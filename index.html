@@ -3,130 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asrat - Astrophysicist</title>
-    <meta name="description" content="Portfolio of Asrat, Astrophysicist and Researcher">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e6e6e6;
-            line-height: 1.6;
-        }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        header {
-            text-align: center;
-            padding: 80px 20px;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-        }
-        h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle { font-size: 1.5em; color: #a0a0a0; margin-bottom: 30px; }
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-        .btn:hover { transform: translateY(-3px); }
-        nav {
-            background: rgba(26, 26, 46, 0.9);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 30px;
-        }
-        nav a {
-            color: #e6e6e6;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: #00d4ff; }
-        section { padding: 60px 20px; }
-        .card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 4px solid #00d4ff;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #090a0f;
-            color: #666;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            nav ul { flex-direction: column; gap: 10px; }
-        }
-    </style>
+    <meta name="description" content="Asrate Gaulle - Computational Astrophysics Researcher | Ph.D. Student at Ariel University">
+    <title>Asrate Gaulle | Computational Astrophysicist</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#research">Research</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <!-- Animated Background -->
+    <div class="cosmos-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">🔭</span>
+                <span>Asrate Gaulle</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
 
-    <header>
-        <div class="container">
-            <h1>🌌 Asrat</h1>
-            <p class="subtitle">Astrophysicist & Researcher</p>
-            <a href="#contact" class="btn">Get in Touch</a>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-name">Asrate Gaulle</h1>
+            <h2 class="hero-title">Computational Astrophysicist</h2>
+            <p class="hero-subtitle">
+                Ph.D. Student @ <strong>Ariel University, Israel</strong> | 
+                Exploring radiative transfer in colliding winds of massive binaries
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="assets/docs/CV_AsrateGaulle.pdf" class="btn btn-secondary" download>
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/asrat-g/github-slideshow" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://asrieguale.wixsite.com/site" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <a href="mailto:asrieguale@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="mailto:asrateg@du.edu.et" aria-label="Institutional Email">
+                    <i class="fas fa-university"></i>
+                </a>
+            </div>
         </div>
-    </header>
-
-    <section id="about">
-        <div class="container">
-            <h2>👋 About Me</h2>
-            <div class="card">
-                <p>Welcome! I'm an astrophysicist passionate about understanding the cosmos. 
-                My research focuses on [your research area]. I'm currently working at [your institution].</p>
+        <div class="hero-image">
+            <div class="image-frame">
+                <img src="assets/images/portrait.jpg" alt="Asrate Gaulle" onerror="this.src='https://ui-avatars.com/api/?name=Asrate+Gaulle&size=256&background=0a192f&color=64ffda'">
             </div>
         </div>
     </section>
 
-    <section id="research">
+    <!-- About Section -->
+    <section id="about" class="section">
         <div class="container">
-            <h2>🔭 Research Interests</h2>
-            <div class="card"><p>• Cosmology & Large-Scale Structure</p></div>
-            <div class="card"><p>• Galaxy Formation & Evolution</p></div>
-            <div class="card"><p>• Computational Astrophysics</p></div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>📧 Contact</h2>
-            <div class="card">
-                <p>📧 Email: <a href="mailto:your.email@example.com" style="color:#00d4ff">your.email@example.com</a></p>
-                <p>🔗 GitHub: <a href="https://github.com/asrat-g" style="color:#00d4ff">github.com/asrat-g</a></p>
+            <h2 class="section-title"><span class="section-number">01.</span> About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I am a passionate astrophysicist from <strong>Ethiopia</strong>, currently pursuing my Ph.D. in 
+                        <strong>Computational Astrophysics</strong> at <strong>Ariel University, Israel</strong>. 
+                        My research journey began in the highlands of Shewa and has taken me across continents, 
+                        driven by an unwavering curiosity about the cosmos.
+                    </p>
+                    <p>
+                        With a strong foundation in both observational and theoretical astrophysics, I specialize in 
+                        <strong>radiative transfer modeling</strong>, <strong>binary star interactions</strong>, and 
+                        <strong>galaxy evolution</strong>. My work combines Python-based simulations with multi-wavelength 
+                        observational data to unravel the physics of some of the universe's most energetic phenomena.
+                    </p>
+                    <p>
+                        Beyond research, I am committed to <strong>education and mentorship</strong>, having taught 
+                        physics and astrophysics to hundreds of students and led departmental initiatives at 
+                        Dilla University. I believe in making astrophysics accessible and inspiring the next 
+                        generation of African scientists.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">10+</span>
+                        <span class="stat-label">Years in Academia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Publications</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">6+</span>
+                        <span class="stat-label">International Conferences</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">100+</span>
+                        <span class="stat-label">Students Mentored</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 Asrat • Built with ❤️ for science</p>
+    <!-- Education Section -->
+    <section id="education" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">02.</span> Education</h2>
+            <div class="timeline">
+                <!-- Ph.D. -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Apr 2025 – Present</span>
+                        <h3>Ph.D. in Computational Astrophysics</h3>
+                        <p class="institution">Ariel University, Israel</p>
+                        <p class="thesis-title"><strong>Thesis:</strong> Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries</p>
+                        <p class="supervisor"><strong>Supervisor:</strong> Prof. Amit Kashi</p>
+                        <ul class="timeline-list">
+                            <li>Astrophysics, Geophysics and Space Science (AGASS) Center</li>
+                            <li>Focus: Hydrodynamic simulations, radiative transfer, massive binary evolution</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- M.Sc. -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Oct 2016 – Jul 2018</span>
+                        <h3>M.Sc. in Astronomy & Astrophysics</h3>
+                        <p class="institution">Entoto Observatory & Research Center / Addis Ababa University, Ethiopia</p>
+                        <p class="thesis-title"><strong>Thesis:</strong> An alternative method for measuring accretion rate in Galaxies using X/O flux ratio</p>
+                        <p class="grade"><strong>CGPA:</strong> 3.98/4.00</p>
+                    </div>
+                </div>
+                
+                <!-- B.Sc. -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Oct 2010 – Jun 2013</span>
+                        <h3>B.Sc. in Applied Physics</h3>
+                        <p class="institution">Debre Berhan University, Ethiopia</p>
+                        <p class="thesis-title"><strong>Senior Project:</strong> Optimizing Wind Energy Conversion by calculating Betz-limit</p>
+                        <p class="grade"><strong>CGPA:</strong> 3.84/4.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">03.</span> Work Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3>Head, Department of Physics</h3>
+                        <span class="experience-date">Jan 2021 – Jun 2024</span>
+                    </div>
+                    <p class="experience-org">Dilla University, Ethiopia</p>
+                    <ul class="experience-list">
+                        <li>Directed departmental academic and research activities</li>
+                        <li>Mentored students and faculty in curriculum development</li>
+                        <li>Coordinated research initiatives and resource allocation</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3>Chairperson, Ethiopian Space Science Society</h3>
+                        <span class="experience-date">Jul 2020 – Apr 2025</span>
+                    </div>
+                    <p class="experience-org">Dilla University Branch, Ethiopia</p>
+                    <ul class="experience-list">
+                        <li>Led national space science advocacy and outreach programs</li>
+                        <li>Organized workshops, seminars, and student competitions</li>
+                        <li>Fostered collaborations with international space organizations</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3>Lecturer of Physics & Astrophysics</h3>
+                        <span class="experience-date">Jul 2018 – Apr 2025</span>
+                    </div>
+                    <p class="experience-org">Dilla University, Ethiopia</p>
+                    <ul class="experience-list">
+                        <li>Taught undergraduate courses: Mechanics, Electromagnetism, Astrophysics, Cosmology</li>
+                        <li>Developed interactive teaching materials using Python simulations</li>
+                        <li>Supervised 100+ B.Sc. senior projects in Physics & Astrophysics</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3>Assistant Lecturer / Graduate Assistant</h3>
+                        <span class="experience-date">2013 – 2018</span>
+                    </div>
+                    <p class="experience-org">Dilla University & Haramaya University, Ethiopia</p>
+                    <ul class="experience-list">
+                        <li>Supported laboratory instruction and student mentoring</li>
+                        <li>Assisted in curriculum development for physics programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Interests -->
+    <section id="research" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">04.</span> Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <i class="fas fa-galaxy"></i>
+                    <h3>Galaxy Formation & Evolution</h3>
+                    <p>Investigating processes driving galaxy growth, dark matter roles, star formation, and feedback mechanisms.</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-black-hole"></i>
+                    <h3>Black Hole Physics</h3>
+                    <p>Studying formation, accretion, mergers, and AGN feedback in galaxy evolution.</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Massive Binaries</h3>
+                    <p>Exploring formation, evolution, and wind-collision physics in massive binary systems.</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Accretion & Feedback</h3>
+                    <p>Modeling accretion mechanisms and feedback from disks, supernovae, and AGN.</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>Dark Energy & Modified Gravity</h3>
+                    <p>Studying f(R,T,S) models and their impact on cosmic expansion and structure formation.</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-planet-ringed"></i>
+                    <h3>Exoplanets & Planet Formation</h3>
+                    <p>Researching planetary formation, evolution, and detection methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">05.</span> Publications</h2>
+            <div class="publications-list">
+                <div class="pub-item">
+                    <span class="pub-year">2025</span>
+                    <div class="pub-content">
+                        <h4>An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2</h4>
+                        <p class="pub-authors">Gaulle A., Pović M., Zewdie D.</p>
+                        <p class="pub-journal"><em>Astronomy & Astrophysics</em> (to be submitted)</p>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <span class="pub-year">2020</span>
+                    <div class="pub-content">
+                        <h4>AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z < 0.1</h4>
+                        <p class="pub-authors">Zewdie D., Pović M., Aravena M., Roberto J., Gaulle A.</p>
+                        <p class="pub-journal"><em>Monthly Notices of the RAS</em>, 498, 4345</p>
+                        <a href="https://doi.org/10.1093/mnras/staa2476" class="pub-link" target="_blank">View Paper <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <span class="pub-year">2019</span>
+                    <div class="pub-content">
+                        <h4>Properties of local galaxies with the highest growth rate at redshift z ≤ 0.1</h4>
+                        <p class="pub-authors">Zewdie D., Pović M., Aravena M., Roberto J., Gaulle A.</p>
+                        <p class="pub-journal"><em>IAU Symposium 356 Proceedings</em>, arXiv:2004.00718</p>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <span class="pub-year">2019</span>
+                    <div class="pub-content">
+                        <h4>Accretion rate in AGN and X-ray-to-optical flux ratio at z < 0.2</h4>
+                        <p class="pub-authors">Gaulle A., Pović M., Zewdie D.</p>
+                        <p class="pub-journal"><em>IAU Symposium 356 Proceedings</em>, arXiv:2003.13487</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">06.</span> Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">SciPy</span>
+                        <span class="skill-tag">AstroPy</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">SunPy</span>
+                        <span class="skill-tag">FORTRAN</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-telescope"></i> Astrophysics Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TOPCAT</span>
+                        <span class="skill-tag">IRAF</span>
+                        <span class="skill-tag">DS9</span>
+                        <span class="skill-tag">AstroImageJ</span>
+                        <span class="skill-tag">PHOEBE</span>
+                        <span class="skill-tag">YT</span>
+                        <span class="skill-tag">FLASH</span>
+                        <span class="skill-tag">RADMC-3D</span>
+                        <span class="skill-tag">TORUS</span>
+                        <span class="skill-tag">pynbody</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-file-alt"></i> Documentation & Analysis</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LaTeX</span>
+                        <span class="skill-tag">Overleaf</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">Jupyter</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-language"></i> Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">English (Fluent)</span>
+                        <span class="skill-tag">Amharic (Native)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conferences & Training -->
+    <section id="conferences" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">07.</span> Conferences & Professional Development</h2>
+            <div class="conf-grid">
+                <div class="conf-card">
+                    <h4><i class="fas fa-microphone-alt"></i> International Conferences</h4>
+                    <ul class="conf-list">
+                        <li>17th Int'l Conf. on Dark Side of the Universe, Rwanda (2023)</li>
+                        <li>IAU Symposium 356: Nuclear Activity in Galaxies, Ethiopia (2019)</li>
+                        <li>Panchromatic Universe Conference, Ethiopia (2017)</li>
+                        <li>MEARIM Regional Meeting, Ethiopia (2017)</li>
+                        <li>ISYA 39: Young Astronomers School (2017)</li>
+                        <li>AfAS2021 Virtual Conference</li>
+                    </ul>
+                </div>
+                <div class="conf-card">
+                    <h4><i class="fas fa-chalkboard-teacher"></i> Workshops & Training</h4>
+                    <ul class="conf-list">
+                        <li>Pan-African Astro-Particle Physics Workshop (2022)</li>
+                        <li>Ethiopian Observational Astronomy Workshop (2022)</li>
+                        <li>MW-Gaia: Bringing Milky Way to Schools (2021)</li>
+                        <li>Python Programming & Writing Skills Training (2019)</li>
+                        <li>European Week of Astronomy & Space Science, UK (2018)</li>
+                    </ul>
+                </div>
+                <div class="conf-card">
+                    <h4><i class="fas fa-hands-helping"></i> Community Service</h4>
+                    <ul class="conf-list">
+                        <li>Physics Virtual Lab Training for Teachers (2024)</li>
+                        <li>Python Training for College Staff (2022)</li>
+                        <li>STEM Student Inspirational Lectures (2019–Present)</li>
+                        <li>Grade 12 Tutorial Programs</li>
+                        <li>Student Mentorship & Academic Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">08.</span> Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p class="contact-intro">
+                        I'm currently pursuing my Ph.D. at Ariel University and am always open to 
+                        discussing research collaborations, mentorship opportunities, or astrophysics outreach initiatives.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+251 (0) 912 708 676</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:asrieguale@gmail.com">asrieguale@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-university"></i>
+                            <a href="mailto:asrateg@du.edu.et">asrateg@du.edu.et</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ariel University, Israel</span>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <a href="https://github.com/asrat-g/github-slideshow" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://asrieguale.wixsite.com/site" target="_blank"><i class="fas fa-globe"></i> Website</a>
+                        <a href="assets/docs/CV_AsrateGaulle.pdf" download><i class="fas fa-file-pdf"></i> CV</a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Asrate Gaulle. All rights reserved.</p>
+            <p class="footer-credit">Built with <i class="fas fa-heart"></i> for the cosmos</p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
 </body>
 </html>
