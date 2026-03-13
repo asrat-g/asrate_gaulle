@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asrat - Astrophysicist</title>
+    <meta name="description" content="Portfolio of Asrat, Astrophysicist and Researcher">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e6e6e6;
+            line-height: 1.6;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { font-size: 1.5em; color: #a0a0a0; margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        nav {
+            background: rgba(26, 26, 46, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            color: #e6e6e6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #00d4ff; }
+        section { padding: 60px 20px; }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #00d4ff;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #090a0f;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            nav ul { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>🌌 Asrat</h1>
+            <p class="subtitle">Astrophysicist & Researcher</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>👋 About Me</h2>
+            <div class="card">
+                <p>Welcome! I'm an astrophysicist passionate about understanding the cosmos. 
+                My research focuses on [your research area]. I'm currently working at [your institution].</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="research">
+        <div class="container">
+            <h2>🔭 Research Interests</h2>
+            <div class="card"><p>• Cosmology & Large-Scale Structure</p></div>
+            <div class="card"><p>• Galaxy Formation & Evolution</p></div>
+            <div class="card"><p>• Computational Astrophysics</p></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>📧 Contact</h2>
+            <div class="card">
+                <p>📧 Email: <a href="mailto:your.email@example.com" style="color:#00d4ff">your.email@example.com</a></p>
+                <p>🔗 GitHub: <a href="https://github.com/asrat-g" style="color:#00d4ff">github.com/asrat-g</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Asrat • Built with ❤️ for science</p>
+    </footer>
+</body>
+</html>
