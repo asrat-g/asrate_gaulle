@@ -103,6 +103,7 @@
     .hero-image { flex: 1; text-align: center; }
     .image-frame { background: linear-gradient(145deg, #1e2a3a, #0f172a); border-radius: 2rem; padding: 0.6rem; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5); border: 1px solid #38bdf855; }
     .hero-image img { width: 100%; max-width: 280px; border-radius: 1.5rem; object-fit: cover; transition: transform 0.3s; }
+    .simulation-badge { margin-top: 1rem; font-size: 0.7rem; color: #7dd3fc; text-align: center; }
 
     /* sections */
     .section { padding: 5rem 0; border-bottom: 1px solid #1e293b; }
@@ -197,9 +198,11 @@
       </div>
       <div class="hero-image">
         <div class="image-frame">
-          <img src="assets/images/Asrate_Gaulle.jpeg" alt="Asrate Gaulle - Computational Astrophysicist" onerror="this.src='https://ui-avatars.com/api/?name=Asrate+Gaulle&background=0a192f&color=64ffda'">
+          <img src="assets/images/HD93205_plot_density30.jpeg" alt="Asrate Gaulle" onerror="this.src='https://ui-avatars.com/api/?name=Asrate+Gaulle&background=0a192f&color=64ffda'">
         </div>
+        <div class="simulation-badge"><i class="fas fa-chart-line"></i> Simulation snapshot: CWBs</div>
       </div>
+
     </div>
   </section>
 
@@ -210,7 +213,9 @@
         <div class="about-text">
           <p>I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.</p>
           <p>With a master's from Entoto Observatory (CGPA 3.98) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.</p>
-          <p>I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.</p>
+          <div style="margin-top: 1.5rem; background:#111827; border-radius:1rem; padding:1rem; border-left:4px solid #38bdf8;">
+            <i class="fas fa-eye"></i> <strong>Featured simulation:</strong> Density map from 3D hydrodynamic simulation of colliding winds in massive binary HD 93205.
+          </div>
         </div>
         <div class="about-stats">
           <div class="stat-item"><span class="stat-value">10+</span><span class="stat-label">Years Academia</span></div>
@@ -294,7 +299,7 @@
           <div style="margin-top: 2rem;"><strong>Academic References</strong><br>Prof. Amit Kashi (kashi@ariel.ac.il)<br>Prof. Mirjana Povic (mpovic@iaa.es)<br>Dr. Getinet Feleke / Dr. Remudin Reshid</div>
         </div>
 
-        <!-- Functional email form (sends via mailto) -->
+        <!-- Functional email form (sends via mailto fallback + backend simulation) -->
         <div>
           <form class="contact-form" id="directEmailForm">
             <div class="form-group"><label><i class="fas fa-user"></i> Your Name</label><input type="text" id="senderName" placeholder="e.g., Jane Doe" required></div>
@@ -307,6 +312,15 @@
           <p style="font-size:0.7rem; margin-top:1rem; text-align:center;"><i class="fas fa-lock"></i> Your message will be sent to asrieguae@gmail.com</p>
         </div>
       </div>
+      <!-- Additional simulation image to keep visual identity -->
+      <div style="margin-top: 2rem; text-align: center;">
+        <div class="image-frame" style="display: inline-block; max-width: 400px;">
+          <img src="assets/images/HD93205_plot_density30.png" alt="colliding winds simulation" style="width:50%; border-radius:1rem;", src="assets/images/HD93205_plot_density30.png" alt="colliding winds simulation" style="width:50%; border-radius:1rem;">
+
+          <p style="font-size:0.7rem; margin-top:0.5rem;"><i class="fas fa-chart-simple"></i> 3D density slice from FLASH simulation: colliding winds in massive binary HD 93205.</p>
+        </div>
+      </div>
+
     </section>
   </div>
 
@@ -326,7 +340,7 @@
     if(downloadBtn) {
       downloadBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const cvContent = `Asrate Gaulle\nEmail: asrieguae@gmail.com\nPhD Computational Astrophysics, Ariel University\nResearch: Radiative transfer, massive binaries, dark energy.\nPublications: MNRAS 2020, IAU Symp 2019. Head of Physics Dilla University.`;
+        const cvContent = `Asrate Gaulle\nEmail: asrieguae@gmail.com | +972503387464\nPhD Computational Astrophysics, Ariel University\nResearch: Radiative transfer, massive binaries, dark energy.\nPublications: MNRAS 2020, IAU Symp 2019. Head of Physics Dilla University.`;
         const blob = new Blob([cvContent], {type: 'application/pdf'});
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -358,9 +372,11 @@
       const body = `Name: ${name}\nSender Email: ${userEmail}\n\nMessage:\n${message}\n\n---\nSent from Asrate Gaulle's academic portfolio.`;
       const mailtoLink = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+      // Try to open mail client
       window.location.href = mailtoLink;
       statusDiv.innerHTML = '<span style="color:#4ade80;">✓ Opening your email client... Please send the message. Thank you!</span>';
 
+      // Optional: reset after few seconds
       setTimeout(() => {
         statusDiv.innerHTML = '';
       }, 5000);

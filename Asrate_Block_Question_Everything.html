@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Question Everything — Astrophysics blog by Asrate Gaulle: massive binaries, dark energy, AGN, radiative transfer, and cosmic mysteries.">
+  <title>Question Everything | Asrate Gaulle — Astrophysics Blog</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafc;
+      color: #111827;
+      line-height: 1.5;
+    }
+    body.dark {
+      background: #0a0f1a;
+      color: #e2e8f0;
+    }
+    body.dark .blog-card {
+      background: #111827;
+      border-color: #1f2a3e;
+    }
+    body.dark .navbar, body.dark footer {
+      background: #020617;
+      border-color: #1e293b;
+    }
+    body.dark .sidebar-card {
+      background: #111827;
+    }
+    body.dark .search-bar input {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
+    body.dark .admin-panel {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    a {
+      text-decoration: none;
+      color: #2563eb;
+    }
+    body.dark a {
+      color: #60a5fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .navbar {
+      background: #ffffffdd;
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e2e8f0;
+      transition: 0.2s;
+    }
+    body.dark .navbar {
+      background: #0f172ae6;
+      border-bottom: 1px solid #1e293b;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .logo a {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    body.dark .logo a {
+      background: linear-gradient(135deg, #a5f3fc, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-weight: 500;
+      color: #1e293b;
+    }
+    body.dark .nav-links a {
+      color: #cbd5e1;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #1e293b;
+    }
+    body.dark .theme-toggle {
+      color: #facc15;
+    }
+    .blog-header {
+      background: linear-gradient(135deg, #0f2b3d, #1b4f72);
+      color: white;
+      padding: 3rem 0 2.5rem;
+      text-align: center;
+    }
+    body.dark .blog-header {
+      background: linear-gradient(135deg, #020617, #0f172a);
+    }
+    .blog-header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      margin: 3rem 0;
+    }
+    .blog-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+      border: 1px solid #eef2ff;
+      transition: 0.2s;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+    }
+    .post-img {
+      width: 100%;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      margin-bottom: 1rem;
+      background: #e2e8f0;
+    }
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+    body.dark .post-meta {
+      color: #94a3b8;
+    }
+    .post-tag {
+      background: #e0f2fe;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    body.dark .post-tag {
+      background: #1e3a5f;
+      color: #b9e6ff;
+    }
+    .blog-card h2 {
+      font-size: 1.7rem;
+      margin: 0.5rem 0;
+    }
+    .blog-card h2 a {
+      color: #0f172a;
+    }
+    body.dark .blog-card h2 a {
+      color: #f1f5f9;
+    }
+    .blog-excerpt {
+      margin: 0.8rem 0;
+      color: #334155;
+    }
+    body.dark .blog-excerpt {
+      color: #cbd5e6;
+    }
+    .read-more {
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #eef2ff;
+    }
+    body.dark .sidebar-card {
+      background: #111827;
+      border-color: #1f2a3e;
+    }
+    .search-bar {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.6rem;
+      border-radius: 40px;
+      border: 1px solid #cbd5e1;
+    }
+    .sidebar-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .recent-list {
+      list-style: none;
+    }
+    .recent-list li {
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+    .admin-panel {
+      background: #ffffff;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e2e8f0;
+    }
+    body.dark .admin-panel {
+      background: #111827;
+      border-color: #1f2a3e;
+    }
+    .admin-panel h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .admin-panel input, .admin-panel textarea, .admin-panel select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      background: #f9fafc;
+      font-family: inherit;
+    }
+    body.dark .admin-panel input, body.dark .admin-panel textarea, body.dark .admin-panel select {
+      background: #1e293b;
+      border-color: #334155;
+      color: white;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .footer {
+      background: #f1f5f9;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    body.dark .footer {
+      background: #020617;
+      border-color: #1e293b;
+    }
+    @media (max-width: 800px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .nav-flex { flex-direction: column; gap: 0.8rem; }
+      .blog-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="container nav-flex">
+      <div class="logo"><a href="#"><i class="fas fa-question-circle"></i> Question Everything</a></div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#blog-posts">Blog</a>
+        <a href="#about">About</a>
+        <a href="#admin">+ New Post</a>
+        <button class="theme-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-header" id="home">
+    <div class="container">
+      <h1>Question Everything <i class="fas fa-star-of-life"></i></h1>
+      <p>Musings on astrophysics, computational cosmos, and the poetry of science — by Asrate Gaulle</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">🔭 Radiative transfer | Massive binaries | Dark energy | Ethiopian skies</p>
+    </div>
+  </div>
+
+  <div class="container blog-grid" id="blog-posts">
+    <div class="blog-posts" id="postContainer"></div>
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3><i class="fas fa-search"></i> Search</h3>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search blog...">
+          <button id="searchBtn" style="background:#2563eb; border:none; border-radius:40px; padding:0 12px; color:white;"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <h3><i class="fas fa-user-astronaut"></i> About Author</h3>
+        <p>Asrate Gaulle — Ph.D. candidate in Computational Astrophysics at Ariel University, Israel. Former Head of Physics at Dilla University, Ethiopia. Passionate about massive binaries, modified gravity, and making astrophysics accessible.</p>
+        <a href="https://asrieguae.wixsite.com/site" target="_blank">Full portfolio →</a>
+      </div>
+      <div class="sidebar-card">
+        <h3><i class="fas fa-fire"></i> Recent Posts</h3>
+        <ul class="recent-list" id="recentPostsList"></ul>
+      </div>
+      <div class="sidebar-card">
+        <h3><i class="fas fa-tags"></i> Topics</h3>
+        <div id="topicCloud" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+      </div>
+      <!-- Admin panel to add new posts inline -->
+      <div class="admin-panel" id="admin">
+        <h3><i class="fas fa-pen-fancy"></i> Write New Post</h3>
+        <input type="text" id="newTitle" placeholder="Post Title">
+        <input type="text" id="newTags" placeholder="Tags (comma separated, e.g. Massive Binaries, Cosmology)">
+        <input type="text" id="newImageUrl" placeholder="Image URL (optional, paste link or use /assets/images/...)">
+        <textarea id="newExcerpt" rows="2" placeholder="Short excerpt (max 200 chars)"></textarea>
+        <textarea id="newContent" rows="4" placeholder="Full article content (markdown / plain text)"></textarea>
+        <button id="publishPostBtn" class="btn-primary"><i class="fas fa-cloud-upload-alt"></i> Publish Post</button>
+        <p style="font-size:0.7rem; margin-top:8px;">💡 Tip: You can use local image paths like "assets/images/hrd-evolution.png"</p>
+
+    </div>
+
+
+    </aside>
+  </div>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <p>© 2026 Asrate Gaulle — <strong>Question Everything</strong> | Inspired by the cosmic quest</p>
+      <p><a href="mailto:asrieguae@gmail.com"><i class="fas fa-envelope"></i> asrieguae@gmail.com</a> | <a href="https://github.com/asrat-g" target="_blank">GitHub</a> | <a href="https://asrieguae.wixsite.com/site" target="_blank">Website</a></p>
+      <p style="font-size: 0.7rem;">🔭 “Nothing is as pure as knowledge — question everything, even the stars.”</p>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- DEFAULT BLOG POSTS (with images) ----------
+    let blogPosts = [
+      {
+        id: 1,
+        title: "Colliding Winds in Massive Binaries: When Stars Roar",
+        date: "April 2, 2026",
+        tags: ["Massive Binaries", "Radiative Transfer", "Computational Astrophysics"],
+        excerpt: "Massive binary systems are cosmic laboratories where supersonic winds collide, creating complex shocks and instabilities. In my ongoing PhD research, I simulate radiative transfer in these collisions to understand X-ray emission and wind fragmentation...",
+        contentFull: "Full article: Using FLASH and RADMC-3D, we explore how instabilities evolve in colliding-wind binaries. The interaction region produces phase-dependent X-rays and can drive particle acceleration. This has implications for stellar feedback and potential gamma-ray emission.",
+        imageUrl: "assets/images/hrd-evolution.png"
+      },
+      {
+        id: 2,
+        title: "Dark Energy & Modified Gravity: Rethinking Cosmic Acceleration",
+        date: "March 20, 2026",
+        tags: ["Dark Energy", "Modified Gravity", "Cosmology"],
+        excerpt: "The ΛCDM model, while successful, leaves open questions about the nature of dark energy. I investigate f(R,T) gravity models and their observational signatures on large-scale structure and the Hubble tension...",
+        contentFull: "Extended article: By comparing f(R,T) simulations with galaxy survey data, we constrain deviations from GR. The next generation of surveys (Euclid, Rubin) will test these alternatives.",
+        imageUrl: "https://images.unsplash.com/photo-1506703719100-f0b3c5c4e5a4?w=600&h=300&fit=crop"
+      },
+      {
+        id: 3,
+        title: "Accretion Rate Diagnostics: X-ray to Optical Flux Ratio in AGN",
+        date: "February 10, 2026",
+        tags: ["AGN", "Accretion", "Galaxy Evolution"],
+        excerpt: "Measuring accretion rates onto supermassive black holes is key for understanding AGN feedback. In our recent work, we propose an alternative method using the X-ray-to-optical flux ratio, calibrated with SDSS and XMM-Newton data...",
+        contentFull: "The method uses the fact that the X-ray to optical ratio correlates with Eddington ratio. This provides a cheap estimator for large AGN samples. Paper to be submitted to A&A.",
+        imageUrl: "https://cdn.pixabay.com/photo/2019/11/03/20/11/black-hole-4600189_640.jpg"
+      },
+      {
+        id: 4,
+        title: "Inside-out Assembled Galaxies: A Window into Galaxy Evolution",
+        date: "January 18, 2026",
+        tags: ["Galaxy Formation", "Star Formation", "MNRAS"],
+        excerpt: "Some galaxies grow from the inside-out: the central bulge forms first, then the disk. Our 2020 MNRAS paper identified such candidates at z<0.1 and explored their AGN & star-formation properties...",
+        contentFull: "Using multi-wavelength data from GALEX, SDSS, and WISE, we find that inside-out assembled galaxies host low-luminosity AGN and are in a transitional phase.",
+        imageUrl: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=300&fit=crop"
+      }
+    ];
+
+    let nextId = 5;
+
+    // Helper: format date as "Month DD, YYYY"
+    function getCurrentDate() {
+      const d = new Date();
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Save to localStorage
+    function savePosts() {
+      localStorage.setItem('asrate_blog_posts', JSON.stringify(blogPosts));
+      localStorage.setItem('asrate_blog_nextId', nextId);
+    }
+
+    function loadPostsFromStorage() {
+      const stored = localStorage.getItem('asrate_blog_posts');
+      if(stored) {
+        blogPosts = JSON.parse(stored);
+        const storedId = localStorage.getItem('asrate_blog_nextId');
+        if(storedId) nextId = parseInt(storedId);
+        else nextId = Math.max(...blogPosts.map(p=>p.id),0)+1;
+      }
+    }
+
+    // Render all posts
+    function renderPosts(postsArray) {
+      const container = document.getElementById('postContainer');
+      if(!container) return;
+      container.innerHTML = '';
+      if(postsArray.length === 0) {
+        container.innerHTML = '<div class="blog-card"><p>No posts match your search. Write a new post using the sidebar form! 🔭</p></div>';
+        return;
+      }
+      postsArray.forEach(post => {
+        const tagHtml = post.tags.map(t => `<span class="post-tag">${escapeHtml(t)}</span>`).join('');
+        const imageHtml = post.imageUrl ? `<img src="${escapeHtml(post.imageUrl)}" class="post-img" alt="${escapeHtml(post.title)}" onerror="this.style.display='none'">` : '';
+        const postHtml = `
+          <article class="blog-card" id="post-${post.id}">
+            ${imageHtml}
+            <div class="post-meta">
+              <span><i class="far fa-calendar-alt"></i> ${escapeHtml(post.date)}</span>
+              <span><i class="fas fa-tag"></i> ${tagHtml}</span>
+            </div>
+            <h2><a href="#" onclick="openPostModal(${post.id}); return false;">${escapeHtml(post.title)}</a></h2>
+            <div class="blog-excerpt">${escapeHtml(post.excerpt)}</div>
+            <a href="#" class="read-more" onclick="openPostModal(${post.id}); return false;">Read more →</a>
+          </article>
+        `;
+        container.insertAdjacentHTML('beforeend', postHtml);
+      });
+      updateRecentAndTopics(postsArray);
+    }
+
+    function updateRecentAndTopics(postsArray) {
+      const recentList = document.getElementById('recentPostsList');
+      if(recentList) {
+        recentList.innerHTML = '';
+        postsArray.slice(0, 5).forEach(post => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#" onclick="openPostModal(${post.id}); return false;">${escapeHtml(post.title)}</a><br><small>${escapeHtml(post.date)}</small>`;
+          recentList.appendChild(li);
+        });
+      }
+      const topicCount = new Map();
+      postsArray.forEach(p => { p.tags.forEach(t => topicCount.set(t, (topicCount.get(t)||0)+1)); });
+      const topicCloudDiv = document.getElementById('topicCloud');
+      if(topicCloudDiv) {
+        topicCloudDiv.innerHTML = '';
+        for(let [topic, count] of topicCount.entries()) {
+          const span = document.createElement('span');
+          span.className = 'post-tag';
+          span.style.cursor = 'pointer';
+          span.innerText = `${topic} (${count})`;
+          span.onclick = () => filterByTag(topic);
+          topicCloudDiv.appendChild(span);
+        }
+      }
+    }
+
+    function filterByTag(tag) {
+      const filtered = blogPosts.filter(p => p.tags.includes(tag));
+      renderPosts(filtered);
+      document.getElementById('searchInput').value = `tag: ${tag}`;
+    }
+
+    function searchPosts(query) {
+      const q = query.toLowerCase();
+      const filtered = blogPosts.filter(p => p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) || p.tags.some(t => t.toLowerCase().includes(q)));
+      renderPosts(filtered);
+    }
+
+    function openPostModal(id) {
+      const post = blogPosts.find(p => p.id === id);
+      if(!post) return;
+      const isDark = document.body.classList.contains('dark');
+      const modalHtml = `
+        <div id="postModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); z-index:2000; display:flex; align-items:center; justify-content:center; padding:2rem;">
+          <div style="background:${isDark ? '#111827' : 'white'}; max-width:800px; width:90%; border-radius:2rem; padding:2rem; max-height:85vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between;"><h2>${escapeHtml(post.title)}</h2><button id="closeModalBtn" style="background:none; border:none; font-size:1.8rem; cursor:pointer;">&times;</button></div>
+            ${post.imageUrl ? `<img src="${escapeHtml(post.imageUrl)}" style="width:100%; border-radius:1rem; margin:1rem 0;" onerror="this.style.display='none'">` : ''}
+            <div class="post-meta" style="margin:1rem 0;">${escapeHtml(post.date)} | ${post.tags.map(t=>'#'+escapeHtml(t)).join(' ')}</div>
+            <p style="white-space: pre-wrap;">${escapeHtml(post.contentFull)}</p>
+            <hr><p><i class="fas fa-user-astronaut"></i> — Asrate Gaulle, computational astrophysicist. Question everything.</p>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('postModal').remove());
+      document.addEventListener('keydown', function escHandler(e) { if(e.key === 'Escape') { const m = document.getElementById('postModal'); if(m) m.remove(); document.removeEventListener('keydown', escHandler); } });
+    }
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m) { if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m; }); }
+
+    // --- ADD NEW POST with image and full content ---
+    function addNewPost() {
+      const title = document.getElementById('newTitle').value.trim();
+      const tagsRaw = document.getElementById('newTags').value.trim();
+      const imageUrl = document.getElementById('newImageUrl').value.trim();
+      const excerpt = document.getElementById('newExcerpt').value.trim();
+      const content = document.getElementById('newContent').value.trim();
+      if(!title || !excerpt || !content) {
+        alert("Please fill at least Title, Excerpt and Content.");
+        return;
+      }
+      const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(t=>t) : ["Astrophysics"];
+      const newPost = {
+        id: nextId++,
+        title: title,
+        date: getCurrentDate(),
+        tags: tags,
+        excerpt: excerpt.substring(0, 280),
+        contentFull: content,
+        imageUrl: imageUrl || ""
+      };
+      blogPosts.unshift(newPost); // newest first
+      savePosts();
+      renderPosts(blogPosts);
+      // clear form
+      document.getElementById('newTitle').value = '';
+      document.getElementById('newTags').value = '';
+      document.getElementById('newImageUrl').value = '';
+      document.getElementById('newExcerpt').value = '';
+      document.getElementById('newContent').value = '';
+      alert("✅ New post published! It will appear at the top.");
+    }
+
+    // dark mode
+    const darkToggle = document.getElementById('darkModeToggle');
+    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    darkToggle?.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // initial load and event binding
+    loadPostsFromStorage();
+    renderPosts(blogPosts);
+    document.getElementById('searchBtn')?.addEventListener('click', () => searchPosts(document.getElementById('searchInput').value));
+    document.getElementById('searchInput')?.addEventListener('keyup', (e) => { if(e.key === 'Enter') searchPosts(e.target.value); });
+    document.getElementById('publishPostBtn')?.addEventListener('click', addNewPost);
+    window.filterByTag = filterByTag;
+    window.openPostModal = openPostModal;
+  </script>
+</body>
+</html>
