@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="description" content="Asrate Gaulle - Computational Astrophysicist | Ph.D. Candidate at Ariel University, Israel. Research in CWBs, radiative transfer, dark energy & galaxy evolution.">
+  <meta name="description" content="Asrate Gaulle - Computational Astrophysicist | Ph.D. Candidate at Ariel University, Israel.">
 
-  <!-- REPLACE your current <title> with this -->
-<title>Asrate Gaulle | Computational Astrophysicist | Ph.D. Candidate</title>
-<meta name="description" content="The official website of Asrate Gaulle, a Computational Astrophysicist and Ph.D. candidate at Ariel University, Israel. Research on massive binaries, dark energy, and galaxy evolution.">
+  <title>Asrate Gaulle | Computational Astrophysicist</title>
 
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
@@ -68,44 +66,122 @@
       color: transparent;
     }
     .nav-logo i { color: #38bdf8; margin-right: 6px; }
-    .nav-menu { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-menu { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
     .nav-link { text-decoration: none; color: #cbd5e1; font-weight: 500; font-size: 0.9rem; transition: 0.2s; }
     .nav-link:hover { color: #7dd3fc; border-bottom: 2px solid #38bdf8; padding-bottom: 4px; }
+
+    /* Language Switcher */
+    .lang-switch {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      background: #38bdf8;
+      color: #0a0f1a;
+    }
+
     .hamburger { display: none; flex-direction: column; cursor: pointer; }
     .bar { width: 25px; height: 2px; background-color: #cbd5e1; margin: 3px 0; transition: 0.3s; }
 
-    /* hero with image */
-    .hero {
-      min-height: 100vh;
+    /* hero section */
+    .hero-section {
+      text-align: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-row {
       display: flex;
       align-items: center;
-      padding: 6rem 0 3rem;
-      background: radial-gradient(circle at 10% 30%, #0f172a, #020617);
-    }
-    .hero-grid {
-      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
-      gap: 3rem;
-      align-items: center;
-      justify-content: space-between;
     }
-    .hero-content { flex: 2; max-width: 700px; }
-    .hero-greeting { font-size: 1rem; color: #7dd3fc; letter-spacing: 2px; margin-bottom: 1rem; font-weight: 500; }
-    .hero-name { font-size: 3.8rem; font-weight: 800; background: linear-gradient(135deg, #f1f5f9, #94a3b8); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.5rem; }
-    .hero-title { font-size: 1.7rem; font-weight: 500; color: #38bdf8; margin-bottom: 1rem; }
-    .hero-subtitle { font-size: 1.1rem; color: #94a3b8; margin-bottom: 2rem; line-height: 1.6; }
-    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .btn { padding: 0.75rem 1.8rem; border-radius: 40px; font-weight: 600; text-decoration: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none; font-family: inherit; }
-    .btn-primary { background: #0f3b5c; color: white; border: 1px solid #2c5f8a; }
-    .btn-primary:hover { background: #1e4a76; transform: translateY(-2px); }
-    .btn-secondary { background: transparent; border: 1px solid #38bdf8; color: #38bdf8; }
-    .btn-secondary:hover { background: #38bdf822; transform: translateY(-2px); }
-    .social-links { display: flex; gap: 1.5rem; }
-    .social-links a { color: #94a3b8; font-size: 1.5rem; transition: 0.2s; }
-    .social-links a:hover { color: #7dd3fc; transform: translateY(-3px); }
-    .hero-image { flex: 1; text-align: center; }
-    .image-frame { background: linear-gradient(145deg, #1e2a3a, #0f172a); border-radius: 2rem; padding: 0.6rem; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5); border: 1px solid #38bdf855; }
-    .hero-image img { width: 100%; max-width: 280px; border-radius: 1.5rem; object-fit: cover; transition: transform 0.3s; }
+    .hero-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #4a90e2;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-text {
+      text-align: left;
+    }
+    .hero-name {
+      font-size: 2.5rem;
+      margin: 0 0 5px 0;
+      font-weight: bold;
+    }
+    .hero-title {
+      font-size: 1.4rem;
+      color: #4a90e2;
+      margin: 0;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #94a3b8;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 25px;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background: #4a90e2;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover { background: #357abd; transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: #4a90e2;
+      border: 2px solid #4a90e2;
+    }
+    .btn-secondary:hover { background: #4a90e2; color: white; transform: translateY(-2px); }
+    .social-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .social-links a { color: #4a90e2; font-size: 1.5rem; transition: all 0.3s ease; }
+    .social-links a:hover { color: #357abd; transform: translateY(-3px); }
 
     /* sections */
     .section { padding: 5rem 0; border-bottom: 1px solid #1e293b; }
@@ -129,8 +205,6 @@
     .experience-grid, .research-grid, .conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
     .experience-card, .research-card, .conf-card { background: #111827; padding: 1.5rem; border-radius: 1.2rem; border: 1px solid #1f2a3e; transition: 0.2s; }
     .experience-card:hover, .research-card:hover { border-color: #2c5f8a; transform: translateY(-4px); }
-    .experience-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 0.5rem; }
-    .experience-date { font-size: 0.75rem; color: #7dd3fc; }
     .research-card i { font-size: 2rem; color: #38bdf8; margin-bottom: 1rem; }
 
     .publications-list { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -141,7 +215,6 @@
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
     .skill-tag { background: #1e2a3a; padding: 0.25rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-family: monospace; }
 
-    /* contact form - fully functional email box */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
     .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
     .contact-item a { color: #7dd3fc; text-decoration: none; }
@@ -152,409 +225,353 @@
     footer { background: #020617; padding: 2rem; text-align: center; font-size: 0.85rem; }
 
     @media (max-width: 780px) {
-      .nav-menu { display: none; flex-direction: column; background: #0f172ae6; width: 100%; padding: 1rem; }
+      .nav-menu { display: none; flex-direction: column; background: #0f172ae6; width: 100%; padding: 1rem; position: absolute; top: 60px; left: 0; }
       .nav-menu.active { display: flex; }
       .hamburger { display: flex; }
-      .hero-name { font-size: 2.5rem; }
+      .hero-name { font-size: 2rem; }
+      .hero-title { font-size: 1.1rem; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-grid { flex-direction: column-reverse; text-align: center; }
-      .hero-content { text-align: center; }
-      .social-links { justify-content: center; }
+      .lang-switch { margin-left: 0; }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo"><i class="fas fa-star-of-life"></i> Asrate Gaulle</a>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#education" class="nav-link">Education</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#research" class="nav-link">Research</a></li>
-        <li><a href="#publications" class="nav-link">Publications</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-    </div>
-  </nav>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-logo"><i class="fas fa-star-of-life"></i> Asrate Gaulle</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#about" class="nav-link" data-key="nav_about">About</a></li>
+      <li><a href="#education" class="nav-link" data-key="nav_education">Education</a></li>
+      <li><a href="#experience" class="nav-link" data-key="nav_experience">Experience</a></li>
+      <li><a href="#research" class="nav-link" data-key="nav_research">Research</a></li>
+      <li><a href="#publications" class="nav-link" data-key="nav_publications">Publications</a></li>
+      <li><a href="#skills" class="nav-link" data-key="nav_skills">Skills</a></li>
+      <li><a href="#contact" class="nav-link" data-key="nav_contact">Contact</a></li>
+      <li>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="am">አማ</button>
+          <button class="lang-btn" data-lang="he">עִבְרִית</button>
+        </div>
+      </li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+  </div>
+</nav>
 
 <div class="hero-section">
   <div class="hero-row">
-    <!-- Small circular photo -->
     <div class="hero-photo">
       <img src="assets/images/Asrate_Gaulle.jpeg" alt="Asrate Gaulle">
     </div>
-
-    <!-- Name and field container -->
     <div class="hero-text">
-      <h1 class="hero-name" id="dropping-name"></h1>
-      <h2 class="hero-title" id="dropping-title"></h2>
+      <h1 class="hero-name" data-key="hero_name">Asrate Gaulle</h1>
+      <h2 class="hero-title" data-key="hero_title">Computational Astrophysicist</h2>
     </div>
   </div>
-
-  <p class="hero-subtitle">Ph.D. Candidate @ Ariel University, Israel | Exploring radiative transfer, massive binaries & dark energy | From Ethiopia to the cosmos</p>
-
+  <p class="hero-subtitle" data-key="hero_subtitle">Ph.D. Candidate @ Ariel University, Israel | Exploring radiative transfer, massive binaries & dark energy | From Ethiopia to the cosmos</p>
   <div class="hero-cta">
-    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+    <a href="#contact" class="btn btn-primary" data-key="btn_contact"><i class="fas fa-paper-plane"></i> Get in Touch</a>
     <a href="#" id="downloadCvBtn" class="btn btn-secondary"><i class="fas fa-download"></i> Download CV</a>
   </div>
-
   <div class="social-links">
-    <a href="https://github.com/asrat-g" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://github.com/asrate_g" target="_blank"><i class="fab fa-github"></i></a>
     <a href="https://asrieguae.wixsite.com/site" target="_blank"><i class="fas fa-globe"></i></a>
     <a href="mailto:asrieguae@gmail.com"><i class="fas fa-envelope"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
   </div>
 </div>
 
-<script>
-function dropLetters(element, text, startDelay = 0) {
-  if (!element) return;
-  element.innerHTML = '';
-  text.split('').forEach((char, index) => {
-    const span = document.createElement('span');
-    span.textContent = char === ' ' ? '\u00A0' : char;
-    span.style.display = 'inline-block';
-    span.style.opacity = '0';
-    span.style.animation = `drop 0.4s ease forwards ${startDelay + index * 0.05}s`;
-    element.appendChild(span);
-  });
-}
-
-dropLetters(document.getElementById('dropping-name'), 'Asrate Gaulle', 0.2);
-dropLetters(document.getElementById('dropping-title'), 'Computational Astrophysicist', 0.8);
-</script>
-
-<style>
-@keyframes drop {
-  0% { opacity: 0; transform: translateY(-50px) rotate(-10deg); }
-  100% { opacity: 1; transform: translateY(0) rotate(0); }
-}
-
-.hero-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-.hero-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid #4a90e2;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  flex-shrink: 0;
-}
-
-.hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-text {
-  text-align: left;
-}
-
-.hero-name {
-  font-size: 2.5rem;
-  margin: 0 0 5px 0;
-  font-weight: bold;
-}
-
-.hero-title {
-  font-size: 1.4rem;
-  color: #4a90e2;
-  margin: 0;
-}
-
-.hero-subtitle {
-  font-size: 1rem;
-  color: #666;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 25px;
-  line-height: 1.6;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background: #4a90e2;
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  background: #357abd;
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #4a90e2;
-  border: 2px solid #4a90e2;
-}
-
-.btn-secondary:hover {
-  background: #4a90e2;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.social-links {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.social-links a {
-  color: #4a90e2;
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-  color: #357abd;
-  transform: translateY(-3px);
-}
-
-.hero-section {
-  text-align: center;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* Responsive: stack vertically on mobile */
-@media (max-width: 600px) {
-  .hero-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .hero-text {
-    text-align: center;
-  }
-
-  .hero-name {
-    font-size: 2rem;
-  }
-
-  .hero-title {
-    font-size: 1.2rem;
-  }
-
-  .hero-photo {
-    width: 100px;
-    height: 100px;
-  }
-
-  .btn {
-    padding: 8px 20px;
-    font-size: 0.9rem;
-  }
-}
-</style>
+<div class="container">
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2 class="section-title"><span class="section-number">01.</span> <span data-key="about_title">About Me</span></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-key="about_p1">I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.</p>
+        <p data-key="about_p2">With a master's from Entoto Observatory (CGPA 3.98/4.00 or 9.95/10.00) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.</p>
+        <p data-key="about_p3">I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item"><span class="stat-value">10+</span><span class="stat-label" data-key="stat_years">Years Academia</span></div>
+        <div class="stat-item"><span class="stat-value">4</span><span class="stat-label" data-key="stat_pubs">Publications</span></div>
+        <div class="stat-item"><span class="stat-value">7+</span><span class="stat-label" data-key="stat_confs">Intl Conferences</span></div>
+        <div class="stat-item"><span class="stat-value">100+</span><span class="stat-label" data-key="stat_students">Mentored Students</span></div>
+      </div>
+    </div>
   </section>
 
-  <div class="container">
-    <section id="about" class="section">
-      <h2 class="section-title"><span class="section-number">01.</span> About Me</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.</p>
-          <p>With a master's from Entoto Observatory (CGPA 3.98/4.00 or 9.95/10.00) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.</p>
-          <p>I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.</p>
-        </div>
-        <div class="about-stats">
-          <div class="stat-item"><span class="stat-value">10+</span><span class="stat-label">Years Academia</span></div>
-          <div class="stat-item"><span class="stat-value">4</span><span class="stat-label">Publications</span></div>
-          <div class="stat-item"><span class="stat-value">7+</span><span class="stat-label">Intl Conferences</span></div>
-          <div class="stat-item"><span class="stat-value">100+</span><span class="stat-label">Mentored Students</span></div>
-        </div>
+  <!-- Education Section -->
+  <section id="education" class="section section-alt">
+    <h2 class="section-title"><span class="section-number">02.</span> <span data-key="edu_title">Education</span></h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_phd_date">Apr 2025 – Present</span><h3 data-key="edu_phd_title">Ph.D. in Computational Astrophysics</h3><p>Ariel University, Israel | AGASS Center</p><p data-key="edu_phd_thesis"><strong>Thesis:</strong> Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries</p><p><span data-key="edu_supervisor">Supervisor</span>: Prof. Amit Kashi</p></div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_msc_date">Oct 2016 – Jul 2018</span><h3 data-key="edu_msc_title">M.Sc. Astronomy & Astrophysics</h3><p>Entoto Observatory / Addis Ababa University | CGPA 3.98/4.00</p><p data-key="edu_msc_thesis"><strong>Thesis:</strong> Alternative method for measuring accretion rate in Galaxies using X/O flux ratio</p><p><span data-key="edu_supervisor">Supervisor</span>: Prof. Mirjana Povic</p></div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_bsc_date">Oct 2010 – Jun 2013</span><h3 data-key="edu_bsc_title">B.Sc. Applied Physics</h3><p>Debre Berhan University | CGPA 3.84/4.00</p><p data-key="edu_bsc_project">Senior Project: Optimizing Wind Energy Conversion (Betz-limit)</p></div></div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section">
+    <h2 class="section-title"><span class="section-number">03.</span> <span data-key="exp_title">Experience & Leadership</span></h2>
+    <div class="experience-grid">
+      <div class="experience-card"><h3 data-key="exp1_title">Head, Dept. of Physics</h3><span class="experience-date" data-key="exp1_date">01/2021 – 06/2024</span><p>Dilla University, Ethiopia</p><ul><li data-key="exp1_li1">Led academic strategy, curriculum innovation, faculty mentoring</li><li data-key="exp1_li2">Established research collaborations and student projects</li></ul></div>
+      <div class="experience-card"><h3 data-key="exp2_title">Lecturer of Physics & Astrophysics</h3><span class="experience-date" data-key="exp2_date">07/2018 – 04/2025</span><p>Dilla University</p><ul><li data-key="exp2_li1">Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)</li><li data-key="exp2_li2">Supervised 100+ BSc senior projects</li></ul></div>
+      <div class="experience-card"><h3 data-key="exp3_title">ESSS Branch Chairperson</h3><span class="experience-date" data-key="exp3_date">2020 – 2025</span><p>Ethiopian Space Science Society, DU</p><ul><li data-key="exp3_li1">Organized national space science events and STEM outreach</li><li data-key="exp3_li2">Promoted astronomy education across Ethiopia</li></ul></div>
+    </div>
+  </section>
+
+  <!-- Research Interests -->
+  <section id="research" class="section section-alt">
+    <h2 class="section-title"><span class="section-number">04.</span> <span data-key="research_title">Research Interests</span></h2>
+    <div class="research-grid">
+      <div class="research-card"><i class="fas fa-star-of-life"></i><h3 data-key="research1_title">Massive Binaries</h3><p data-key="research1_desc">Colliding winds, radiative transfer, instability evolution in massive binary systems.</p></div>
+      <div class="research-card"><i class="fas fa-chart-line"></i><h3 data-key="research2_title">Dark Energy & Modified Gravity</h3><p data-key="research2_desc">Exploring f(R,T,S) models and cosmic expansion.</p></div>
+      <div class="research-card"><i class="fas fa-galaxy"></i><h3 data-key="research3_title">Galaxy Formation & Evolution</h3><p data-key="research3_desc">Dark matter, star formation, feedback & AGN.</p></div>
+      <div class="research-card"><i class="fas fa-black-hole"></i><h3 data-key="research4_title">Accretion & Black Holes</h3><p data-key="research4_desc">AGN accretion rates, X-ray/optical diagnostics.</p></div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications" class="section">
+    <h2 class="section-title"><span class="section-number">05.</span> <span data-key="pubs_title">Publications</span></h2>
+    <div class="publications-list">
+      <div class="pub-item"><span class="pub-year">2026</span><div><h4>An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2</h4><p>Gaulle A., Pović M., Zewdie D. — <em>A&A, to be submitted</em></p></div></div>
+      <div class="pub-item"><span class="pub-year">2020</span><div><h4>AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z < 0.1</h4><p>Zewdie D., Pović M., Aravena M., Roberto J., Gaulle A. — <em>MNRAS, 498, 4345</em></p></div></div>
+      <div class="pub-item"><span class="pub-year">2019</span><div><h4>Properties of local galaxies with the highest growth rate at redshift z ≤ 0.1</h4><p>Zewdie et al. (incl. Gaulle A.) — <em>IAU Symp. 356</em></p></div></div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section section-alt">
+    <h2 class="section-title"><span class="section-number">06.</span> <span data-key="skills_title">Technical Skill</span></h2>
+    <div style="display:grid; gap:1.5rem;">
+      <div class="skill-category"><h3 data-key="skills_lang"><i class="fas fa-code"></i> Languages & Libraries</h3><div class="skill-tags"><span class="skill-tag">Python (NumPy, AstroPy)</span><span class="skill-tag">FORTRAN</span><span class="skill-tag">C++</span><span class="skill-tag">R</span></div></div>
+      <div class="skill-category"><h3 data-key="skills_astro"><i class="fas fa-telescope"></i> Astrophysics Codes</h3><div class="skill-tags"><span class="skill-tag">FLASH</span><span class="skill-tag">RADMC-3D</span><span class="skill-tag">PHOEBE</span><span class="skill-tag">YT</span></div></div>
+      <div class="skill-category"><h3 data-key="skills_soft"><i class="fas fa-chalkboard"></i> Soft & Languages</h3><div class="skill-tags"><span class="skill-tag">LaTeX</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Amharic (አማርኛ)</span><span class="skill-tag">English</span></div></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2 class="section-title"><span class="section-number">07.</span> <span data-key="contact_title">Connect & Send a Message</span></h2>
+    <div class="contact-grid">
+      <div>
+        <p data-key="contact_intro">📍 Open for collaborations, PhD discussions, and outreach. Feel free to reach out.</p>
+        <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:asrieguae@gmail.com">asrieguae@gmail.com</a></div>
+        <div class="contact-item"><i class="fas fa-university"></i><a href="mailto:asrate_g.weldegeb@msmail.ariel.ac.il">asrate_g.weldegeb@msmail.ariel.ac.il</a></div>
+        <div class="contact-item"><i class="fas fa-map-pin"></i><span data-key="contact_location">Ariel, Israel | Dilla, Ethiopia</span></div>
       </div>
-    </section>
-
-    <section id="education" class="section section-alt">
-      <h2 class="section-title"><span class="section-number">02.</span> Education</h2>
-      <div class="timeline">
-        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">Apr 2025 – Present</span><h3>Ph.D. in Computational Astrophysics</h3><p class="institution">Ariel University, Israel | AGASS Center</p><p><strong>Thesis:</strong> Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries</p><p>Supervisor: Prof. Amit Kashi</p></div></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">Oct 2016 – Jul 2018</span><h3>M.Sc. Astronomy & Astrophysics</h3><p class="institution">Entoto Observatory / Addis Ababa University | CGPA 3.98/4.00 or 9.95/10.00</p><p><strong>Thesis:</strong> Alternative method for measuring accretion rate in Galaxies using X/O flux ratio </p><p>Supervisor: Prof. Mirjana Povic </p></div></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">Oct 2010 – Jun 2013</span><h3>B.Sc. Applied Physics</h3><p class="institution">Debre Berhan University | CGPA 3.84/4.00 or 9.6/10.00</p><p>Senior Project: Optimizing Wind Energy Conversion (Betz-limit)</p></div></div>
+      <div>
+        <form class="contact-form" id="directEmailForm">
+          <div class="form-group"><label data-key="form_name">Your Name</label><input type="text" id="senderName" placeholder="Your name" required></div>
+          <div class="form-group"><label data-key="form_email">Your Email</label><input type="email" id="senderEmail" placeholder="you@example.com" required></div>
+          <div class="form-group"><label data-key="form_message">Message</label><textarea id="emailMessage" rows="4" placeholder="Write your message..." required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;" data-key="form_send"><i class="fas fa-paper-plane"></i> Send Email</button>
+          <div id="formStatus" class="form-status"></div>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
+</div>
 
-    <section id="experience" class="section">
-      <h2 class="section-title"><span class="section-number">03.</span> Experience & Leadership</h2>
-      <div class="experience-grid">
-        <div class="experience-card"><div class="experience-header"><h3>Head, Dept. of Physics</h3><span class="experience-date">01/2021 – 06/2024</span></div><p class="experience-org">Dilla University, Ethiopia</p><ul class="experience-list"><li>Led academic strategy, curriculum innovation, faculty mentoring</li><li>Established research collaborations and student projects</li></ul></div>
-        <div class="experience-card"><div class="experience-header"><h3>Lecturer of Physics & Astrophysics</h3><span class="experience-date">07/2018 – 04/2025</span></div><p class="experience-org">Dilla University</p><ul class="experience-list"><li>Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)</li><li>Supervised 100+ BSc senior projects</li></ul></div>
-        <div class="experience-card"><div class="experience-header"><h3>ESSS Branch Chairperson</h3><span class="experience-date">2020 – 2025</span></div><p class="experience-org">Ethiopian Space Science Society, DU</p><ul class="experience-list"><li>Organized national space science events and STEM outreach</li><li>Promoted astronomy education across Ethiopia</li></ul></div>
-        <div class="experience-card"><div class="experience-header"><h3>Assistant Lecturer / Graduate Asst.</h3><span class="experience-date">2013 – 2018</span></div><p class="experience-org">Haramaya University & Dilla University</p><ul class="experience-list"><li>Lab demonstrations, electronics, mechanics, and tutoring</li></ul></div>
-      </div>
-    </section>
+<footer>
+  <p>© 2026 Asrate Gaulle — <span data-key="footer_text">Computational Astrophysicist</span></p>
+</footer>
 
-    <section id="research" class="section section-alt">
-      <h2 class="section-title"><span class="section-number">04.</span> Research Interests</h2>
-      <div class="research-grid">
-        <div class="research-card"><i class="fas fa-star-of-life"></i><h3>Massive Binaries</h3><p>Colliding winds, radiative transfer, instability evolution in massive binary systems.</p></div>
-        <div class="research-card"><i class="fas fa-chart-line"></i><h3>Dark Energy & Modified Gravity</h3><p>Exploring f(R,T,S) models and cosmic expansion.</p></div>
-        <div class="research-card"><i class="fas fa-galaxy"></i><h3>Galaxy Formation & Evolution</h3><p>Dark matter, star formation, feedback & AGN.</p></div>
-        <div class="research-card"><i class="fas fa-black-hole"></i><h3>Accretion & Black Holes</h3><p>AGN accretion rates, X-ray/optical diagnostics.</p></div>
-        <div class="research-card"><i class="fas fa-planet-ringed"></i><h3>Exoplanets & Planet Formation</h3><p>Detection and evolution of planetary systems.</p></div>
-        <div class="research-card"><i class="fas fa-supernova"></i><h3>Supernova & Transients</h3><p>Light-curve analysis and spectroscopic characterization.</p></div>
-      </div>
-    </section>
+<script>
+// ==================== TRANSLATIONS ====================
+const translations = {
+  en: {
+    // Navigation
+    nav_about: "About", nav_education: "Education", nav_experience: "Experience", nav_research: "Research",
+    nav_publications: "Publications", nav_skills: "Skills", nav_contact: "Contact",
+    // Hero
+    hero_name: "Asrate Gaulle", hero_title: "Computational Astrophysicist",
+    hero_subtitle: "Ph.D. Candidate @ Ariel University, Israel | Exploring radiative transfer, massive binaries & dark energy | From Ethiopia to the cosmos",
+    btn_contact: "Get in Touch",
+    // About
+    about_title: "About Me",
+    about_p1: "I am a computational astrophysicist from Alem Ketema, Ethiopia, currently pursuing a Ph.D. at Ariel University, Israel. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.",
+    about_p2: "With a master's from Entoto Observatory (CGPA 3.98/4.00) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.",
+    about_p3: "I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.",
+    stat_years: "Years Academia", stat_pubs: "Publications", stat_confs: "Intl Conferences", stat_students: "Mentored Students",
+    // Education
+    edu_title: "Education", edu_phd_date: "Apr 2025 – Present", edu_phd_title: "Ph.D. in Computational Astrophysics",
+    edu_phd_thesis: "Thesis: Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries",
+    edu_supervisor: "Supervisor", edu_msc_date: "Oct 2016 – Jul 2018", edu_msc_title: "M.Sc. Astronomy & Astrophysics",
+    edu_msc_thesis: "Thesis: Alternative method for measuring accretion rate in Galaxies using X/O flux ratio",
+    edu_bsc_date: "Oct 2010 – Jun 2013", edu_bsc_title: "B.Sc. Applied Physics", edu_bsc_project: "Senior Project: Optimizing Wind Energy Conversion (Betz-limit)",
+    // Experience
+    exp_title: "Experience & Leadership", exp1_title: "Head, Dept. of Physics", exp1_date: "01/2021 – 06/2024",
+    exp1_li1: "Led academic strategy, curriculum innovation, faculty mentoring", exp1_li2: "Established research collaborations and student projects",
+    exp2_title: "Lecturer of Physics & Astrophysics", exp2_date: "07/2018 – 04/2025",
+    exp2_li1: "Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)", exp2_li2: "Supervised 100+ BSc senior projects",
+    exp3_title: "ESSS Branch Chairperson", exp3_date: "2020 – 2025",
+    exp3_li1: "Organized national space science events and STEM outreach", exp3_li2: "Promoted astronomy education across Ethiopia",
+    // Research
+    research_title: "Research Interests", research1_title: "Massive Binaries", research1_desc: "Colliding winds, radiative transfer, instability evolution in massive binary systems.",
+    research2_title: "Dark Energy & Modified Gravity", research2_desc: "Exploring f(R,T,S) models and cosmic expansion.",
+    research3_title: "Galaxy Formation & Evolution", research3_desc: "Dark matter, star formation, feedback & AGN.",
+    research4_title: "Accretion & Black Holes", research4_desc: "AGN accretion rates, X-ray/optical diagnostics.",
+    // Publications
+    pubs_title: "Publications",
+    // Skills
+    skills_title: "Technical Skill", skills_lang: "Languages & Libraries", skills_astro: "Astrophysics Codes", skills_soft: "Soft & Languages",
+    // Contact
+    contact_title: "Connect & Send a Message", contact_intro: "📍 Open for collaborations, PhD discussions, and outreach. Feel free to reach out.",
+    contact_location: "Ariel, Israel | Dilla, Ethiopia",
+    form_name: "Your Name", form_email: "Your Email", form_message: "Message", form_send: "Send Email",
+    footer_text: "Computational Astrophysicist"
+  },
+  am: {
+    nav_about: "ስለ እኔ", nav_education: "ትምህርት", nav_experience: "ልምድ", nav_research: "ምርምር",
+    nav_publications: "ህትመቶች", nav_skills: "ክህሎቶች", nav_contact: "አግኙኝ",
+    hero_name: "አስራተ ጎሌ", hero_title: "ኮምፒውቲሽናል አስትሮፊዚስት",
+    hero_subtitle: "የዶክትሬት እጩ @ አሪኤል ዩኒቨርሲቲ፣ እስራኤል | ራዲያቲቭ ትራንስፈር፣ ግዙፍ ሁለትዮሽ ሲስተሞች እና ጨለማ ሃይል | ከኢትዮጵያ ወደ ጠፈር",
+    btn_contact: "ያግኙኝ",
+    about_title: "ስለ እኔ",
+    about_p1: "እኔ ከአለም ቀተማ፣ ኢትዮጵያ የመጣሁ ኮምፒውቲሽናል አስትሮፊዚስት ነኝ፣ በአሁኑ ጊዜ በአሪኤል ዩኒቨርሲቲ፣ እስራኤል የዶክትሬት ትምህርቴን እከታተላለሁ።",
+    about_p2: "በእንጦጦ ኦብዘርቫቶሪ ማስተርስ ዲግሪ እና በአፕላይድ ፊዚክስ የመጀመሪያ ዲግሪ ያለኝ ሲሆን፣ በዲላ ዩኒቨርሲቲ የፊዚክስ ዲፓርትመንት መሪ ነበርኩ።",
+    about_p3: "በክፍት ሳይንስ እና ትምህርት አምናለሁ — አጽናፈ ሰማይ የሁሉም ነው።",
+    stat_years: "የአካዳሚክ ዓመታት", stat_pubs: "ህትመቶች", stat_confs: "ዓለም አቀፍ ኮንፈረንሶች", stat_students: "የተማሩ ተማሪዎች",
+    edu_title: "ትምህርት", edu_phd_date: "ኤፕሪል 2025 – አሁን", edu_phd_title: "የዶክትሬት ዲግሪ በኮምፒውቲሽናል አስትሮፊዚክስ",
+    edu_phd_thesis: "ረቂቅ ፅንሰ ሃሳብ የራዲያቲቭ ትራንስፈር እና አለመረጋጋት ዝግመተ ለውጥ",
+    edu_supervisor: "አማካሪ", edu_msc_date: "ኦክቶበር 2016 – ጁላይ 2018", edu_msc_title: "ኤም.ኤስ.ሲ በአስትሮኖሚ እና አስትሮፊዚክስ",
+    edu_msc_thesis: "ረቂቅ ፅንሰ ሃሳብ አማራጭ ዘዴ ለአክሬሽን መጠን መለኪያ",
+    edu_bsc_date: "ኦክቶበር 2010 – ጁን 2013", edu_bsc_title: "ቢ.ኤስ.ሲ በአፕላይድ ፊዚክስ", edu_bsc_project: "የከፍተኛ ፕሮጀክት የንፋስ ሃይል ማመቻቸት",
+    exp_title: "ልምድ እና አመራር", exp1_title: "የፊዚክስ ዲፓርትመንት ኃላፊ", exp1_date: "01/2021 – 06/2024",
+    exp1_li1: "የአካዳሚክ ስትራቴጂ አመራር", exp1_li2: "የምርምር ትብብር መፍጠር",
+    exp2_title: "የፊዚክስ እና አስትሮፊዚክስ ሌክቸረር", exp2_date: "07/2018 – 04/2025",
+    exp2_li1: "ኮርሶች: አጠቃላይ ፊዚክስ, አስትሮፊዚክስ, ኮስሞሎጂ", exp2_li2: "100+ ተማሪዎችን መምራት",
+    exp3_title: "ESSS ቅርንጫፍ ሊቀመንበር", exp3_date: "2020 – 2025",
+    exp3_li1: "ብሔራዊ የጠፈር ሳይንስ ዝግጅቶች ማደራጀት", exp3_li2: "በኢትዮጵያ የስነ ፈለክ ትምህርት ማስፋፋት",
+    research_title: "የምርምር ፍላጎቶች", research1_title: "ግዙፍ ሁለትዮሽ ሲስተሞች", research1_desc: "ኮሊዲንግ ንፋስ, ራዲያቲቭ ትራንስፈር",
+    research2_title: "ጨለማ ሃይል እና የተሻሻለ ስበት", research2_desc: "f(R,T,S) ሞዴሎችን እና የኮስሞስ መስፋፋትን ማሰስ",
+    research3_title: "ጋላክሲ ምስረታ እና ዝግመተ ለውጥ", research3_desc: "ጨለማ ቁስ, የኮከብ ምስረታ",
+    research4_title: "አክሬሽን እና ጥቁር ጉድጓዶች", research4_desc: "የኤጂኤን አክሬሽን መጠን",
+    pubs_title: "ህትመቶች",
+    skills_title: "ቴክኒካል ክህሎት", skills_lang: "ቋንቋዎች እና ቤተ-ፅሁፎች", skills_astro: "አስትሮፊዚክስ ኮዶች", skills_soft: "ሌሎች ክህሎቶች",
+    contact_title: "ይገናኙ እና መልእክት ይላኩ", contact_intro: "📍 ለትብብር፣ የዶክትሬት ውይይቶች እና የአውትሪች ስራዎች ክፍት ነኝ።",
+    contact_location: "አሪኤል, እስራኤል | ዲላ, ኢትዮጵያ",
+    form_name: "ስምዎ", form_email: "ኢሜይልዎ", form_message: "መልእክት", form_send: "ኢሜይል ላኩ",
+    footer_text: "ኮምፒውቲሽናል አስትሮፊዚስት"
+  },
+  he: {
+    nav_about: "אודות", nav_education: "השכלה", nav_experience: "ניסיון", nav_research: "מחקר",
+    nav_publications: "פרסומים", nav_skills: "כישורים", nav_contact: "צור קשר",
+    hero_name: "אסרטה גולה", hero_title: "אסטרופיזיקאי חישובי",
+    hero_subtitle: "דוקטורנט @ אוניברסיטת אריאל, ישראל | חקר העברה קרינתית, בינאריות מסיביות ואנרגיה אפלה | מאתיופיה לקוסמוס",
+    btn_contact: "צור קשר",
+    about_title: "אודותיי",
+    about_p1: "אני אסטרופיזיקאי חישובי מאלם קטמה, אתיופיה, כיום דוקטורנט באוניברסיטת אריאל, ישראל. המחקר שלי מחבר בין סימולציות העברה קרינתית לנתוני תצפית.",
+    about_p2: "עם תואר שני ממצפה אנטוטו ותואר ראשון בפיזיקה שימושית, הובלתי את המחלקה לפיזיקה באוניברסיטת דילה, הנחיתי מעל 100 סטודנטים ותרמתי להפצת מדעי החלל באתיופיה.",
+    about_p3: "אני מאמין חזק במדע פתוח וחינוך — היקום שייך לכולם.",
+    stat_years: "שנות אקדמיה", stat_pubs: "פרסומים", stat_confs: "כנסים בין-לאומיים", stat_students: "סטודנטים שהנחיתי",
+    edu_title: "השכלה", edu_phd_date: "אפריל 2025 – הווה", edu_phd_title: "דוקטורט באסטרופיזיקה חישובית",
+    edu_phd_thesis: "תזה: העברה קרינתית והתפתחות חוסר יציבות ברוחות מתנגשות של בינאריות מסיביות",
+    edu_supervisor: "מנחה", edu_msc_date: "אוק' 2016 – יול' 2018", edu_msc_title: "M.Sc. באסטרונומיה ואסטרופיזיקה",
+    edu_msc_thesis: "תזה: שיטה חלופית למדידת קצב אקרציה בגלקסיות",
+    edu_bsc_date: "אוק' 2010 – יונ' 2013", edu_bsc_title: "B.Sc. בפיזיקה שימושית", edu_bsc_project: "פרויקט גמר: אופטימיזציה של אנרגיית רוח",
+    exp_title: "ניסיון ומנהיגות", exp1_title: "ראש המחלקה לפיזיקה", exp1_date: "01/2021 – 06/2024",
+    exp1_li1: "הובלת אסטרטגיה אקדמית, חדשנות בתכנית הלימודים", exp1_li2: "הקמת שיתופי פעולה במחקר",
+    exp2_title: "מרצה לפיזיקה ואסטרופיזיקה", exp2_date: "07/2018 – 04/2025",
+    exp2_li1: "קורסים: פיזיקה כללית, אסטרופיזיקה, קוסמולוגיה, פיזיקה חישובית", exp2_li2: "הנחיית מעל 100 פרויקטי גמר לתואר ראשון",
+    exp3_title: "יו"ר סניף ESSS", exp3_date: "2020 – 2025",
+    exp3_li1: "ארגון אירועים לאומיים למדעי החלל", exp3_li2: "קידום חינוך אסטרונומי ברחבי אתיופיה",
+    research_title: "תחומי מחקר", research1_title: "בינאריות מסיביות", research1_desc: "רוחות מתנגשות, העברה קרינתית, התפתחות חוסר יציבות",
+    research2_title: "אנרגיה אפלה וכבידה מתוקנת", research2_desc: "חקר מודלים f(R,T,S) והתפשטות קוסמית",
+    research3_title: "היווצרות גלקסיות והתפתחותן", research3_desc: "חומר אפל, היווצרות כוכבים, משוב ו-AGN",
+    research4_title: "אקרציה וחורים שחורים", research4_desc: "קצבי אקרציה של AGN, אבחוני רנטגן/אופטי",
+    pubs_title: "פרסומים",
+    skills_title: "כישורים טכניים", skills_lang: "שפות וספריות", skills_astro: "קודים אסטרופיזיקליים", skills_soft: "כלים נוספים",
+    contact_title: "צור קשר ושלח הודעה", contact_intro: "📍 פתוח לשיתופי פעולה, דיוני דוקטורט ופעילויות הסברה. אל תהססו ליצור קשר.",
+    contact_location: "אריאל, ישראל | דילה, אתיופיה",
+    form_name: "שמך", form_email: "האימייל שלך", form_message: "הודעה", form_send: "שלח אימייל",
+    footer_text: "אסטרופיזיקאי חישובי"
+  }
+};
 
-    <section id="publications" class="section">
-      <h2 class="section-title"><span class="section-number">05.</span> Publications</h2>
-      <div class="publications-list">
-        <div class="pub-item"><span class="pub-year">2026</span><div class="pub-content"><h4>An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2</h4><p>Gaulle A., Pović M., Zewdie D. — <em>A&A, to be submitted</em></p></div></div>
-        <div class="pub-item"><span class="pub-year">2020</span><div class="pub-content"><h4>AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z < 0.1</h4><p>Zewdie D., Pović M., Aravena M., Roberto J., Gaulle A. — <em>MNRAS, 498, 4345</em></p></div></div>
-        <div class="pub-item"><span class="pub-year">2019</span><div class="pub-content"><h4>Properties of local galaxies with the highest growth rate at redshift z ≤ 0.1</h4><p>Zewdie et al. (incl. Gaulle A.) — <em>IAU Symp. 356</em></p></div></div>
-        <div class="pub-item"><span class="pub-year">2019</span><div class="pub-content"><h4>Accretion rate in AGN and X-ray-to-optical flux ratio at z < 0.2</h4><p>Gaulle A., Pović M., Zewdie D. — <em>IAU Symp. 356 Proc.</em></p></div></div>
-      </div>
-    </section>
+// ==================== APPLY TRANSLATION ====================
+let currentLang = localStorage.getItem('language') || 'en';
 
-    <section id="skills" class="section section-alt">
-      <h2 class="section-title"><span class="section-number">06.</span> Technical Skill</h2>
-      <div style="display:grid; gap:1.5rem;">
-        <div class="skill-category"><h3><i class="fas fa-code"></i> Languages & Libraries</h3><div class="skill-tags"><span class="skill-tag">Python (NumPy, AstroPy)</span><span class="skill-tag">FORTRAN</span><span class="skill-tag">C++</span><span class="skill-tag">R</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Pandas</span><span class="skill-tag">SciPy</span></div></div>
-        <div class="skill-category"><h3><i class="fas fa-telescope"></i> Astrophysics Codes</h3><div class="skill-tags"><span class="skill-tag">FLASH</span><span class="skill-tag">RADMC-3D</span><span class="skill-tag">TORUS</span><span class="skill-tag">PHOEBE</span><span class="skill-tag">YT</span><span class="skill-tag">pynbody</span><span class="skill-tag">TOPCAT</span></div></div>
-        <div class="skill-category"><h3><i class="fas fa-chalkboard"></i> Soft & Languages</h3><div class="skill-tags"><span class="skill-tag">LaTeX (Expert)</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Amharic (Native)</span><span class="skill-tag">English (Fluent)</span></div></div>
-      </div>
-    </section>
-
-    <section id="conferences" class="section">
-      <h2 class="section-title"><span class="section-number">07.</span> Conferences & Outreach</h2>
-      <div class="conf-grid">
-        <div class="conf-card"><h4><i class="fas fa-globe"></i> Selected Conferences</h4><ul class="experience-list"><li>17th Dark Side of Universe, Rwanda (2023)</li><li>IAU Symposium 356, Ethiopia (2019)</li><li>Panchromatic Universe (2017), MEARIM (2017)</li><li>39th ISYA (IAU), AfAS2021</li></ul></div>
-        <div class="conf-card"><h4><i class="fas fa-chalkboard-user"></i> Workshops & Training</h4><ul class="experience-list"><li>Pan-African Astro-Particle Workshop (2022)</li><li>Ethiopian Observational Astronomy (2022)</li><li>MW-Gaia School (2021)</li><li>Python & Writing Skills (2019)</li></ul></div>
-        <div class="conf-card"><h4><i class="fas fa-hand-sparkles"></i> Community Service</h4><ul class="experience-list"><li>Physics Virtual Lab training for teachers (2024)</li><li>Python for college staff (2022)</li><li>STEM inspirational lectures yearly</li></ul></div>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION WITH FULL EMAIL FORM (working email box) -->
-    <section id="contact" class="section section-alt">
-      <h2 class="section-title"><span class="section-number">08.</span> Connect & Send a Message</h2>
-      <div class="contact-grid">
-        <div>
-          <p class="contact-intro" style="margin-bottom:1.2rem;">📍 Open for collaborations, PhD discussions, and outreach. Feel free to reach out.</p>
-          <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:asrieguae@gmail.com">asrieguae@gmail.com</a></div>
-          <div class="contact-item"><i class="fas fa-university"></i><a href="mailto:asrate_g.weldegeb@msmail.ariel.ac.il">asrate_g.weldegeb@msmail.ariel.ac.il</a></div>
-          <div class="contact-item"><i class="fas fa-phone-alt"></i><span>+972 (0) 50338**64</span></div>
-          <div class="contact-item"><i class="fab fa-github"></i><a href="https://github.com/asrat-g">github.com/asrat-g</a></div>
-          <div class="contact-item"><i class="fas fa-map-pin"></i><span>Ariel, Israel | Dilla, Ethiopia</span></div>
-          <div style="margin-top: 2rem;"><strong>Academic References</strong><br>Prof. Amit Kashi (kashi@ariel.ac.il)<br>Prof. Mirjana Povic (mpovic@iaa.es)<br>Dr. Getinet Feleke / Dr. Remudin Reshid</div>
-        </div>
-
-        <!-- Functional email form (sends via mailto) -->
-        <div>
-          <form class="contact-form" id="directEmailForm">
-            <div class="form-group"><label><i class="fas fa-user"></i> Your Name</label><input type="text" id="senderName" placeholder="e.g., Asrate Gaulle" required></div>
-            <div class="form-group"><label><i class="fas fa-envelope"></i> Your Email</label><input type="email" id="senderEmail" placeholder="youl@example.com" required></div>
-            <div class="form-group"><label><i class="fas fa-tag"></i> Subject</label><input type="text" id="emailSubject" placeholder="Collaboration / Research inquiry" required></div>
-            <div class="form-group"><label><i class="fas fa-comment"></i> Message</label><textarea id="emailMessage" rows="5" placeholder="Write your message here... I will get back to you promptly." required></textarea></div>
-            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-paper-plane"></i> Send Email Directly</button>
-            <div id="formStatus" class="form-status"></div>
-          </form>
-          <p style="font-size:0.7rem; margin-top:1rem; text-align:center;"><i class="fas fa-lock"></i> Your message will be sent to asrieguae@gmail.com</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>© 2026 Asrate Gaulle — Computational Astrophysicist | Designed with <i class="fas fa-star"></i> from Ethiopia to Israel</p>
-    <p style="margin-top: 8px; font-size: 0.7rem;"><a href="#" style="color:#7dd3fc;">Back to top</a></p>
-  </footer>
-
-  <script>
-    // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    hamburger?.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    // Download CV
-    const downloadBtn = document.getElementById('downloadCvBtn');
-    if(downloadBtn) {
-      downloadBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const cvContent = `Asrate Gaulle\nEmail: asrieguae@gmail.com\nPhD Computational Astrophysics, Ariel University\nResearch: Radiative transfer, massive binaries, dark energy.\nPublications: MNRAS 2020, IAU Symp 2019. Head of Physics Dilla University.`;
-        const blob = new Blob([cvContent], {type: 'application/pdf'});
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'Asrate_Gaulle.pdf';
-        link.click();
-        URL.revokeObjectURL(link.href);
-      });
-    }
-
-    // EMAIL FORM: uses mailto with prefilled subject/body (opens default email client)
-    const emailForm = document.getElementById('directEmailForm');
-    const statusDiv = document.getElementById('formStatus');
-
-    emailForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('senderName').value.trim();
-      const userEmail = document.getElementById('senderEmail').value.trim();
-      const subjectRaw = document.getElementById('emailSubject').value.trim();
-      const message = document.getElementById('emailMessage').value.trim();
-
-      if(!name || !userEmail || !subjectRaw || !message) {
-        statusDiv.innerHTML = '<span style="color:#f97316;">⚠️ Please fill all fields.</span>';
-        return;
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('language', lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  // Update all elements with data-key
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (translations[lang] && translations[lang][key]) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = translations[lang][key];
+      } else {
+        el.innerHTML = translations[lang][key];
       }
+    }
+  });
+  document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'am' ? 'am' : 'he');
+}
 
-      // Compose email to Asrate
-      const toEmail = "asrieguae@gmail.com";
-      const subject = `[Portfolio] ${subjectRaw} from ${name}`;
-      const body = `Name: ${name}\nSender Email: ${userEmail}\n\nMessage:\n${message}\n\n---\nSent from Asrate Gaulle's academic portfolio.`;
-      const mailtoLink = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+// Event listeners for language buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
 
-      window.location.href = mailtoLink;
-      statusDiv.innerHTML = '<span style="color:#4ade80;">✓ Opening your email client... Please send the message. Thank you!</span>';
+// Initialize with saved language
+setLanguage(currentLang);
 
-      setTimeout(() => {
-        statusDiv.innerHTML = '';
-      }, 5000);
-    });
+// ==================== EXISTING FUNCTIONALITY ====================
+// Hamburger menu
+document.getElementById('hamburger')?.addEventListener('click', () => {
+  document.getElementById('navMenu').classList.toggle('active');
+});
 
-    // smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target && this.getAttribute('href') !== '#') {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
+// Download CV
+document.getElementById('downloadCvBtn')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  const cvContent = `Asrate Gaulle - Computational Astrophysicist\nPhD Candidate at Ariel University\nResearch: Radiative transfer, massive binaries, dark energy.`;
+  const blob = new Blob([cvContent], {type: 'application/pdf'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'Asrate_Gaulle_CV.pdf';
+  link.click();
+  URL.revokeObjectURL(link.href);
+});
+
+// Email form
+const emailForm = document.getElementById('directEmailForm');
+const statusDiv = document.getElementById('formStatus');
+emailForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('senderName').value.trim();
+  const userEmail = document.getElementById('senderEmail').value.trim();
+  const message = document.getElementById('emailMessage').value.trim();
+  if(!name || !userEmail || !message) {
+    statusDiv.innerHTML = '<span style="color:#f97316;">⚠️ Please fill all fields.</span>';
+    return;
+  }
+  const toEmail = "asrieguae@gmail.com";
+  const subject = `[Portfolio] Message from ${name}`;
+  const body = `Name: ${name}\nEmail: ${userEmail}\n\nMessage:\n${message}`;
+  window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  statusDiv.innerHTML = '<span style="color:#4ade80;">✓ Opening email client... Thank you!</span>';
+  setTimeout(() => statusDiv.innerHTML = '', 5000);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target && this.getAttribute('href') !== '#') {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
 </body>
 </html>
