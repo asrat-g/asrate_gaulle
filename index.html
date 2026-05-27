@@ -1,577 +1,1556 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="description" content="Asrate Gaulle - Computational Astrophysicist | Ph.D. Candidate at Ariel University, Israel.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Asrate Gaulle — Computational Astrophysicist, Ph.D. Candidate at Ariel University, Israel.">
+<title>Asrate Gaulle | Computational Astrophysicist</title>
 
-  <title>Asrate Gaulle | Computational Astrophysicist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN SYSTEM
+───────────────────────────────────────────── */
+:root {
+  --cosmos-black: #02030a;
+  --deep-space: #050818;
+  --nebula-blue: #0d1b3e;
+  --star-white: #f0f4ff;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --aurora-cyan: #4fc3f7;
+  --aurora-violet: #7c4dff;
+  --aurora-teal: #26c6da;
+  --text-primary: #dde8f5;
+  --text-secondary: #8fa8c8;
+  --text-muted: #4a6080;
+  --border: rgba(79, 195, 247, 0.12);
+  --border-gold: rgba(201, 168, 76, 0.25);
+  --card-bg: rgba(8, 16, 40, 0.75);
+  --card-hover: rgba(13, 27, 70, 0.9);
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0a0f1a;
-      color: #e2e8f0;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
+html { scroll-behavior: smooth; }
 
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #141e2c; }
-    ::-webkit-scrollbar-thumb { background: #2d4a6e; border-radius: 6px; }
+body {
+  font-family: var(--font-body);
+  background-color: var(--cosmos-black);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  font-size: 17px;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+/* ─────────────────────────────────────────────
+   COSMOS CANVAS BACKGROUND
+───────────────────────────────────────────── */
+#cosmos-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    /* navigation */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 15, 26, 0.85);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.9rem 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .nav-logo {
-      font-size: 1.45rem;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-      background: linear-gradient(135deg, #a5f3fc, #38bdf8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .nav-logo i { color: #38bdf8; margin-right: 6px; }
-    .nav-menu { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
-    .nav-link { text-decoration: none; color: #cbd5e1; font-weight: 500; font-size: 0.9rem; transition: 0.2s; }
-    .nav-link:hover { color: #7dd3fc; border-bottom: 2px solid #38bdf8; padding-bottom: 4px; }
+.page-content { position: relative; z-index: 1; }
 
-    /* Language Switcher */
-    .lang-switch {
-      display: flex;
-      gap: 0.5rem;
-      margin-left: 1rem;
-    }
-    .lang-btn {
-      background: transparent;
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
-      padding: 4px 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .lang-btn:hover, .lang-btn.active {
-      background: #38bdf8;
-      color: #0a0f1a;
-    }
+/* ─────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cosmos-black); }
+::-webkit-scrollbar-thumb { background: var(--aurora-cyan); border-radius: 3px; opacity: 0.5; }
 
-    .hamburger { display: none; flex-direction: column; cursor: pointer; }
-    .bar { width: 25px; height: 2px; background-color: #cbd5e1; margin: 3px 0; transition: 0.3s; }
+/* ─────────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────────── */
+.navbar {
+  position: fixed; top: 0; width: 100%;
+  background: rgba(2, 3, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-gold);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+.nav-inner {
+  max-width: 1300px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-brand-star {
+  width: 22px; height: 22px;
+  animation: star-spin 20s linear infinite;
+}
+@keyframes star-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.nav-links {
+  display: flex; align-items: center;
+  gap: 0.1rem; list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 2px; left: 50%; right: 50%;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.25s ease;
+}
+.nav-links a:hover { color: var(--gold-light); }
+.nav-links a:hover::after { left: 10%; right: 10%; }
 
-    /* hero section */
-    .hero-section {
-      text-align: center;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .hero-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-    .hero-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid #4a90e2;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-    }
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .hero-text {
-      text-align: left;
-    }
-    .hero-name {
-      font-size: 2.5rem;
-      margin: 0 0 5px 0;
-      font-weight: bold;
-    }
-    .hero-title {
-      font-size: 1.4rem;
-      color: #4a90e2;
-      margin: 0;
-    }
-    .hero-subtitle {
-      font-size: 1rem;
-      color: #94a3b8;
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 25px;
-      line-height: 1.6;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    .btn-primary {
-      background: #4a90e2;
-      color: white;
-      border: none;
-    }
-    .btn-primary:hover { background: #357abd; transform: translateY(-2px); }
-    .btn-secondary {
-      background: transparent;
-      color: #4a90e2;
-      border: 2px solid #4a90e2;
-    }
-    .btn-secondary:hover { background: #4a90e2; color: white; transform: translateY(-2px); }
-    .social-links {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-    .social-links a { color: #4a90e2; font-size: 1.5rem; transition: all 0.3s ease; }
-    .social-links a:hover { color: #357abd; transform: translateY(-3px); }
+.lang-btns {
+  display: flex; gap: 0.3rem; margin-left: 1rem;
+}
+.lang-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--text-secondary);
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lang-btn:hover, .lang-btn.active {
+  background: var(--gold);
+  color: var(--cosmos-black);
+  border-color: var(--gold);
+  font-weight: 700;
+}
 
-    /* sections */
-    .section { padding: 5rem 0; border-bottom: 1px solid #1e293b; }
-    .section-alt { background: #0f1420; }
-    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; }
-    .section-number { color: #38bdf8; font-size: 1.6rem; font-weight: 500; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
 
-    .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; }
-    .about-text p { margin-bottom: 1.2rem; color: #cbd5e6; }
-    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; background: #111827; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #1f2a3e; }
-    .stat-item { text-align: center; }
-    .stat-value { font-size: 2.2rem; font-weight: 700; color: #7dd3fc; display: block; }
-    .stat-label { font-size: 0.8rem; color: #94a3b8; }
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 100px 2rem 60px;
+  text-align: center;
+  position: relative;
+}
 
-    .timeline { position: relative; padding-left: 1.5rem; }
-    .timeline-item { position: relative; margin-bottom: 2.5rem; padding-left: 2rem; }
-    .timeline-dot { position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; background: #38bdf8; border-radius: 50%; border: 2px solid #0f172a; }
-    .timeline-content { background: #111827; padding: 1.2rem 1.5rem; border-radius: 1rem; border-left: 3px solid #38bdf8; }
-    .timeline-date { font-size: 0.8rem; color: #7dd3fc; font-family: monospace; }
+.hero-nebula {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(79,195,247,0.07) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 80% at 20% 70%, rgba(124,77,255,0.05) 0%, transparent 60%),
+              radial-gradient(ellipse 50% 50% at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
 
-    .experience-grid, .research-grid, .conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
-    .experience-card, .research-card, .conf-card { background: #111827; padding: 1.5rem; border-radius: 1.2rem; border: 1px solid #1f2a3e; transition: 0.2s; }
-    .experience-card:hover, .research-card:hover { border-color: #2c5f8a; transform: translateY(-4px); }
-    .research-card i { font-size: 2rem; color: #38bdf8; margin-bottom: 1rem; }
+.hero-inner { max-width: 900px; }
 
-    .publications-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .pub-item { display: flex; gap: 1rem; background: #111827; padding: 1rem 1.5rem; border-radius: 1rem; flex-wrap: wrap; }
-    .pub-year { font-weight: 700; color: #38bdf8; min-width: 65px; font-family: monospace; }
+.hero-orbit {
+  width: 140px; height: 140px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.hero-orbit-ring {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 50%;
+  animation: orbit-pulse 4s ease-in-out infinite;
+}
+.hero-orbit-ring:nth-child(2) {
+  inset: -12px;
+  border-color: rgba(79,195,247,0.15);
+  animation-delay: -2s;
+  animation-duration: 6s;
+}
+@keyframes orbit-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+.hero-avatar {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(201,168,76,0.5);
+}
+.hero-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-avatar-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--nebula-blue), #1a0a3e);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: var(--gold);
+}
 
-    .skill-category { background: #111827; padding: 1.2rem; border-radius: 1rem; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
-    .skill-tag { background: #1e2a3a; padding: 0.25rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-family: monospace; }
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--aurora-cyan);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fade-up 0.8s ease 0.2s forwards;
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--aurora-cyan) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  animation: fade-up 0.8s ease 0.4s forwards;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fade-up 0.8s ease 0.6s forwards;
+}
+.hero-divider {
+  width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 1.8rem;
+  opacity: 0;
+  animation: fade-in 0.8s ease 0.8s forwards;
+}
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 680px; margin: 0 auto 2.5rem;
+  font-style: italic;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fade-up 0.8s ease 1s forwards;
+}
+.hero-cta {
+  display: flex; gap: 1rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+  opacity: 0;
+  animation: fade-up 0.8s ease 1.2s forwards;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 30px; border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer; border: none;
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  transform: translateX(-101%);
+  transition: transform 0.3s ease;
+}
+.btn:hover::before { transform: translateX(0); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--cosmos-black);
+  font-weight: 600;
+}
+.btn-gold::before { background: var(--gold-light); }
+.btn-outline {
+  background: transparent;
+  color: var(--aurora-cyan);
+  border: 1px solid rgba(79,195,247,0.4);
+}
+.btn-outline::before { background: rgba(79,195,247,0.1); }
+.btn-outline:hover { border-color: var(--aurora-cyan); color: var(--aurora-cyan); }
+.btn span { position: relative; z-index: 1; }
 
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-    .contact-item a { color: #7dd3fc; text-decoration: none; }
-    .contact-form .form-group { margin-bottom: 1rem; }
-    .contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem; background: #1e293b; border: 1px solid #334155; border-radius: 12px; color: white; font-family: inherit; }
-    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #38bdf8; }
-    .form-status { margin-top: 1rem; font-size: 0.85rem; padding: 0.5rem; border-radius: 8px; text-align: center; }
-    footer { background: #020617; padding: 2rem; text-align: center; font-size: 0.85rem; }
+.hero-socials {
+  display: flex; gap: 1.5rem; justify-content: center;
+  opacity: 0; animation: fade-in 0.8s ease 1.4s forwards;
+}
+.hero-socials a {
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.hero-socials a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.2);
+}
 
-    @media (max-width: 780px) {
-      .nav-menu { display: none; flex-direction: column; background: #0f172ae6; width: 100%; padding: 1rem; position: absolute; top: 60px; left: 0; }
-      .nav-menu.active { display: flex; }
-      .hamburger { display: flex; }
-      .hero-name { font-size: 2rem; }
-      .hero-title { font-size: 1.1rem; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; }
-      .hero-grid { flex-direction: column-reverse; text-align: center; }
-      .lang-switch { margin-left: 0; }
-    }
-  </style>
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fade-in 1s ease 2s forwards;
+}
+.scroll-hint span {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────
+   SECTIONS
+───────────────────────────────────────────── */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+.section-container {
+  max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--aurora-cyan);
+  margin-bottom: 0.8rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--aurora-cyan);
+  opacity: 0.5;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--star-white);
+  margin-bottom: 3rem;
+}
+.gold-accent { color: var(--gold); }
+
+/* alternate section backgrounds */
+.section-dark {
+  background: rgba(5, 8, 24, 0.6);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT
+───────────────────────────────────────────── */
+.about-layout {
+  display: grid; grid-template-columns: 1fr 380px; gap: 5rem; align-items: start;
+}
+.about-text p {
+  color: var(--text-primary); margin-bottom: 1.4rem;
+  font-size: 1.05rem; line-height: 1.85;
+}
+.about-text p strong { color: var(--gold); font-weight: 600; }
+
+.about-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+}
+.about-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.stat-box { text-align: center; padding: 1.2rem 0; }
+.stat-box + .stat-box { border-top: 1px solid var(--border); }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem; font-weight: 700;
+  color: var(--gold); line-height: 1;
+  display: block;
+}
+.stat-label-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-top: 0.4rem; display: block;
+}
+
+/* ─────────────────────────────────────────────
+   EDUCATION TIMELINE
+───────────────────────────────────────────── */
+.timeline {
+  position: relative; padding-left: 2px;
+}
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 12px; bottom: 12px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--aurora-cyan), transparent);
+}
+.timeline-item {
+  position: relative; padding-left: 3rem; margin-bottom: 3rem;
+}
+.timeline-diamond {
+  position: absolute; left: -7px; top: 8px;
+  width: 15px; height: 15px;
+  background: var(--cosmos-black);
+  border: 2px solid var(--gold);
+  transform: rotate(45deg);
+}
+.timeline-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: 1.6rem 2rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+.timeline-card:hover {
+  background: var(--card-hover);
+  border-color: var(--border-gold);
+  transform: translateX(4px);
+}
+.timeline-date {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.1em; color: var(--aurora-cyan);
+  margin-bottom: 0.5rem;
+}
+.timeline-card h3 {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 600; color: var(--star-white); margin-bottom: 0.3rem;
+}
+.timeline-card .inst {
+  font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.8rem;
+}
+.timeline-card .thesis {
+  font-size: 0.95rem; color: var(--text-secondary);
+  font-style: italic;
+}
+.timeline-card .thesis strong { color: var(--gold); font-style: normal; }
+
+/* ─────────────────────────────────────────────
+   EXPERIENCE CARDS
+───────────────────────────────────────────── */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
+}
+.exp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.8rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.exp-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--aurora-cyan));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.exp-card:hover { background: var(--card-hover); border-color: var(--border-gold); transform: translateY(-4px); }
+.exp-card:hover::before { transform: scaleX(1); }
+.exp-card h3 {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+  color: var(--star-white); margin-bottom: 0.3rem;
+}
+.exp-card .period {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
+  color: var(--aurora-cyan); margin-bottom: 0.3rem;
+}
+.exp-card .place { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+.exp-card ul { list-style: none; }
+.exp-card ul li {
+  font-size: 0.95rem; color: var(--text-secondary);
+  padding: 0.3rem 0; padding-left: 1.2rem; position: relative;
+}
+.exp-card ul li::before {
+  content: '◆'; position: absolute; left: 0;
+  color: var(--gold); font-size: 0.45rem; top: 0.55rem;
+}
+
+/* ─────────────────────────────────────────────
+   RESEARCH INTERESTS
+───────────────────────────────────────────── */
+.research-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+}
+.research-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2rem 1.8rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.research-card:hover {
+  background: var(--card-hover);
+  border-color: rgba(79,195,247,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.research-icon {
+  width: 60px; height: 60px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.4rem; color: var(--gold);
+  transition: all 0.3s ease;
+}
+.research-card:hover .research-icon {
+  background: rgba(201,168,76,0.18);
+  transform: scale(1.1);
+}
+.research-card h3 {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+  color: var(--star-white); margin-bottom: 0.8rem; letter-spacing: 0.04em;
+}
+.research-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ─────────────────────────────────────────────
+   PUBLICATIONS
+───────────────────────────────────────────── */
+.pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.pub-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
+  padding: 1.4rem 1.8rem;
+  display: grid; grid-template-columns: 70px 1fr;
+  gap: 1.5rem; align-items: start;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+.pub-item:hover {
+  background: var(--card-hover);
+  border-left-color: var(--gold);
+  transform: translateX(4px);
+}
+.pub-year {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+  color: var(--gold); padding-top: 0.1rem;
+}
+.pub-content h4 {
+  font-family: var(--font-body); font-size: 1.05rem;
+  font-weight: 600; color: var(--star-white); margin-bottom: 0.4rem; line-height: 1.4;
+}
+.pub-content p { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+.pub-badge {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; margin-top: 0.5rem;
+  background: rgba(79,195,247,0.1); color: var(--aurora-cyan);
+  border: 1px solid rgba(79,195,247,0.2);
+  text-decoration: none;
+}
+.pub-badge--prep {
+  background: rgba(201,168,76,0.1); color: var(--gold);
+  border-color: rgba(201,168,76,0.3);
+}
+.pub-badge--link { cursor: pointer; transition: all 0.2s ease; }
+.pub-badge--link:hover { background: rgba(79,195,247,0.25); border-color: var(--aurora-cyan); }
+.pub-badge--link i { font-size: 0.55rem; margin-left: 4px; }
+.pub-type-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.pub-type {
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 20px; font-weight: 600;
+}
+.pub-type--new  { background: rgba(201,168,76,0.18); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+.pub-type--cwb  { background: rgba(124,77,255,0.15); color: #b39ddb; border: 1px solid rgba(124,77,255,0.3); }
+.pub-type--agn  { background: rgba(79,195,247,0.12); color: var(--aurora-cyan); border: 1px solid rgba(79,195,247,0.25); }
+.pub-type--gal  { background: rgba(38,198,218,0.12); color: var(--aurora-teal); border: 1px solid rgba(38,198,218,0.25); }
+.pub-item--featured { border-left-color: var(--gold) !important; background: rgba(201,168,76,0.04) !important; }
+.pub-item--featured h4 { color: var(--gold-light); }
+
+/* ─────────────────────────────────────────────
+   SKILLS
+───────────────────────────────────────────── */
+.skills-layout {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+}
+.skill-group {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 1.6rem;
+  backdrop-filter: blur(8px);
+}
+.skill-group-title {
+  font-family: var(--font-display); font-size: 0.85rem;
+  font-weight: 600; letter-spacing: 0.1em;
+  color: var(--gold); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.skill-group-title i { color: var(--aurora-cyan); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skill-tag {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  background: rgba(5,8,24,0.8);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 4px 12px; border-radius: 2px;
+  transition: all 0.2s ease;
+}
+.skill-tag:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(201,168,76,0.06);
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────────── */
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start;
+}
+.contact-info p {
+  font-size: 1.05rem; color: var(--text-secondary);
+  margin-bottom: 2rem; line-height: 1.8;
+}
+.contact-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-icon {
+  width: 36px; height: 36px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.contact-item-text { font-size: 0.95rem; color: var(--text-secondary); }
+.contact-item-text a { color: var(--aurora-cyan); text-decoration: none; }
+.contact-item-text a:hover { color: var(--gold-light); }
+
+.contact-form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px; padding: 2.5rem;
+  backdrop-filter: blur(12px);
+}
+.form-field { margin-bottom: 1.2rem; }
+.form-label {
+  display: block;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 0.5rem;
+}
+.form-input, .form-textarea {
+  width: 100%;
+  background: rgba(5,8,24,0.8);
+  border: 1px solid var(--border);
+  border-radius: 2px; padding: 0.9rem 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-body); font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+.form-input:focus, .form-textarea:focus {
+  outline: none; border-color: var(--gold);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-status {
+  margin-top: 1rem; padding: 0.6rem;
+  border-radius: 2px; font-size: 0.85rem; text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer {
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border-gold);
+  text-align: center;
+}
+.footer-brand {
+  font-family: var(--font-display); font-size: 1.3rem;
+  color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.6rem;
+}
+.footer-sub {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   REVEAL ANIMATIONS
+───────────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─────────────────────────────────────────────
+   MOBILE
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about-layout, .contact-layout { grid-template-columns: 1fr; }
+  .about-card { margin-top: 0; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(2,3,10,0.97); padding: 1rem; border-bottom: 1px solid var(--border-gold); }
+  .nav-links.open { display: flex; }
+  .nav-links li { padding: 0.3rem 0; }
+  .hamburger { display: flex; }
+  .hero { padding-top: 80px; }
+  .hero-name { font-size: 2.5rem; }
+  .section { padding: 70px 0; }
+  .cards-grid, .research-grid { grid-template-columns: 1fr; }
+  .pub-item { grid-template-columns: 55px 1fr; }
+}
+</style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════
+     COSMOS CANVAS
+════════════════════════════════════════ -->
+<canvas id="cosmos-canvas"></canvas>
+
+<div class="page-content">
+
+<!-- ═══════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
 <nav class="navbar">
-  <div class="nav-container">
-    <a href="#" class="nav-logo"><i class="fas fa-star-of-life"></i> Asrate Gaulle</a>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#about" class="nav-link" data-key="nav_about">About</a></li>
-      <li><a href="#education" class="nav-link" data-key="nav_education">Education</a></li>
-      <li><a href="#experience" class="nav-link" data-key="nav_experience">Experience</a></li>
-      <li><a href="#research" class="nav-link" data-key="nav_research">Research</a></li>
-      <li><a href="#publications" class="nav-link" data-key="nav_publications">Publications</a></li>
-      <li><a href="#skills" class="nav-link" data-key="nav_skills">Skills</a></li>
-      <li><a href="#contact" class="nav-link" data-key="nav_contact">Contact</a></li>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <svg class="nav-brand-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L13.5 9H21L15 13.5L17.5 21L12 17L6.5 21L9 13.5L3 9H10.5L12 2Z" fill="#c9a84c" opacity="0.9"/>
+      </svg>
+      <span data-i18n="brand">ASRATE GAULLE</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#education" data-i18n="nav.edu">Education</a></li>
+      <li><a href="#experience" data-i18n="nav.exp">Experience</a></li>
+      <li><a href="#research" data-i18n="nav.research">Research</a></li>
+      <li><a href="#publications" data-i18n="nav.pubs">Publications</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       <li>
-        <div class="lang-switch">
-          <button class="lang-btn" data-lang="en">EN</button>
+        <div class="lang-btns">
+          <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="am">አማ</button>
-          <button class="lang-btn" data-lang="he">עִבְרִית</button>
+          <button class="lang-btn" data-lang="he">עב</button>
         </div>
       </li>
     </ul>
-    <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
-<div class="hero-section">
-  <div class="hero-row">
-    <div class="hero-photo">
-      <img src="assets/images/Asrate_Gaulle.jpeg" alt="Asrate Gaulle">
-    </div>
-    <div class="hero-text">
-      <h1 class="hero-name" data-key="hero_name">Asrate Gaulle</h1>
-      <h2 class="hero-title" data-key="hero_title">Computational Astrophysicist</h2>
-    </div>
-  </div>
-  <p class="hero-subtitle" data-key="hero_subtitle">Ph.D. Candidate @ Ariel University, Israel | Exploring radiative transfer, massive binaries & dark energy | From Ethiopia to the cosmos</p>
-  <div class="hero-cta">
-    <a href="#contact" class="btn btn-primary" data-key="btn_contact"><i class="fas fa-paper-plane"></i> Get in Touch</a>
-    <a href="#" id="downloadCvBtn" class="btn btn-secondary"><i class="fas fa-download"></i> Download CV</a>
-  </div>
-  <div class="social-links">
-    <a href="https://github.com/asrate_g" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="https://asrieguae.wixsite.com/site" target="_blank"><i class="fas fa-globe"></i></a>
-    <a href="mailto:asrieguae@gmail.com"><i class="fas fa-envelope"></i></a>
-  </div>
-</div>
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-nebula"></div>
+  <div class="hero-inner">
 
-<div class="container">
-  <!-- About Section -->
-  <section id="about" class="section">
-    <h2 class="section-title"><span class="section-number">01.</span> <span data-key="about_title">About Me</span></h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p data-key="about_p1">I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.</p>
-        <p data-key="about_p2">With a master's from Entoto Observatory (CGPA 3.98/4.00 or 9.95/10.00) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.</p>
-        <p data-key="about_p3">I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.</p>
-      </div>
-      <div class="about-stats">
-        <div class="stat-item"><span class="stat-value">10+</span><span class="stat-label" data-key="stat_years">Years Academia</span></div>
-        <div class="stat-item"><span class="stat-value">4</span><span class="stat-label" data-key="stat_pubs">Publications</span></div>
-        <div class="stat-item"><span class="stat-value">7+</span><span class="stat-label" data-key="stat_confs">Intl Conferences</span></div>
-        <div class="stat-item"><span class="stat-value">100+</span><span class="stat-label" data-key="stat_students">Mentored Students</span></div>
+    <div class="hero-orbit">
+      <div class="hero-orbit-ring"></div>
+      <div class="hero-orbit-ring"></div>
+      <div class="hero-avatar">
+        <div class="hero-avatar-placeholder">
+          <i class="fas fa-user-astronaut"></i>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Education Section -->
-  <section id="education" class="section section-alt">
-    <h2 class="section-title"><span class="section-number">02.</span> <span data-key="edu_title">Education</span></h2>
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Ph.D. Candidate · Ariel University · Israel</p>
+    <h1 class="hero-name" data-i18n="hero.name">Asrate Gaulle</h1>
+    <h2 class="hero-title" data-i18n="hero.title">Computational Astrophysicist</h2>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle" data-i18n="hero.sub">Decoding the violent interactions of massive binary stars through radiative transfer simulations, hydrodynamic modelling, and observational diagnostics — bridging Ethiopia to the cosmos.</p>
+
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold"><span><i class="fas fa-paper-plane"></i> <span data-i18n="hero.cta1">Get in Touch</span></span></a>
+      <a href="#" id="cvBtn" class="btn btn-outline"><span><i class="fas fa-file-alt"></i> <span data-i18n="hero.cta2">Download CV</span></span></a>
+    </div>
+
+    <div class="hero-socials">
+      <a href="https://github.com/asrate_g" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://asrieguae.wixsite.com/site" target="_blank" aria-label="Website"><i class="fas fa-globe"></i></a>
+      <a href="mailto:asrieguae@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://orcid.org/" target="_blank" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-i18n="hero.scroll">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.about_label">01 — Profile</p>
+    <h2 class="section-title reveal" data-i18n="sec.about_title">About <span class="gold-accent">Me</span></h2>
+
+    <div class="about-layout">
+      <div class="about-text reveal">
+        <p data-i18n="about.p1">I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>, under the supervision of <strong>Prof. Amit Kashi</strong>. My research bridges 3D AMR hydrodynamic simulations and observational X-ray data to decode the violent interactions within massive binary stellar systems.</p>
+        <p data-i18n="about.p2">With an M.Sc. from <strong>Entoto Observatory & Research Center</strong> (CGPA 3.98/4.00, Addis Ababa University) and a B.Sc. in Applied Physics from Debre Berhan University, I served as Head of the Physics Department at Dilla University, mentoring over 100 students and driving curriculum innovation in Ethiopia.</p>
+        <p data-i18n="about.p3">I am a strong advocate for open science and STEM outreach. As ESSS Branch Chairperson at Dilla University (2020–2025), I organised national space science events and public astronomy lectures — because the universe belongs to everyone.</p>
+      </div>
+
+      <div class="about-card reveal reveal-delay-2">
+        <div class="about-stats-grid">
+          <div class="stat-box"><span class="stat-num">10+</span><span class="stat-label-text" data-i18n="stat.yrs">Years in Academia</span></div>
+          <div class="stat-box"><span class="stat-num">5</span><span class="stat-label-text" data-i18n="stat.pubs">Publications</span></div>
+          <div class="stat-box"><span class="stat-num">7+</span><span class="stat-label-text" data-i18n="stat.conf">Intl. Conferences</span></div>
+          <div class="stat-box"><span class="stat-num">100+</span><span class="stat-label-text" data-i18n="stat.stu">Mentored Students</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EDUCATION
+════════════════════════════════════════ -->
+<section class="section section-dark" id="education">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.edu_label">02 — Academic Training</p>
+    <h2 class="section-title reveal" data-i18n="sec.edu_title">Education</h2>
+
     <div class="timeline">
-      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_phd_date">Apr 2025 – Present</span><h3 data-key="edu_phd_title">Ph.D. in Computational Astrophysics</h3><p>Ariel University, Israel | AGASS Center</p><p data-key="edu_phd_thesis"><strong>Thesis:</strong> Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries</p><p><span data-key="edu_supervisor">Supervisor</span>: Prof. Amit Kashi</p></div></div>
-      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_msc_date">Oct 2016 – Jul 2018</span><h3 data-key="edu_msc_title">M.Sc. Astronomy & Astrophysics</h3><p>Entoto Observatory / Addis Ababa University | CGPA 3.98/4.00</p><p data-key="edu_msc_thesis"><strong>Thesis:</strong> Alternative method for measuring accretion rate in Galaxies using X/O flux ratio</p><p><span data-key="edu_supervisor">Supervisor</span>: Prof. Mirjana Povic</p></div></div>
-      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date" data-key="edu_bsc_date">Oct 2010 – Jun 2013</span><h3 data-key="edu_bsc_title">B.Sc. Applied Physics</h3><p>Debre Berhan University | CGPA 3.84/4.00</p><p data-key="edu_bsc_project">Senior Project: Optimizing Wind Energy Conversion (Betz-limit)</p></div></div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <h2 class="section-title"><span class="section-number">03.</span> <span data-key="exp_title">Experience & Leadership</span></h2>
-    <div class="experience-grid">
-      <div class="experience-card"><h3 data-key="exp1_title">Head, Dept. of Physics</h3><span class="experience-date" data-key="exp1_date">01/2021 – 06/2024</span><p>Dilla University, Ethiopia</p><ul><li data-key="exp1_li1">Led academic strategy, curriculum innovation, faculty mentoring</li><li data-key="exp1_li2">Established research collaborations and student projects</li></ul></div>
-      <div class="experience-card"><h3 data-key="exp2_title">Lecturer of Physics & Astrophysics</h3><span class="experience-date" data-key="exp2_date">07/2018 – 04/2025</span><p>Dilla University</p><ul><li data-key="exp2_li1">Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)</li><li data-key="exp2_li2">Supervised 100+ BSc senior projects</li></ul></div>
-      <div class="experience-card"><h3 data-key="exp3_title">ESSS Branch Chairperson</h3><span class="experience-date" data-key="exp3_date">2020 – 2025</span><p>Ethiopian Space Science Society, DU</p><ul><li data-key="exp3_li1">Organized national space science events and STEM outreach</li><li data-key="exp3_li2">Promoted astronomy education across Ethiopia</li></ul></div>
-    </div>
-  </section>
-
-  <!-- Research Interests -->
-  <section id="research" class="section section-alt">
-    <h2 class="section-title"><span class="section-number">04.</span> <span data-key="research_title">Research Interests</span></h2>
-    <div class="research-grid">
-      <div class="research-card"><i class="fas fa-star-of-life"></i><h3 data-key="research1_title">Massive Binaries</h3><p data-key="research1_desc">Colliding winds, radiative transfer, instability evolution in massive binary systems.</p></div>
-      <div class="research-card"><i class="fas fa-chart-line"></i><h3 data-key="research2_title">Dark Energy & Modified Gravity</h3><p data-key="research2_desc">Exploring f(R,T,S) models and cosmic expansion.</p></div>
-      <div class="research-card"><i class="fas fa-galaxy"></i><h3 data-key="research3_title">Galaxy Formation & Evolution</h3><p data-key="research3_desc">Dark matter, star formation, feedback & AGN.</p></div>
-      <div class="research-card"><i class="fas fa-black-hole"></i><h3 data-key="research4_title">Accretion & Black Holes</h3><p data-key="research4_desc">AGN accretion rates, X-ray/optical diagnostics.</p></div>
-    </div>
-  </section>
-
-  <!-- Publications -->
-  <section id="publications" class="section">
-    <h2 class="section-title"><span class="section-number">05.</span> <span data-key="pubs_title">Publications</span></h2>
-    <div class="publications-list">
-      <div class="pub-item"><span class="pub-year">2026</span><div><h4>An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2</h4><p>Gaulle A., Pović M., Zewdie D. — <em>A&A, to be submitted</em></p></div></div>
-      <div class="pub-item"><span class="pub-year">2020</span><div><h4>AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z < 0.1</h4><p>Zewdie D., Pović M., Aravena M., Roberto J., Gaulle A. — <em>MNRAS, 498, 4345</em></p></div></div>
-      <div class="pub-item"><span class="pub-year">2019</span><div><h4>Properties of local galaxies with the highest growth rate at redshift z ≤ 0.1</h4><p>Zewdie et al. (incl. Gaulle A.) — <em>IAU Symp. 356</em></p></div></div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="section section-alt">
-    <h2 class="section-title"><span class="section-number">06.</span> <span data-key="skills_title">Technical Skill</span></h2>
-    <div style="display:grid; gap:1.5rem;">
-      <div class="skill-category"><h3 data-key="skills_lang"><i class="fas fa-code"></i> Languages & Libraries</h3><div class="skill-tags"><span class="skill-tag">Python (NumPy, AstroPy)</span><span class="skill-tag">FORTRAN</span><span class="skill-tag">C++</span><span class="skill-tag">R</span></div></div>
-      <div class="skill-category"><h3 data-key="skills_astro"><i class="fas fa-telescope"></i> Astrophysics Codes</h3><div class="skill-tags"><span class="skill-tag">FLASH</span><span class="skill-tag">RADMC-3D</span><span class="skill-tag">PHOEBE</span><span class="skill-tag">YT</span></div></div>
-      <div class="skill-category"><h3 data-key="skills_soft"><i class="fas fa-chalkboard"></i> Soft & Languages</h3><div class="skill-tags"><span class="skill-tag">LaTeX</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Amharic (አማርኛ)</span><span class="skill-tag">English</span></div></div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <h2 class="section-title"><span class="section-number">07.</span> <span data-key="contact_title">Connect & Send a Message</span></h2>
-    <div class="contact-grid">
-      <div>
-        <p data-key="contact_intro">📍 Open for collaborations, PhD discussions, and outreach. Feel free to reach out.</p>
-        <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:asrieguae@gmail.com">asrieguae@gmail.com</a></div>
-        <div class="contact-item"><i class="fas fa-university"></i><a href="mailto:asrate_g.weldegeb@msmail.ariel.ac.il">asrate_g.weldegeb@msmail.ariel.ac.il</a></div>
-        <div class="contact-item"><i class="fas fa-map-pin"></i><span data-key="contact_location">Ariel, Israel | Dilla, Ethiopia</span></div>
+      <div class="timeline-item reveal">
+        <div class="timeline-diamond"></div>
+        <div class="timeline-card">
+          <div class="timeline-date" data-i18n="edu.phd_date">April 2025 – Present</div>
+          <h3 data-i18n="edu.phd_deg">Ph.D. in Computational Astrophysics</h3>
+          <p class="inst">Ariel University, Israel · AGASS Center</p>
+          <p class="thesis"><strong data-i18n="edu.thesis_label">Thesis:</strong> <span data-i18n="edu.phd_thesis">Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries</span></p>
+          <p class="thesis" style="margin-top:0.4rem"><strong data-i18n="edu.sup_label">Supervisor:</strong> <span data-i18n="edu.phd_sup">Prof. Amit Kashi</span></p>
+        </div>
       </div>
-      <div>
-        <form class="contact-form" id="directEmailForm">
-          <div class="form-group"><label data-key="form_name">Your Name</label><input type="text" id="senderName" placeholder="Your name" required></div>
-          <div class="form-group"><label data-key="form_email">Your Email</label><input type="email" id="senderEmail" placeholder="you@example.com" required></div>
-          <div class="form-group"><label data-key="form_message">Message</label><textarea id="emailMessage" rows="4" placeholder="Write your message..." required></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;" data-key="form_send"><i class="fas fa-paper-plane"></i> Send Email</button>
+
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-diamond"></div>
+        <div class="timeline-card">
+          <div class="timeline-date" data-i18n="edu.msc_date">October 2016 – July 2018</div>
+          <h3 data-i18n="edu.msc_deg">M.Sc. Astronomy & Astrophysics</h3>
+          <p class="inst">Entoto Observatory & Research Center · Addis Ababa University · CGPA 3.98/4.00 (9.95/10.00)</p>
+          <p class="thesis"><strong data-i18n="edu.thesis_label">Thesis:</strong> <span data-i18n="edu.msc_thesis">Alternative Method for Measuring Accretion Rates in Galaxies Using the X-ray/Optical Flux Ratio</span></p>
+          <p class="thesis" style="margin-top:0.4rem"><strong data-i18n="edu.sup_label">Supervisor:</strong> Prof. Mirjana Pović</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-diamond"></div>
+        <div class="timeline-card">
+          <div class="timeline-date" data-i18n="edu.bsc_date">October 2010 – June 2013</div>
+          <h3 data-i18n="edu.bsc_deg">B.Sc. Applied Physics</h3>
+          <p class="inst">Debre Berhan University · CGPA 3.84/4.00</p>
+          <p class="thesis"><strong data-i18n="edu.proj_label">Senior Project:</strong> <span data-i18n="edu.bsc_proj">Optimizing Wind Energy Conversion Systems (Betz-Limit Analysis)</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════ -->
+<section class="section" id="experience">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.exp_label">03 — Career</p>
+    <h2 class="section-title reveal" data-i18n="sec.exp_title">Experience & <span class="gold-accent">Leadership</span></h2>
+
+    <div class="cards-grid">
+      <div class="exp-card reveal">
+        <h3 data-i18n="exp.head_title">Head, Department of Physics</h3>
+        <div class="period" data-i18n="exp.head_period">January 2021 – June 2024</div>
+        <div class="place">Dilla University, Ethiopia</div>
+        <ul>
+          <li data-i18n="exp.head_li1">Led academic strategy, curriculum innovation, and faculty development</li>
+          <li data-i18n="exp.head_li2">Established regional research collaborations and funded student projects</li>
+          <li data-i18n="exp.head_li3">Expanded department from 3 to 8 active research areas</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal reveal-delay-1">
+        <h3 data-i18n="exp.lec_title">Lecturer — Physics & Astrophysics</h3>
+        <div class="period" data-i18n="exp.lec_period">July 2018 – April 2025</div>
+        <div class="place">Dilla University, Ethiopia</div>
+        <ul>
+          <li data-i18n="exp.lec_li1">Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)</li>
+          <li data-i18n="exp.lec_li2">Supervised 100+ B.Sc. senior research projects</li>
+          <li data-i18n="exp.lec_li3">Developed new computational astrophysics module from scratch</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal reveal-delay-2">
+        <h3 data-i18n="exp.esss_title">ESSS Branch Chairperson</h3>
+        <div class="period" data-i18n="exp.esss_period">2020 – 2025</div>
+        <div class="place">Ethiopian Space Science Society, Dilla University</div>
+        <ul>
+          <li data-i18n="exp.esss_li1">Organised national space science symposia and public astronomy nights</li>
+          <li data-i18n="exp.esss_li2">Inspired 500+ secondary school students through annual STEM outreach</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     RESEARCH
+════════════════════════════════════════ -->
+<section class="section section-dark" id="research">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.res_label">04 — Science</p>
+    <h2 class="section-title reveal" data-i18n="sec.res_title">Research <span class="gold-accent">Interests</span></h2>
+
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <div class="research-icon"><i class="fas fa-atom"></i></div>
+        <h3 data-i18n="res.cwb_title">Colliding-Wind Binaries</h3>
+        <p data-i18n="res.cwb_desc">3D AMR hydrodynamic simulations of wind-wind collision regions; radiative cooling, NTSI, Kelvin-Helmholtz instabilities, and synthetic X-ray spectra.</p>
+      </div>
+      <div class="research-card reveal reveal-delay-1">
+        <div class="research-icon"><i class="fas fa-radiation"></i></div>
+        <h3 data-i18n="res.rt_title">Radiative Transfer</h3>
+        <p data-i18n="res.rt_desc">Modelling photon transport through dense stellar winds using RADMC-3D and TORUS; infrared and X-ray synthetic observables for comparison with XMM-Newton and Chandra.</p>
+      </div>
+      <div class="research-card reveal reveal-delay-2">
+        <div class="research-icon"><i class="fas fa-galaxy"></i></div>
+        <h3 data-i18n="res.agn_title">AGN & Accretion</h3>
+        <p data-i18n="res.agn_desc">Alternative accretion-rate diagnostics via X-ray/optical flux ratios; cross-matching 4XMM-DR14 with SDSS and Galaxy Zoo morphological classifications.</p>
+      </div>
+      <div class="research-card reveal reveal-delay-3">
+        <div class="research-icon"><i class="fas fa-infinity"></i></div>
+        <h3 data-i18n="res.de_title">Dark Energy & Modified Gravity</h3>
+        <p data-i18n="res.de_desc">Exploring f(R,T,S) extended gravity models, equation-of-state constraints, and large-scale structure formation in a dark-energy-dominated cosmos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PUBLICATIONS
+════════════════════════════════════════ -->
+<section class="section" id="publications">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.pub_label">05 — Output</p>
+    <h2 class="section-title reveal" data-i18n="sec.pub_title">Publications</h2>
+
+    <div class="pub-list">
+
+      <!-- P1: CWB HD 93205 — in prep -->
+      <div class="pub-item reveal pub-item--featured">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-type-row"><span class="pub-type pub-type--new">New</span><span class="pub-type pub-type--cwb">Massive Binaries</span></div>
+          <h4>Multidimensional Hydrodynamic Foundational Modelling and Radiative Cooling Effects of Colliding Winds in HD 93205</h4>
+          <p>Gaulle A., Kashi A.</p>
+          <span class="pub-badge pub-badge--prep">In Preparation · MNRAS</span>
+        </div>
+      </div>
+
+      <!-- P2: AGN accretion rate A&A -->
+      <div class="pub-item reveal reveal-delay-1">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-type-row"><span class="pub-type pub-type--agn">AGN</span></div>
+          <h4>An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2</h4>
+          <p>Gaulle A., Pović M., Zewdie D.</p>
+          <span class="pub-badge pub-badge--prep">A&amp;A — To be submitted</span>
+        </div>
+      </div>
+
+      <!-- P3: MNRAS 2020 -->
+      <div class="pub-item reveal reveal-delay-2">
+        <div class="pub-year">2020</div>
+        <div class="pub-content">
+          <div class="pub-type-row"><span class="pub-type pub-type--agn">AGN</span><span class="pub-type pub-type--gal">Galaxy Evolution</span></div>
+          <h4>AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z &lt; 0.1</h4>
+          <p>Zewdie D., Pović M., Aravena M., Roberto J., &amp; Gaulle A. — <em>MNRAS, 498, 4345</em></p>
+          <span class="pub-badge">MNRAS · DOI: 10.1093/mnras/staa2689</span>
+        </div>
+      </div>
+
+      <!-- P4: IAU 356 proceedings 2019 – galaxies -->
+      <div class="pub-item reveal reveal-delay-3">
+        <div class="pub-year">2019</div>
+        <div class="pub-content">
+          <div class="pub-type-row"><span class="pub-type pub-type--gal">Galaxy Evolution</span></div>
+          <h4>Properties of Local Galaxies with the Highest Growth Rate at Redshift z ≤ 0.1</h4>
+          <p>Zewdie D., Pović M., Aravena M., Roberto J., &amp; Gaulle A. — <em>Proc. IAU Symposium 356</em></p>
+          <a class="pub-badge pub-badge--link" href="https://arxiv.org/abs/2004.00718" target="_blank">arXiv:2004.00718 <i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+
+      <!-- P5: IAU 356 proceedings 2019 – accretion -->
+      <div class="pub-item reveal">
+        <div class="pub-year">2019</div>
+        <div class="pub-content">
+          <div class="pub-type-row"><span class="pub-type pub-type--agn">AGN</span></div>
+          <h4>Accretion Rate in AGN and X-ray-to-Optical Flux Ratio at z &lt; 0.2</h4>
+          <p>Gaulle A., Pović M., &amp; Zewdie D. — <em>Proc. IAU Symposium 356</em></p>
+          <a class="pub-badge pub-badge--link" href="https://arxiv.org/abs/2003.13487" target="_blank">arXiv:2003.13487 <i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section class="section section-dark" id="skills">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.sk_label">06 — Toolkit</p>
+    <h2 class="section-title reveal" data-i18n="sec.sk_title">Technical <span class="gold-accent">Skills</span></h2>
+
+    <div class="skills-layout">
+      <div class="skill-group reveal">
+        <div class="skill-group-title"><i class="fas fa-code"></i> <span data-i18n="sk.lang">Programming Languages</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">NumPy</span>
+          <span class="skill-tag">AstroPy</span><span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">FORTRAN</span><span class="skill-tag">C++</span><span class="skill-tag">R</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title"><i class="fas fa-fire"></i> <span data-i18n="sk.sim">Simulation Codes</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">FLASH AMR</span><span class="skill-tag">RADMC-3D</span>
+          <span class="skill-tag">TORUS</span><span class="skill-tag">PHOEBE</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-title"><i class="fas fa-chart-scatter"></i> <span data-i18n="sk.vis">Visualisation & Post-processing</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">yt</span><span class="skill-tag">VisIt</span>
+          <span class="skill-tag">ParaView</span><span class="skill-tag">PyXSIM</span>
+          <span class="skill-tag">XSPEC</span><span class="skill-tag">CIAO</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title"><i class="fas fa-telescope"></i> <span data-i18n="sk.obs">Observational Tools</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">XMM-Newton SAS</span><span class="skill-tag">Chandra CIAO</span>
+          <span class="skill-tag">SDSS</span><span class="skill-tag">4XMM-DR14</span>
+          <span class="skill-tag">TOPCAT</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title"><i class="fas fa-wrench"></i> <span data-i18n="sk.tools">Dev & Writing Tools</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">LaTeX</span><span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">HPC / SLURM</span><span class="skill-tag">Linux/Bash</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-title"><i class="fas fa-language"></i> <span data-i18n="sk.langs">Languages</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">English — Fluent</span>
+          <span class="skill-tag">Amharic — Native</span>
+          <span class="skill-tag">Hebrew — Beginner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="section-container">
+    <p class="section-label reveal" data-i18n="sec.con_label">07 — Connect</p>
+    <h2 class="section-title reveal" data-i18n="sec.con_title">Get in <span class="gold-accent">Touch</span></h2>
+
+    <div class="contact-layout">
+      <div class="reveal">
+        <p data-i18n="con.intro">Open to research collaborations, Ph.D. discussions, and science outreach. Whether you are a fellow researcher, prospective student, or simply curious about the stars — feel free to reach out.</p>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-item-text"><strong data-i18n="con.personal_email">Personal</strong><br><a href="mailto:asrieguae@gmail.com">asrieguae@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-university"></i></div>
+          <div class="contact-item-text"><strong data-i18n="con.uni_email">University</strong><br><a href="mailto:asrate_g.weldegeb@msmail.ariel.ac.il">asrate_g.weldegeb@msmail.ariel.ac.il</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-item-text" data-i18n="con.location">Ariel University, Israel · Dilla, Ethiopia</div>
+        </div>
+      </div>
+
+      <div class="contact-form-card reveal reveal-delay-2">
+        <form id="contactForm">
+          <div class="form-field">
+            <label class="form-label" data-i18n="form.name">Your Name</label>
+            <input class="form-input" type="text" id="fName" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" data-i18n="form.email">Your Email</label>
+            <input class="form-input" type="email" id="fEmail" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" data-i18n="form.msg">Message</label>
+            <textarea class="form-textarea" id="fMsg" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%">
+            <span><i class="fas fa-paper-plane"></i> <span data-i18n="form.send">Send Message</span></span>
+          </button>
           <div id="formStatus" class="form-status"></div>
         </form>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
 <footer>
-  <p>© 2026 Asrate Gaulle — <span data-key="footer_text">Computational Astrophysicist</span></p>
+  <div class="footer-brand">ASRATE GAULLE</div>
+  <div class="footer-sub" data-i18n="footer">Computational Astrophysicist · Ariel University, Israel · © 2026</div>
 </footer>
 
+</div><!-- /page-content -->
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
+/* ─── COSMOS CANVAS ─── */
+(function() {
+  const canvas = document.getElementById('cosmos-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars, nebulae, shootingStars;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    const N = Math.floor((W * H) / 2800);
+    for (let i = 0; i < N; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.004 + 0.001,
+        phase: Math.random() * Math.PI * 2,
+        color: pickStarColor()
+      });
+    }
+    nebulae = [];
+    for (let i = 0; i < 6; i++) {
+      nebulae.push({
+        x: Math.random() * W, y: Math.random() * H,
+        rx: 200 + Math.random() * 400, ry: 100 + Math.random() * 300,
+        hue: Math.random() < 0.4 ? 200 : (Math.random() < 0.5 ? 270 : 45),
+        a: 0.015 + Math.random() * 0.03
+      });
+    }
+    shootingStars = [];
+  }
+
+  function pickStarColor() {
+    const r = Math.random();
+    if (r < 0.15) return '#a8d0ff'; // blue giant
+    if (r < 0.25) return '#ffdab9'; // orange
+    if (r < 0.3)  return '#e8c97a'; // gold
+    return '#dde8f5';               // white
+  }
+
+  function spawnShootingStar() {
+    if (Math.random() < 0.004 && shootingStars.length < 3) {
+      const sx = Math.random() * W;
+      shootingStars.push({
+        x: sx, y: Math.random() * H * 0.4,
+        vx: (2 + Math.random() * 4) * (Math.random() < 0.5 ? 1 : -1),
+        vy: 1.5 + Math.random() * 2,
+        life: 1, fade: 0.012 + Math.random() * 0.015,
+        len: 80 + Math.random() * 120
+      });
+    }
+  }
+
+  let t = 0;
+  function draw() {
+    t += 0.016;
+    ctx.clearRect(0, 0, W, H);
+
+    // Deep space gradient bg
+    const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W, H) * 0.8);
+    bg.addColorStop(0, '#050820');
+    bg.addColorStop(0.5, '#020510');
+    bg.addColorStop(1, '#02030a');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Nebulae
+    for (const n of nebulae) {
+      ctx.save();
+      ctx.translate(n.x, n.y);
+      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(n.rx, n.ry));
+      grad.addColorStop(0, `hsla(${n.hue},70%,60%,${n.a * 1.5})`);
+      grad.addColorStop(1, `hsla(${n.hue},70%,40%,0)`);
+      ctx.scale(1, n.ry / n.rx);
+      ctx.beginPath(); ctx.arc(0, 0, n.rx, 0, Math.PI * 2);
+      ctx.fillStyle = grad; ctx.fill();
+      ctx.restore();
+    }
+
+    // Stars
+    for (const s of stars) {
+      const a = (Math.sin(t * s.speed * 60 + s.phase) * 0.3 + 0.7) * s.a;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.color.replace(')', `,${a})`).replace('rgb', 'rgba').replace('#', '');
+      // Quick hex to rgba
+      ctx.globalAlpha = a;
+      ctx.fillStyle = s.color;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // Shooting stars
+    spawnShootingStar();
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const ss = shootingStars[i];
+      ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.fade;
+      if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
+      const ang = Math.atan2(ss.vy, ss.vx);
+      const tail = ctx.createLinearGradient(ss.x, ss.y, ss.x - Math.cos(ang)*ss.len, ss.y - Math.sin(ang)*ss.len);
+      tail.addColorStop(0, `rgba(255,255,255,${ss.life * 0.9})`);
+      tail.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath();
+      ctx.moveTo(ss.x, ss.y);
+      ctx.lineTo(ss.x - Math.cos(ang)*ss.len, ss.y - Math.sin(ang)*ss.len);
+      ctx.strokeStyle = tail; ctx.lineWidth = 1.5 * ss.life;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize(); initStars(); draw();
+})();
+
+/* ─── HAMBURGER ─── */
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* ─── CV DOWNLOAD ─── */
+document.getElementById('cvBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  alert('CV download coming soon. Please contact asrieguae@gmail.com to request a copy.');
+});
+
+/* ─── CONTACT FORM ─── */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('fName').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  const msg = document.getElementById('fMsg').value.trim();
+  const status = document.getElementById('formStatus');
+  if (!name || !email || !msg) {
+    status.innerHTML = '<span style="color:#f97316">⚠ Please fill in all fields.</span>';
+    return;
+  }
+  const to = 'asrieguae@gmail.com';
+  const sub = `[Portfolio] Message from ${name}`;
+  const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`;
+  window.location.href = `mailto:${to}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
+  status.innerHTML = '<span style="color:#4ade80">✓ Opening your email client…</span>';
+  setTimeout(() => { status.innerHTML = ''; this.reset(); }, 5000);
+});
+
+/* ─── SCROLL REVEAL ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── SMOOTH NAV CLOSE ─── */
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+/* ═══════════════════════════════════
+   INTERNATIONALISATION
+═══════════════════════════════════ */
+const I18N = {
   en: {
-    // Navigation
-    nav_about: "About", nav_education: "Education", nav_experience: "Experience", nav_research: "Research",
-    nav_publications: "Publications", nav_skills: "Skills", nav_contact: "Contact",
-    // Hero
-    hero_name: "Asrate Gaulle", hero_title: "Computational Astrophysicist",
-    hero_subtitle: "Ph.D. Candidate @ Ariel University, Israel | Exploring radiative transfer, massive binaries & dark energy | From Ethiopia to the cosmos",
-    btn_contact: "Get in Touch",
-    // About
-    about_title: "About Me",
-    about_p1: "I am a computational astrophysicist from Alem Ketema, Ethiopia, currently pursuing a Ph.D. at Ariel University, Israel. My research bridges radiative transfer simulations and observational data to decode the violent interactions in massive binary systems and the large-scale influence of dark energy.",
-    about_p2: "With a master's from Entoto Observatory (CGPA 3.98/4.00) and B.Sc. in Applied Physics, I've led the Physics Department at Dilla University, mentored 100+ students, and actively contributed to Ethiopian space science outreach as ESSS branch chairperson.",
-    about_p3: "I strongly believe in open science and education: from teaching computational physics to organizing STEM inspiration lectures every year — the universe belongs to everyone.",
-    stat_years: "Years Academia", stat_pubs: "Publications", stat_confs: "Intl Conferences", stat_students: "Mentored Students",
-    // Education
-    edu_title: "Education", edu_phd_date: "Apr 2025 – Present", edu_phd_title: "Ph.D. in Computational Astrophysics",
-    edu_phd_thesis: "Thesis: Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries",
-    edu_supervisor: "Supervisor", edu_msc_date: "Oct 2016 – Jul 2018", edu_msc_title: "M.Sc. Astronomy & Astrophysics",
-    edu_msc_thesis: "Thesis: Alternative method for measuring accretion rate in Galaxies using X/O flux ratio",
-    edu_bsc_date: "Oct 2010 – Jun 2013", edu_bsc_title: "B.Sc. Applied Physics", edu_bsc_project: "Senior Project: Optimizing Wind Energy Conversion (Betz-limit)",
-    // Experience
-    exp_title: "Experience & Leadership", exp1_title: "Head, Dept. of Physics", exp1_date: "01/2021 – 06/2024",
-    exp1_li1: "Led academic strategy, curriculum innovation, faculty mentoring", exp1_li2: "Established research collaborations and student projects",
-    exp2_title: "Lecturer of Physics & Astrophysics", exp2_date: "07/2018 – 04/2025",
-    exp2_li1: "Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)", exp2_li2: "Supervised 100+ BSc senior projects",
-    exp3_title: "ESSS Branch Chairperson", exp3_date: "2020 – 2025",
-    exp3_li1: "Organized national space science events and STEM outreach", exp3_li2: "Promoted astronomy education across Ethiopia",
-    // Research
-    research_title: "Research Interests", research1_title: "Massive Binaries", research1_desc: "Colliding winds, radiative transfer, instability evolution in massive binary systems.",
-    research2_title: "Dark Energy & Modified Gravity", research2_desc: "Exploring f(R,T,S) models and cosmic expansion.",
-    research3_title: "Galaxy Formation & Evolution", research3_desc: "Dark matter, star formation, feedback & AGN.",
-    research4_title: "Accretion & Black Holes", research4_desc: "AGN accretion rates, X-ray/optical diagnostics.",
-    // Publications
-    pubs_title: "Publications",
-    // Skills
-    skills_title: "Technical Skill", skills_lang: "Languages & Libraries", skills_astro: "Astrophysics Codes", skills_soft: "Soft & Languages",
-    // Contact
-    contact_title: "Connect & Send a Message", contact_intro: "📍 Open for collaborations, PhD discussions, and outreach. Feel free to reach out.",
-    contact_location: "Ariel, Israel | Dilla, Ethiopia",
-    form_name: "Your Name", form_email: "Your Email", form_message: "Message", form_send: "Send Email",
-    footer_text: "Computational Astrophysicist"
+    brand: 'ASRATE GAULLE',
+    'nav.about':'About','nav.edu':'Education','nav.exp':'Experience',
+    'nav.research':'Research','nav.pubs':'Publications','nav.skills':'Skills','nav.contact':'Contact',
+    'hero.eyebrow':'Ph.D. Candidate · Ariel University · Israel',
+    'hero.name':'Asrate Gaulle','hero.title':'Computational Astrophysicist',
+    'hero.sub':'Decoding the violent interactions of massive binary stars through radiative transfer simulations, hydrodynamic modelling, and observational diagnostics — bridging Ethiopia to the cosmos.',
+    'hero.cta1':'Get in Touch','hero.cta2':'Download CV','hero.scroll':'Scroll',
+    'sec.about_label':'01 — Profile','sec.about_title':'About',
+    'sec.edu_label':'02 — Academic Training','sec.edu_title':'Education',
+    'sec.exp_label':'03 — Career','sec.exp_title':'Experience &',
+    'sec.res_label':'04 — Science','sec.res_title':'Research',
+    'sec.pub_label':'05 — Output','sec.pub_title':'Publications',
+    'sec.sk_label':'06 — Toolkit','sec.sk_title':'Technical',
+    'sec.con_label':'07 — Connect','sec.con_title':'Get in',
+    'about.p1':'I am a computational astrophysicist from <strong>Alem Ketema, Ethiopia</strong>, currently pursuing a Ph.D. at <strong>Ariel University, Israel</strong>, under the supervision of <strong>Prof. Amit Kashi</strong>. My research bridges 3D AMR hydrodynamic simulations and observational X-ray data to decode the violent interactions within massive binary stellar systems.',
+    'about.p2':'With an M.Sc. from <strong>Entoto Observatory & Research Center</strong> (CGPA 3.98/4.00, Addis Ababa University) and a B.Sc. in Applied Physics from Debre Berhan University, I served as Head of the Physics Department at Dilla University, mentoring over 100 students and driving curriculum innovation.',
+    'about.p3':'I am a strong advocate for open science and STEM outreach. As ESSS Branch Chairperson at Dilla University (2020–2025), I organised national space science events and public astronomy lectures — because the universe belongs to everyone.',
+    'stat.yrs':'Years in Academia','stat.pubs':'Publications','stat.conf':'Intl. Conferences','stat.stu':'Mentored Students',
+    'edu.phd_date':'April 2025 – Present','edu.phd_deg':'Ph.D. in Computational Astrophysics',
+    'edu.thesis_label':'Thesis:','edu.phd_thesis':'Radiative Transfer and Instability Evolution in Colliding Winds of Massive Binaries',
+    'edu.sup_label':'Supervisor:','edu.phd_sup':'Prof. Amit Kashi',
+    'edu.msc_date':'October 2016 – July 2018','edu.msc_deg':'M.Sc. Astronomy & Astrophysics',
+    'edu.msc_thesis':'Alternative Method for Measuring Accretion Rates in Galaxies Using the X-ray/Optical Flux Ratio',
+    'edu.bsc_date':'October 2010 – June 2013','edu.bsc_deg':'B.Sc. Applied Physics',
+    'edu.proj_label':'Senior Project:','edu.bsc_proj':'Optimizing Wind Energy Conversion Systems (Betz-Limit Analysis)',
+    'exp.head_title':'Head, Department of Physics','exp.head_period':'January 2021 – June 2024',
+    'exp.head_li1':'Led academic strategy, curriculum innovation, and faculty development',
+    'exp.head_li2':'Established regional research collaborations and funded student projects',
+    'exp.head_li3':'Expanded department from 3 to 8 active research areas',
+    'exp.lec_title':'Lecturer — Physics & Astrophysics','exp.lec_period':'July 2018 – April 2025',
+    'exp.lec_li1':'Courses: General Physics, Astrophysics, Cosmology, Computational Physics (Python/FORTRAN)',
+    'exp.lec_li2':'Supervised 100+ B.Sc. senior research projects',
+    'exp.lec_li3':'Developed new computational astrophysics module from scratch',
+    'exp.esss_title':'ESSS Branch Chairperson','exp.esss_period':'2020 – 2025',
+    'exp.esss_li1':'Organised national space science symposia and public astronomy nights',
+    'exp.esss_li2':'Inspired 500+ secondary school students through annual STEM outreach',
+    'res.cwb_title':'Colliding-Wind Binaries','res.cwb_desc':'3D AMR hydrodynamic simulations of wind-wind collision regions; radiative cooling, NTSI, Kelvin-Helmholtz instabilities, and synthetic X-ray spectra.',
+    'res.rt_title':'Radiative Transfer','res.rt_desc':'Modelling photon transport through dense stellar winds using RADMC-3D and TORUS; infrared and X-ray synthetic observables for XMM-Newton and Chandra comparison.',
+    'res.agn_title':'AGN & Accretion','res.agn_desc':'Alternative accretion-rate diagnostics via X-ray/optical flux ratios; cross-matching 4XMM-DR14 with SDSS and Galaxy Zoo morphological classifications.',
+    'res.de_title':'Dark Energy & Modified Gravity','res.de_desc':'Exploring f(R,T,S) extended gravity models, equation-of-state constraints, and large-scale structure formation in a dark-energy-dominated cosmos.',
+    'pub.p1_title':'An Alternative Method for Measuring the Accretion Rate in Active Galactic Nuclei at z ≤ 0.2',
+    'pub.p1_status':'Astronomy & Astrophysics — To be submitted',
+    'pub.p2_title':'AGN and Star-Formation Properties of Inside-out Assembled Galaxy Candidates at z < 0.1',
+    'pub.p3_title':'Properties of Local Galaxies with the Highest Growth Rate at Redshift z ≤ 0.1',
+    'sk.lang':'Programming Languages','sk.sim':'Simulation Codes','sk.vis':'Visualisation & Post-processing',
+    'sk.obs':'Observational Tools','sk.tools':'Dev & Writing Tools','sk.langs':'Languages',
+    'con.intro':'Open to research collaborations, Ph.D. discussions, and science outreach. Whether you are a fellow researcher, prospective student, or simply curious about the stars — feel free to reach out.',
+    'con.personal_email':'Personal','con.uni_email':'University','con.location':'Ariel University, Israel · Dilla, Ethiopia',
+    'form.name':'Your Name','form.email':'Your Email','form.msg':'Message','form.send':'Send Message',
+    'footer':'Computational Astrophysicist · Ariel University, Israel · © 2026'
   },
   am: {
-    nav_about: "ስለ እኔ", nav_education: "ትምህርት", nav_experience: "ልምድ", nav_research: "ምርምር",
-    nav_publications: "ህትመቶች", nav_skills: "ክህሎቶች", nav_contact: "አግኙኝ",
-    hero_name: "አስራተ ጎሌ", hero_title: "ኮምፒውቲሽናል አስትሮፊዚስት",
-    hero_subtitle: "የዶክትሬት እጩ @ አሪኤል ዩኒቨርሲቲ፣ እስራኤል | ራዲያቲቭ ትራንስፈር፣ ግዙፍ ሁለትዮሽ ሲስተሞች እና ጨለማ ሃይል | ከኢትዮጵያ ወደ ጠፈር",
-    btn_contact: "ያግኙኝ",
-    about_title: "ስለ እኔ",
-    about_p1: "እኔ ከአለም ቀተማ፣ ኢትዮጵያ የመጣሁ ኮምፒውቲሽናል አስትሮፊዚስት ነኝ፣ በአሁኑ ጊዜ በአሪኤል ዩኒቨርሲቲ፣ እስራኤል የዶክትሬት ትምህርቴን እከታተላለሁ።",
-    about_p2: "በእንጦጦ ኦብዘርቫቶሪ ማስተርስ ዲግሪ እና በአፕላይድ ፊዚክስ የመጀመሪያ ዲግሪ ያለኝ ሲሆን፣ በዲላ ዩኒቨርሲቲ የፊዚክስ ዲፓርትመንት መሪ ነበርኩ።",
-    about_p3: "በክፍት ሳይንስ እና ትምህርት አምናለሁ — አጽናፈ ሰማይ የሁሉም ነው።",
-    stat_years: "የአካዳሚክ ዓመታት", stat_pubs: "ህትመቶች", stat_confs: "ዓለም አቀፍ ኮንፈረንሶች", stat_students: "የተማሩ ተማሪዎች",
-    edu_title: "ትምህርት", edu_phd_date: "ኤፕሪል 2025 – አሁን", edu_phd_title: "የዶክትሬት ዲግሪ በኮምፒውቲሽናል አስትሮፊዚክስ",
-    edu_phd_thesis: "ረቂቅ ፅንሰ ሃሳብ የራዲያቲቭ ትራንስፈር እና አለመረጋጋት ዝግመተ ለውጥ",
-    edu_supervisor: "አማካሪ", edu_msc_date: "ኦክቶበር 2016 – ጁላይ 2018", edu_msc_title: "ኤም.ኤስ.ሲ በአስትሮኖሚ እና አስትሮፊዚክስ",
-    edu_msc_thesis: "ረቂቅ ፅንሰ ሃሳብ አማራጭ ዘዴ ለአክሬሽን መጠን መለኪያ",
-    edu_bsc_date: "ኦክቶበር 2010 – ጁን 2013", edu_bsc_title: "ቢ.ኤስ.ሲ በአፕላይድ ፊዚክስ", edu_bsc_project: "የከፍተኛ ፕሮጀክት የንፋስ ሃይል ማመቻቸት",
-    exp_title: "ልምድ እና አመራር", exp1_title: "የፊዚክስ ዲፓርትመንት ኃላፊ", exp1_date: "01/2021 – 06/2024",
-    exp1_li1: "የአካዳሚክ ስትራቴጂ አመራር", exp1_li2: "የምርምር ትብብር መፍጠር",
-    exp2_title: "የፊዚክስ እና አስትሮፊዚክስ ሌክቸረር", exp2_date: "07/2018 – 04/2025",
-    exp2_li1: "ኮርሶች: አጠቃላይ ፊዚክስ, አስትሮፊዚክስ, ኮስሞሎጂ", exp2_li2: "100+ ተማሪዎችን መምራት",
-    exp3_title: "ESSS ቅርንጫፍ ሊቀመንበር", exp3_date: "2020 – 2025",
-    exp3_li1: "ብሔራዊ የጠፈር ሳይንስ ዝግጅቶች ማደራጀት", exp3_li2: "በኢትዮጵያ የስነ ፈለክ ትምህርት ማስፋፋት",
-    research_title: "የምርምር ፍላጎቶች", research1_title: "ግዙፍ ሁለትዮሽ ሲስተሞች", research1_desc: "ኮሊዲንግ ንፋስ, ራዲያቲቭ ትራንስፈር",
-    research2_title: "ጨለማ ሃይል እና የተሻሻለ ስበት", research2_desc: "f(R,T,S) ሞዴሎችን እና የኮስሞስ መስፋፋትን ማሰስ",
-    research3_title: "ጋላክሲ ምስረታ እና ዝግመተ ለውጥ", research3_desc: "ጨለማ ቁስ, የኮከብ ምስረታ",
-    research4_title: "አክሬሽን እና ጥቁር ጉድጓዶች", research4_desc: "የኤጂኤን አክሬሽን መጠን",
-    pubs_title: "ህትመቶች",
-    skills_title: "ቴክኒካል ክህሎት", skills_lang: "ቋንቋዎች እና ቤተ-ፅሁፎች", skills_astro: "አስትሮፊዚክስ ኮዶች", skills_soft: "ሌሎች ክህሎቶች",
-    contact_title: "ይገናኙ እና መልእክት ይላኩ", contact_intro: "📍 ለትብብር፣ የዶክትሬት ውይይቶች እና የአውትሪች ስራዎች ክፍት ነኝ።",
-    contact_location: "አሪኤል, እስራኤል | ዲላ, ኢትዮጵያ",
-    form_name: "ስምዎ", form_email: "ኢሜይልዎ", form_message: "መልእክት", form_send: "ኢሜይል ላኩ",
-    footer_text: "ኮምፒውቲሽናል አስትሮፊዚስት"
+    brand: 'አስራተ ጎሌ',
+    'nav.about':'ስለ እኔ','nav.edu':'ትምህርት','nav.exp':'ልምድ','nav.research':'ምርምር',
+    'nav.pubs':'ህትመቶች','nav.skills':'ክህሎቶች','nav.contact':'አግኙኝ',
+    'hero.eyebrow':'የዶ/ር እጩ · አሪኤል ዩኒቨርሲቲ · እስራኤል',
+    'hero.name':'አስራተ ጎሌ','hero.title':'ኮምፒውቲሽናል አስትሮፊዚስት',
+    'hero.sub':'በ3D AMR ሃይድሮዳይናሚክ ሲሙሌሽን እና ኤክስ-ሬይ ምልከታ ዘዴዎች ሰፊ ሁለትዮሽ ኮከቦችን አጥንቻለሁ — ከኢትዮጵያ እስከ አጽናፈ ሰማይ።',
+    'hero.cta1':'ያግኙኝ','hero.cta2':'ሲቪ ያውርዱ','hero.scroll':'ወደ ታች',
+    'sec.about_label':'01 — ፕሮፋይል','sec.about_title':'ስለ',
+    'sec.edu_label':'02 — ትምህርት','sec.edu_title':'ትምህርት',
+    'sec.exp_label':'03 — ሙያ','sec.exp_title':'ልምድ እና',
+    'sec.res_label':'04 — ሳይንስ','sec.res_title':'ምርምር',
+    'sec.pub_label':'05 — ህትመቶች','sec.pub_title':'ህትመቶች',
+    'sec.sk_label':'06 — መሳሪያዎች','sec.sk_title':'ቴክኒካዊ',
+    'sec.con_label':'07 — ተናገሩ','sec.con_title':'ይገናኙ',
+    'about.p1':'ከ<strong>አለም ቀተማ፣ ኢትዮጵያ</strong> ቀን አስትሮፊዚስት ነኝ። በ<strong>አሪኤል ዩኒቨርሲቲ፣ እስራኤል</strong> ዶክትሬት ትምህርቴን ከ<strong>ፕሮፌ. አሚት ካሺ</strong> ጋር አከናውናለሁ።',
+    'about.p2':'ኤምኤስሲ ከ<strong>እንጦጦ ኦብዘርቫቶሪ</strong> (3.98/4.00) እና ቢኤስሲ ከደብረ ብርሃን ዩኒቨርሲቲ አግኝቻለሁ። ዲላ ዩኒቨርሲቲ የፊዚክስ ዲፓርትመንት ሃላፊ ሆኜ 100+ ተማሪዎችን አሰልጥናለሁ።',
+    'about.p3':'ክፍት ሳይንስ ደጋፊ ነኝ። ESSS የቅርንጫፍ ሊቀ-ሊቃውንት (2020-2025) ሆኜ ብሔራዊ የጠፈር ሳይንስ ፕሮግራሞችን አደራጀሁ — አጽናፈ ሰማይ የሁሉም ነው።',
+    'stat.yrs':'የአካዳሚክ ዓመታት','stat.pubs':'ህትመቶች','stat.conf':'ዓለም አቀፍ ኮንፈረንሶች','stat.stu':'የተያዙ ተማሪዎች',
+    'edu.phd_date':'ኤፕሪል 2025 – አሁን','edu.phd_deg':'ዶ/ር በኮምፒውቲሽናል አስትሮፊዚክስ',
+    'edu.thesis_label':'ጆርናል:','edu.phd_thesis':'የጨረር ሽግግር እና አለመረጋጋት ዝግመተ ለውጥ',
+    'edu.sup_label':'አማካሪ:','edu.phd_sup':'ፕሮፌ. አሚት ካሺ',
+    'edu.msc_date':'ጥቅምት 2016 – ሐምሌ 2018','edu.msc_deg':'ኤምኤስሲ አስትሮኖሚ እና አስትሮፊዚክስ',
+    'edu.msc_thesis':'አማራጭ ዘዴ ለጋላክሲዎች አክሬሽን ምጣኔ መለኪያ',
+    'edu.bsc_date':'ጥቅምት 2010 – ሰኔ 2013','edu.bsc_deg':'ቢኤስሲ ተግባራዊ ፊዚክስ',
+    'edu.proj_label':'ከፍተኛ ፕሮጀክት:','edu.bsc_proj':'የንፋስ ሃይል ምርት ማመቻቸት',
+    'exp.head_title':'የፊዚክስ ዲፓርትመንት ሃላፊ','exp.head_period':'ጃንዋሪ 2021 – ሰኔ 2024',
+    'exp.head_li1':'ቀመር፣ ስርዓተ ትምህርት ፈጠራ እና ፋኩልቲ ልማት',
+    'exp.head_li2':'የምርምር ትብብር ፈጠረ','exp.head_li3':'ዲፓርትመንት ከ3 ወደ 8 የምርምር ዘርፍ አሳደጉ',
+    'exp.lec_title':'ሌክቸረር — ፊዚክስ እና አስትሮፊዚክስ','exp.lec_period':'ሐምሌ 2018 – ኤፕሪ 2025',
+    'exp.lec_li1':'ኮርሶች: ጠቅላላ ፊዚክስ፣ አስትሮፊዚክስ፣ ኮስሞሎጂ','exp.lec_li2':'100+ ብኤስሲ ፕሮጀክቶችን ምሩ',
+    'exp.lec_li3':'አዲስ ኮምፒውቲሽናል አስትሮፊዚክስ ሞዱል ፈጠሩ',
+    'exp.esss_title':'ESSS ቅርንጫፍ ሊቀ-ሊቃውንት','exp.esss_period':'2020 – 2025',
+    'exp.esss_li1':'ብሔራዊ የጠፈር ሳይንስ ሲምፖዚዮምና ሕዝባዊ ምሽቶች','exp.esss_li2':'500+ ሁለተኛ ደረጃ ተማሪዎችን አነሳሳ',
+    'res.cwb_title':'ኮሊዲንግ-ዊንድ ባይናሪዎች','res.cwb_desc':'3D AMR ሃይድሮዳይናሚክ ሲሙሌሽን፤ ራዲያቲቭ ኩሊንግ፣ NTSI፣ ኬልቪን-ሄልምሆልትዝ አለመረጋጋት።',
+    'res.rt_title':'ራዲያቲቭ ትራንስፈር','res.rt_desc':'RADMC-3D እና TORUS በመጠቀም ፎቶን ትራንስፖርት ሲሙሌሽን፤ ኢንፍራሬድ እና ኤክስ-ሬይ ሰው-ሰራሽ ምልከታዎች።',
+    'res.agn_title':'AGN እና አክሬሽን','res.agn_desc':'X-ray/ኦፕቲካል ፍሰት ጥምርታ ዘዴ፤ 4XMM-DR14 እና SDSS ማጣቀሻ።',
+    'res.de_title':'ጨለማ ሃይልና ሻሸ ስበት','res.de_desc':'f(R,T,S) ሞዴሎች፣ ወቅታዊ ሁኔታ ገደቦች እና ትልቅ-ደረጃ መዋቅር።',
+    'pub.p1_title':'AGN አክሬሽን ምጣኔ ለ z ≤ 0.2 አማራጭ ዘዴ',
+    'pub.p1_status':'A&A — ሊቀርብ',
+    'pub.p2_title':'z < 0.1 ላይ AGN እና ኮከብ-ምስረታ ባህርያት',
+    'pub.p3_title':'z ≤ 0.1 ላሉ ፈጣን-ዕድገት ጋላክሲዎች ባህርያት',
+    'sk.lang':'ፕሮግራሚንግ ቋንቋዎች','sk.sim':'ሲሙሌሽን ኮዶች','sk.vis':'ቪዥዋላይዜሽን',
+    'sk.obs':'ምልከታ ዘዴዎች','sk.tools':'ስያሜ እና ፅሑፍ','sk.langs':'ቋንቋዎች',
+    'con.intro':'ለምርምር ትብብር፣ ዶክትሬት ውይይቶች እና የሳይንስ ቅስቀሳ ክፍት ነኝ። ሳይሃፈሩ ያናግሩን።',
+    'con.personal_email':'ግል ኢሜይል','con.uni_email':'ዩኒቨርሲቲ ኢሜይል','con.location':'አሪኤል ዩኒቨርሲቲ፣ እስራኤል · ዲላ፣ ኢትዮጵያ',
+    'form.name':'ስምዎ','form.email':'ኢሜይልዎ','form.msg':'መልዕክት','form.send':'ኢሜይል ላኩ',
+    'footer':'ኮምፒውቲሽናል አስትሮፊዚስት · አሪኤል ዩኒቨርሲቲ · © 2026'
   },
   he: {
-    nav_about: "אודות", nav_education: "השכלה", nav_experience: "ניסיון", nav_research: "מחקר",
-    nav_publications: "פרסומים", nav_skills: "כישורים", nav_contact: "צור קשר",
-    hero_name: "אסרטה גולה", hero_title: "אסטרופיזיקאי חישובי",
-    hero_subtitle: "דוקטורנט @ אוניברסיטת אריאל, ישראל | חקר העברה קרינתית, בינאריות מסיביות ואנרגיה אפלה | מאתיופיה לקוסמוס",
-    btn_contact: "צור קשר",
-    about_title: "אודותיי",
-    about_p1: "אני אסטרופיזיקאי חישובי מאלם קטמה, אתיופיה, כיום דוקטורנט באוניברסיטת אריאל, ישראל. המחקר שלי מחבר בין סימולציות העברה קרינתית לנתוני תצפית.",
-    about_p2: "עם תואר שני ממצפה אנטוטו ותואר ראשון בפיזיקה שימושית, הובלתי את המחלקה לפיזיקה באוניברסיטת דילה, הנחיתי מעל 100 סטודנטים ותרמתי להפצת מדעי החלל באתיופיה.",
-    about_p3: "אני מאמין חזק במדע פתוח וחינוך — היקום שייך לכולם.",
-    stat_years: "שנות אקדמיה", stat_pubs: "פרסומים", stat_confs: "כנסים בין-לאומיים", stat_students: "סטודנטים שהנחיתי",
-    edu_title: "השכלה", edu_phd_date: "אפריל 2025 – הווה", edu_phd_title: "דוקטורט באסטרופיזיקה חישובית",
-    edu_phd_thesis: "תזה: העברה קרינתית והתפתחות חוסר יציבות ברוחות מתנגשות של בינאריות מסיביות",
-    edu_supervisor: "מנחה", edu_msc_date: "אוק' 2016 – יול' 2018", edu_msc_title: "M.Sc. באסטרונומיה ואסטרופיזיקה",
-    edu_msc_thesis: "תזה: שיטה חלופית למדידת קצב אקרציה בגלקסיות",
-    edu_bsc_date: "אוק' 2010 – יונ' 2013", edu_bsc_title: "B.Sc. בפיזיקה שימושית", edu_bsc_project: "פרויקט גמר: אופטימיזציה של אנרגיית רוח",
-    exp_title: "ניסיון ומנהיגות", exp1_title: "ראש המחלקה לפיזיקה", exp1_date: "01/2021 – 06/2024",
-    exp1_li1: "הובלת אסטרטגיה אקדמית, חדשנות בתכנית הלימודים", exp1_li2: "הקמת שיתופי פעולה במחקר",
-    exp2_title: "מרצה לפיזיקה ואסטרופיזיקה", exp2_date: "07/2018 – 04/2025",
-    exp2_li1: "קורסים: פיזיקה כללית, אסטרופיזיקה, קוסמולוגיה, פיזיקה חישובית", exp2_li2: "הנחיית מעל 100 פרויקטי גמר לתואר ראשון",
-    exp3_title: "יו"ר סניף ESSS", exp3_date: "2020 – 2025",
-    exp3_li1: "ארגון אירועים לאומיים למדעי החלל", exp3_li2: "קידום חינוך אסטרונומי ברחבי אתיופיה",
-    research_title: "תחומי מחקר", research1_title: "בינאריות מסיביות", research1_desc: "רוחות מתנגשות, העברה קרינתית, התפתחות חוסר יציבות",
-    research2_title: "אנרגיה אפלה וכבידה מתוקנת", research2_desc: "חקר מודלים f(R,T,S) והתפשטות קוסמית",
-    research3_title: "היווצרות גלקסיות והתפתחותן", research3_desc: "חומר אפל, היווצרות כוכבים, משוב ו-AGN",
-    research4_title: "אקרציה וחורים שחורים", research4_desc: "קצבי אקרציה של AGN, אבחוני רנטגן/אופטי",
-    pubs_title: "פרסומים",
-    skills_title: "כישורים טכניים", skills_lang: "שפות וספריות", skills_astro: "קודים אסטרופיזיקליים", skills_soft: "כלים נוספים",
-    contact_title: "צור קשר ושלח הודעה", contact_intro: "📍 פתוח לשיתופי פעולה, דיוני דוקטורט ופעילויות הסברה. אל תהססו ליצור קשר.",
-    contact_location: "אריאל, ישראל | דילה, אתיופיה",
-    form_name: "שמך", form_email: "האימייל שלך", form_message: "הודעה", form_send: "שלח אימייל",
-    footer_text: "אסטרופיזיקאי חישובי"
+    brand: 'אסרטה גולה',
+    'nav.about':'אודות','nav.edu':'השכלה','nav.exp':'ניסיון','nav.research':'מחקר',
+    'nav.pubs':'פרסומים','nav.skills':'כישורים','nav.contact':'צור קשר',
+    'hero.eyebrow':'דוקטורנט · אוניברסיטת אריאל · ישראל',
+    'hero.name':'אסרטה גולה','hero.title':'אסטרופיזיקאי חישובי',
+    'hero.sub':'פענוח האינטראקציות הסוערות של כוכבים בינאריים מסיביים באמצעות סימולציות הידרודינמיות, העברה קרינתית ואבחוני X-ray — מאתיופיה לקוסמוס.',
+    'hero.cta1':'צור קשר','hero.cta2':'הורד קורות חיים','hero.scroll':'גלול',
+    'sec.about_label':'01 — פרופיל','sec.about_title':'אודות',
+    'sec.edu_label':'02 — הכשרה אקדמית','sec.edu_title':'השכלה',
+    'sec.exp_label':'03 — קריירה','sec.exp_title':'ניסיון ו',
+    'sec.res_label':'04 — מדע','sec.res_title':'תחומי מחקר',
+    'sec.pub_label':'05 — פלט','sec.pub_title':'פרסומים',
+    'sec.sk_label':'06 — ארגז כלים','sec.sk_title':'כישורים',
+    'sec.con_label':'07 — קשר','sec.con_title':'צור',
+    'about.p1':'אני אסטרופיזיקאי חישובי מ<strong>אלם קטמה, אתיופיה</strong>, כיום דוקטורנט ב<strong>אוניברסיטת אריאל, ישראל</strong>, בהנחיית <strong>פרופ׳ אמית קשי</strong>.',
+    'about.p2':'בעל תואר שני ממצפה אנטוטו (CGPA 3.98/4.00) ותואר ראשון בפיזיקה שימושית. כיהנתי כראש המחלקה לפיזיקה באוניברסיטת דילה, הנחיתי 100+ סטודנטים.',
+    'about.p3':'מאמין במדע פתוח ופעילות הסברה. כיו"ר סניף ESSS (2020–2025) ארגנתי אירועים לאומיים למדעי החלל — היקום שייך לכולם.',
+    'stat.yrs':'שנות אקדמיה','stat.pubs':'פרסומים','stat.conf':'כנסים בינל׳','stat.stu':'סטודנטים שהנחיתי',
+    'edu.phd_date':'אפריל 2025 – הווה','edu.phd_deg':'דוקטורט באסטרופיזיקה חישובית',
+    'edu.thesis_label':'עבודת מחקר:','edu.phd_thesis':'העברה קרינתית והתפתחות חוסר יציבות ברוחות מתנגשות של בינאריות מסיביות',
+    'edu.sup_label':'מנחה:','edu.phd_sup':'פרופ׳ אמית קשי',
+    'edu.msc_date':'אוק׳ 2016 – יול׳ 2018','edu.msc_deg':'M.Sc. אסטרונומיה ואסטרופיזיקה',
+    'edu.msc_thesis':'שיטה חלופית למדידת קצב אקרציה בגלקסיות',
+    'edu.bsc_date':'אוק׳ 2010 – יונ׳ 2013','edu.bsc_deg':'B.Sc. פיזיקה שימושית',
+    'edu.proj_label':'פרויקט גמר:','edu.bsc_proj':'אופטימיזציה של המרת אנרגיית רוח',
+    'exp.head_title':'ראש המחלקה לפיזיקה','exp.head_period':'ינואר 2021 – יוני 2024',
+    'exp.head_li1':'הובלת אסטרטגיה אקדמית, חדשנות בתכנית הלימודים',
+    'exp.head_li2':'הקמת שיתופי פעולה במחקר אזורי',
+    'exp.head_li3':'הרחיב המחלקה מ-3 ל-8 תחומי מחקר פעילים',
+    'exp.lec_title':'מרצה — פיזיקה ואסטרופיזיקה','exp.lec_period':'יולי 2018 – אפריל 2025',
+    'exp.lec_li1':'קורסים: פיזיקה כללית, אסטרופיזיקה, קוסמולוגיה, פיזיקה חישובית',
+    'exp.lec_li2':'הנחיית 100+ פרויקטי גמר לתואר ראשון',
+    'exp.lec_li3':'פיתח מודול חדש לאסטרופיזיקה חישובית',
+    'exp.esss_title':'יו"ר סניף ESSS','exp.esss_period':'2020 – 2025',
+    'exp.esss_li1':'ארגון סימפוזיונים לאומיים ומפגשי אסטרונומיה ציבוריים',
+    'exp.esss_li2':'השראה ל-500+ תלמידי תיכון בפעילות הסברה שנתית',
+    'res.cwb_title':'בינאריות רוחות מתנגשות','res.cwb_desc':'סימולציות הידרודינמיות AMR תלת-ממדיות; קירור קרינתי, NTSI, אי-יציבות קלווין-הלמהולץ.',
+    'res.rt_title':'העברה קרינתית','res.rt_desc':'מודלינג של שינוע פוטונים ברוחות כוכבים צפופות באמצעות RADMC-3D ו-TORUS.',
+    'res.agn_title':'AGN ואקרציה','res.agn_desc':'אבחוני קצב אקרציה חלופיים דרך יחסי שטף X-ray/אופטי; 4XMM-DR14 ו-SDSS.',
+    'res.de_title':'אנרגיה אפלה וכבידה מתוקנת','res.de_desc':'מודלים f(R,T,S), אילוצי משוואת מצב, וגיבוש מבנה בקנה מידה גדול.',
+    'pub.p1_title':'שיטה חלופית למדידת קצב אקרציה ב-AGN עד z ≤ 0.2',
+    'pub.p1_status':'A&A — בהכנה',
+    'pub.p2_title':'תכונות AGN וצמיחת כוכבים בגלקסיות מועמדות-מבנה-מבפנים-החוצה ב-z < 0.1',
+    'pub.p3_title':'תכונות גלקסיות מקומיות עם קצב הצמיחה הגבוה ביותר ב-z ≤ 0.1',
+    'sk.lang':'שפות תכנות','sk.sim':'קודי סימולציה','sk.vis':'ויזואליזציה ועיבוד',
+    'sk.obs':'כלים תצפיתיים','sk.tools':'כלי פיתוח וכתיבה','sk.langs':'שפות',
+    'con.intro':'פתוח לשיתופי פעולה במחקר, דיוני דוקטורט ופעילות הסברה. חוקרים, סטודנטים, או כל מי שסקרן על הכוכבים — אל תהססו לפנות.',
+    'con.personal_email':'אישי','con.uni_email':'אוניברסיטה','con.location':'אוניברסיטת אריאל, ישראל · דילה, אתיופיה',
+    'form.name':'שמך','form.email':'האימייל שלך','form.msg':'הודעה','form.send':'שלח הודעה',
+    'footer':'אסטרופיזיקאי חישובי · אוניברסיטת אריאל, ישראל · © 2026'
   }
 };
 
-// ==================== APPLY TRANSLATION ====================
-let currentLang = localStorage.getItem('language') || 'en';
+let currentLang = localStorage.getItem('ag_lang') || 'en';
 
-function setLanguage(lang) {
+function applyLang(lang) {
   currentLang = lang;
-  localStorage.setItem('language', lang);
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-  // Update all elements with data-key
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.dataset.key;
-    if (translations[lang] && translations[lang][key]) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = translations[lang][key];
-      } else {
-        el.innerHTML = translations[lang][key];
-      }
+  localStorage.setItem('ag_lang', lang);
+  const dict = I18N[lang] || I18N.en;
+  const isRTL = lang === 'he';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
     }
   });
-  document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'am' ? 'am' : 'he');
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
 }
 
-// Event listeners for language buttons
 document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
 
-// Initialize with saved language
-setLanguage(currentLang);
-
-// ==================== EXISTING FUNCTIONALITY ====================
-// Hamburger menu
-document.getElementById('hamburger')?.addEventListener('click', () => {
-  document.getElementById('navMenu').classList.toggle('active');
-});
-
-// Download CV
-document.getElementById('downloadCvBtn')?.addEventListener('click', (e) => {
-  e.preventDefault();
-  const cvContent = `Asrate Gaulle - Computational Astrophysicist\nPhD Candidate at Ariel University\nResearch: Radiative transfer, massive binaries, dark energy.`;
-  const blob = new Blob([cvContent], {type: 'application/pdf'});
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'Asrate_Gaulle_CV.pdf';
-  link.click();
-  URL.revokeObjectURL(link.href);
-});
-
-// Email form
-const emailForm = document.getElementById('directEmailForm');
-const statusDiv = document.getElementById('formStatus');
-emailForm?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('senderName').value.trim();
-  const userEmail = document.getElementById('senderEmail').value.trim();
-  const message = document.getElementById('emailMessage').value.trim();
-  if(!name || !userEmail || !message) {
-    statusDiv.innerHTML = '<span style="color:#f97316;">⚠️ Please fill all fields.</span>';
-    return;
-  }
-  const toEmail = "asrieguae@gmail.com";
-  const subject = `[Portfolio] Message from ${name}`;
-  const body = `Name: ${name}\nEmail: ${userEmail}\n\nMessage:\n${message}`;
-  window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  statusDiv.innerHTML = '<span style="color:#4ade80;">✓ Opening email client... Thank you!</span>';
-  setTimeout(() => statusDiv.innerHTML = '', 5000);
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if(target && this.getAttribute('href') !== '#') {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
+applyLang(currentLang);
 </script>
+
 </body>
 </html>

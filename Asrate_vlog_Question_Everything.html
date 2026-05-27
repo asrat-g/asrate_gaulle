@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Question Everything — Astrophysics vlog by Asrate Gaulle. Musings on massive binaries, radiative transfer, dark energy, and the computational cosmos.">
+<title>Question Everything · Asrate Gaulle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --ink: #0c0e14;
+  --ink-2: #1a1d28;
+  --ink-3: #252836;
+  --paper: #faf8f4;
+  --paper-2: #f2ede6;
+  --paper-3: #e8e0d5;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --gold-pale: #f5e6c0;
+  --cyan: #1a7a9a;
+  --cyan-light: #3bb8d8;
+  --violet: #4a2d7a;
+  --text: #1c1e2a;
+  --text-2: #3d3f52;
+  --text-3: #6b6d82;
+  --border: rgba(28,30,42,0.1);
+  --border-gold: rgba(184,134,11,0.2);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.15);
+}
+[data-theme="dark"] {
+  --paper: #0c0e14;
+  --paper-2: #131620;
+  --paper-3: #1a1d28;
+  --text: #e8e4da;
+  --text-2: #b8b5aa;
+  --text-3: #6b6d82;
+  --border: rgba(232,228,218,0.08);
+  --border-gold: rgba(184,134,11,0.25);
+  --gold-pale: rgba(184,134,11,0.1);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ══════════════════════════════════════════
+   COSMOS CANVAS (dark mode only)
+══════════════════════════════════════════ */
+#cosmos {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  opacity: 0; transition: opacity 0.8s ease;
+}
+[data-theme="dark"] #cosmos { opacity: 1; }
+
+/* ══════════════════════════════════════════
+   MASTHEAD / NAVBAR
+══════════════════════════════════════════ */
+.masthead {
+  position: sticky; top: 0; z-index: 900;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.masthead-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 60px;
+}
+.masthead-nav {
+  display: flex; gap: 1.8rem; align-items: center;
+}
+.masthead-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3); text-decoration: none;
+  transition: color 0.2s;
+}
+.masthead-nav a:hover { color: var(--gold); }
+.masthead-brand {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.masthead-actions {
+  display: flex; gap: 1rem; justify-content: flex-end; align-items: center;
+}
+.masthead-actions button, .masthead-actions a {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3); text-decoration: none;
+  transition: color 0.2s; padding: 4px 8px;
+  border-radius: 3px;
+}
+.masthead-actions button:hover, .masthead-actions a:hover { color: var(--gold); }
+.theme-btn { font-size: 0.85rem !important; }
+
+/* ══════════════════════════════════════════
+   HERO MASTHEAD
+══════════════════════════════════════════ */
+.hero-masthead {
+  position: relative; overflow: hidden;
+  border-bottom: 3px solid var(--gold);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  background: var(--paper-2);
+}
+.hero-masthead::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 39px,
+    var(--border) 39px, var(--border) 40px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent, transparent 79px,
+    var(--border) 79px, var(--border) 80px
+  );
+  opacity: 0.4;
+}
+.hero-masthead-inner { position: relative; max-width: 800px; margin: 0 auto; }
+.hero-issue {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.hero-issue::before, .hero-issue::after {
+  content: ''; width: 40px; height: 1px; background: var(--gold); opacity: 0.5;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900; line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: 1.1rem; font-style: italic;
+  color: var(--text-2); margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+.hero-meta {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.15em; color: var(--text-3);
+  text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 2.5rem auto 0;
+  animation: pulse-line 2s ease-in-out infinite;
+}
+@keyframes pulse-line {
+  0%,100% { opacity: 0.3; transform: scaleY(0.7); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════ */
+.page-wrap {
+  position: relative; z-index: 1;
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.featured-strip {
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 0;
+}
+.featured-strip-label {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.featured-strip-label::after { content: ''; flex: 1; height: 1px; background: var(--border-gold); }
+
+/* Featured article (large) */
+.featured-article {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
+}
+.featured-img-wrap {
+  aspect-ratio: 16/10; overflow: hidden; border-radius: 3px;
+  background: var(--paper-3);
+  position: relative;
+}
+.featured-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.featured-img-wrap:hover img { transform: scale(1.04); }
+.featured-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; color: var(--text-3);
+  background: linear-gradient(135deg, var(--paper-2), var(--paper-3));
+}
+.featured-content {}
+.art-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.art-tag {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 2px;
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  background: var(--gold-pale);
+}
+.art-tag-cyan { border-color: rgba(26,122,154,0.3); color: var(--cyan); background: rgba(26,122,154,0.08); }
+.art-tag-violet { border-color: rgba(74,45,122,0.3); color: var(--violet); background: rgba(74,45,122,0.08); }
+[data-theme="dark"] .art-tag-cyan { color: var(--cyan-light); }
+[data-theme="dark"] .art-tag-violet { color: #9b7fd4; }
+
+.art-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700; line-height: 1.2;
+  color: var(--text); margin-bottom: 1rem;
+  cursor: pointer; transition: color 0.2s;
+}
+.art-title:hover { color: var(--gold); }
+.art-excerpt {
+  font-size: 1rem; color: var(--text-2);
+  line-height: 1.8; margin-bottom: 1.5rem;
+  font-style: italic;
+}
+.art-meta {
+  display: flex; align-items: center; gap: 1.5rem;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.08em; color: var(--text-3);
+  text-transform: uppercase;
+}
+.art-meta-divider { width: 1px; height: 12px; background: var(--border); }
+.read-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); border: 1px solid var(--border);
+  padding: 8px 18px; border-radius: 2px;
+  cursor: pointer; background: none;
+  transition: all 0.25s ease; text-decoration: none;
+}
+.read-btn:hover {
+  border-color: var(--gold); color: var(--gold);
+  background: var(--gold-pale);
+}
+.read-btn-solid {
+  background: var(--gold); color: var(--paper);
+  border-color: var(--gold);
+}
+.read-btn-solid:hover { background: var(--gold-light); color: var(--paper); border-color: var(--gold-light); }
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT GRID
+══════════════════════════════════════════ */
+.content-grid {
+  display: grid; grid-template-columns: 1fr 320px; gap: 4rem;
+  padding: 3.5rem 0;
+}
+
+/* Article cards */
+.articles-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 2.5rem; padding-bottom: 1rem;
+  border-bottom: 2px solid var(--text);
+}
+.articles-header-title {
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+}
+.filter-tabs {
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+}
+.filter-tab {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px;
+  border: 1px solid var(--border);
+  background: none; color: var(--text-3);
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-tab:hover, .filter-tab.active {
+  border-color: var(--gold); color: var(--gold);
+  background: var(--gold-pale);
+}
+
+.article-list { display: flex; flex-direction: column; gap: 0; }
+.article-row {
+  display: grid; grid-template-columns: 1fr 160px;
+  gap: 2rem; align-items: start;
+  padding: 2rem 0; border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.article-row:hover { background: var(--paper-2); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+.article-row-thumb {
+  aspect-ratio: 16/10; overflow: hidden; border-radius: 2px;
+  background: var(--paper-3); flex-shrink: 0;
+}
+.article-row-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.article-row:hover .article-row-thumb img { transform: scale(1.06); }
+.article-row-thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: var(--text-3);
+  background: linear-gradient(135deg, var(--paper-2), var(--paper-3));
+}
+.article-row-title {
+  font-family: var(--font-display); font-size: 1.2rem;
+  font-weight: 600; line-height: 1.3;
+  color: var(--text); margin-bottom: 0.5rem;
+  transition: color 0.2s;
+}
+.article-row:hover .article-row-title { color: var(--gold); }
+.article-row-excerpt {
+  font-size: 0.9rem; color: var(--text-2);
+  line-height: 1.65; margin-bottom: 0.8rem;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.article-row-meta {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.08em; color: var(--text-3);
+  text-transform: uppercase; display: flex; gap: 1rem; align-items: center;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar { position: sticky; top: 76px; align-self: start; }
+.sidebar-block {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-block:last-child { border-bottom: none; }
+.sidebar-title {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.sidebar-title::after { content: ''; flex: 1; height: 1px; background: var(--border-gold); }
+
+/* Search */
+.search-wrap {
+  position: relative;
+}
+.search-wrap input {
+  width: 100%; padding: 0.7rem 1rem;
+  padding-right: 2.5rem;
+  background: var(--paper-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+.search-wrap input::placeholder { color: var(--text-3); }
+.search-wrap input:focus { outline: none; border-color: var(--gold); }
+.search-wrap button {
+  position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--text-3); transition: color 0.2s;
+}
+.search-wrap button:hover { color: var(--gold); }
+
+/* About author */
+.author-card { display: flex; flex-direction: column; gap: 0.8rem; }
+.author-avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--paper-2), var(--paper-3));
+  border: 2px solid var(--border-gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: var(--gold); overflow: hidden;
+}
+.author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.author-name {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+}
+.author-bio { font-size: 0.88rem; color: var(--text-2); line-height: 1.6; }
+.author-link {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: opacity 0.2s;
+}
+.author-link:hover { opacity: 0.7; }
+
+/* Recent posts list */
+.recent-post {
+  padding: 0.7rem 0; border-bottom: 1px dashed var(--border);
+  cursor: pointer;
+}
+.recent-post:last-child { border-bottom: none; }
+.recent-post-title {
+  font-family: var(--font-display); font-size: 0.92rem;
+  font-weight: 600; color: var(--text);
+  line-height: 1.3; margin-bottom: 0.2rem;
+  transition: color 0.2s;
+}
+.recent-post:hover .recent-post-title { color: var(--gold); }
+.recent-post-date {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.08em; color: var(--text-3); text-transform: uppercase;
+}
+
+/* Topic cloud */
+.topic-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.topic-chip {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px; border-radius: 2px;
+  border: 1px solid var(--border);
+  color: var(--text-2); background: none;
+  cursor: pointer; transition: all 0.2s;
+}
+.topic-chip:hover {
+  border-color: var(--gold); color: var(--gold); background: var(--gold-pale);
+}
+
+/* ══════════════════════════════════════════
+   WRITE NEW POST PANEL
+══════════════════════════════════════════ */
+.write-panel {
+  border: 1px solid var(--border-gold);
+  border-radius: 3px;
+  background: var(--paper-2);
+  overflow: hidden;
+  margin-top: 1rem;
+}
+.write-panel-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.write-panel-header span {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+}
+.write-panel-toggle {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); background: none; border: none;
+  cursor: pointer;
+}
+.write-panel-body { padding: 1.5rem; display: none; }
+.write-panel-body.open { display: block; }
+.field-group { margin-bottom: 1rem; }
+.field-label {
+  display: block;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 0.4rem;
+}
+.field-input, .field-textarea {
+  width: 100%; padding: 0.65rem 0.9rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--text); transition: border-color 0.2s;
+  resize: vertical;
+}
+.field-input:focus, .field-textarea:focus { outline: none; border-color: var(--gold); }
+.field-input::placeholder, .field-textarea::placeholder { color: var(--text-3); }
+.publish-btn {
+  width: 100%; padding: 0.8rem;
+  background: var(--gold); color: var(--paper);
+  border: none; border-radius: 2px;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; font-weight: 600;
+  transition: all 0.2s;
+}
+.publish-btn:hover { background: var(--gold-light); }
+.publish-success {
+  margin-top: 0.8rem; padding: 0.6rem;
+  background: rgba(0,150,100,0.1); border: 1px solid rgba(0,150,100,0.2);
+  border-radius: 2px; font-size: 0.8rem;
+  color: #006644; text-align: center; display: none;
+}
+[data-theme="dark"] .publish-success { color: #4caf86; }
+
+/* ══════════════════════════════════════════
+   ARTICLE READER MODAL
+══════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(12,14,20,0.92);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 4rem 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-article {
+  background: var(--paper);
+  max-width: 720px; width: 100%;
+  border-radius: 3px;
+  transform: translateY(30px);
+  transition: transform 0.35s ease;
+  position: relative;
+}
+.modal-overlay.open .modal-article { transform: translateY(0); }
+.modal-img {
+  width: 100%; aspect-ratio: 16/7; object-fit: cover;
+  border-radius: 3px 3px 0 0;
+  display: block;
+}
+.modal-img-placeholder {
+  width: 100%; aspect-ratio: 16/7;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; color: var(--text-3);
+  background: linear-gradient(135deg, var(--paper-2), var(--paper-3));
+  border-radius: 3px 3px 0 0;
+}
+.modal-body { padding: 3rem; }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: rgba(0,0,0,0.5); border: none;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; cursor: pointer; font-size: 1rem;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(0,0,0,0.8); }
+.modal-tags { margin-bottom: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.modal-title {
+  font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700; line-height: 1.2; color: var(--text);
+  margin-bottom: 1.2rem;
+}
+.modal-meta {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--text-3);
+  text-transform: uppercase; margin-bottom: 2rem;
+  padding-bottom: 1.5rem; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.modal-content {
+  font-size: 1.05rem; line-height: 1.9; color: var(--text-2);
+  font-family: var(--font-body);
+}
+.modal-content p { margin-bottom: 1.5rem; }
+.modal-content p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.8rem; font-weight: 700; color: var(--gold);
+  float: left; line-height: 0.8; margin: 0.1em 0.12em -0.1em 0;
+}
+.modal-footer {
+  margin-top: 2.5rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.08em; color: var(--text-3);
+  display: flex; align-items: center; gap: 1rem;
+}
+.modal-footer i { color: var(--gold); }
+
+/* ══════════════════════════════════════════
+   MASTFOOT
+══════════════════════════════════════════ */
+.mastfoot {
+  border-top: 3px double var(--border);
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+  background: var(--paper-2);
+}
+.mastfoot-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem; align-items: start;
+}
+.mastfoot-brand {
+  font-family: var(--font-display); font-size: 1.4rem;
+  font-weight: 900; color: var(--text); margin-bottom: 0.5rem;
+}
+.mastfoot-sub {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase;
+  line-height: 1.8;
+}
+.mastfoot-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.mastfoot-links a {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none;
+  transition: color 0.2s;
+}
+.mastfoot-links a:hover { color: var(--gold); }
+.mastfoot-quote {
+  font-family: var(--font-display); font-size: 0.95rem;
+  font-style: italic; color: var(--text-3); line-height: 1.7;
+}
+.mastfoot-quote cite {
+  display: block; margin-top: 0.6rem;
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-style: normal; color: var(--gold);
+}
+
+/* ══════════════════════════════════════════
+   REVEAL ANIMATION
+══════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+@media (max-width: 768px) {
+  .featured-article { grid-template-columns: 1fr; }
+  .masthead-inner { grid-template-columns: 1fr auto; }
+  .masthead-nav { display: none; }
+  .article-row { grid-template-columns: 1fr; }
+  .article-row-thumb { order: -1; }
+  .mastfoot-inner { grid-template-columns: 1fr; }
+  .modal-body { padding: 1.5rem; }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<!-- Cosmos canvas (dark mode) -->
+<canvas id="cosmos"></canvas>
+
+<!-- ══════ MASTHEAD ══════ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <nav class="masthead-nav">
+      <a href="#featured">Featured</a>
+      <a href="#all-posts">All Posts</a>
+      <a href="#write">Write</a>
+    </nav>
+    <a href="#" class="masthead-brand">✦ Question Everything</a>
+    <div class="masthead-actions">
+      <a href="index.html"><i class="fas fa-user"></i> Portfolio</a>
+      <button class="theme-btn" id="themeBtn" title="Toggle theme"><i class="fas fa-adjust"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<div class="hero-masthead" id="home">
+  <div class="hero-masthead-inner">
+    <div class="hero-issue">Astrophysics Vlog · Asrate Gaulle · Est. 2019</div>
+    <h1 class="hero-title">Question <em>Everything</em></h1>
+    <p class="hero-tagline">Musings on computational astrophysics, massive binary stars, dark energy, and the poetry of the cosmos — from Ethiopia to Ariel University, Israel</p>
+    <p class="hero-meta">🔭 Radiative Transfer &nbsp;·&nbsp; Massive Binaries &nbsp;·&nbsp; Dark Energy &nbsp;·&nbsp; AGN &nbsp;·&nbsp; FLASH / RADMC-3D</p>
+    <div class="hero-scroll-line"></div>
+  </div>
+</div>
+
+<!-- ══════ PAGE CONTENT ══════ -->
+<div style="position:relative; z-index:1;">
+
+<!-- Featured post -->
+<div class="page-wrap" id="featured">
+  <div class="featured-strip reveal">
+    <div class="featured-strip-label">Editor's Pick</div>
+    <div class="featured-article" id="featuredPost"></div>
+  </div>
+</div>
+
+<!-- Main grid -->
+<div class="page-wrap">
+  <div class="content-grid">
+
+    <!-- Articles column -->
+    <main>
+      <div class="articles-header reveal">
+        <h2 class="articles-header-title" id="all-posts">All Articles</h2>
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-tag="All">All</button>
+        </div>
+      </div>
+      <div class="article-list reveal" id="articleList"></div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block reveal">
+        <div class="sidebar-title">Search</div>
+        <div class="search-wrap">
+          <input type="text" id="searchInput" placeholder="Search articles…">
+          <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+
+      <div class="sidebar-block reveal reveal-d1">
+        <div class="sidebar-title">About the Author</div>
+        <div class="author-card">
+          <div class="author-avatar">
+            <img src="assets/images/Asrate_Gaulle.jpeg" alt="Asrate Gaulle" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user-astronaut\'></i>'">
+          </div>
+          <div class="author-name">Asrate Gaulle</div>
+          <div class="author-bio">Ph.D. candidate in Computational Astrophysics at Ariel University, Israel. Former Head of Physics at Dilla University, Ethiopia. Passionate about massive binaries, modified gravity, and making astrophysics accessible to everyone.</div>
+          <a href="index.html" class="author-link">View full portfolio →</a>
+        </div>
+      </div>
+
+      <div class="sidebar-block reveal reveal-d1">
+        <div class="sidebar-title">Recent Posts</div>
+        <div id="recentPosts"></div>
+      </div>
+
+      <div class="sidebar-block reveal reveal-d2">
+        <div class="sidebar-title">Topics</div>
+        <div class="topic-cloud" id="topicCloud"></div>
+      </div>
+
+      <!-- Write panel -->
+      <div class="write-panel reveal reveal-d2" id="write">
+        <div class="write-panel-header">
+          <span><i class="fas fa-pen-nib" style="color:var(--gold);margin-right:8px"></i>Write New Post</span>
+          <button class="write-panel-toggle" id="writeToggle">Expand ↓</button>
+        </div>
+        <div class="write-panel-body" id="writePanelBody">
+          <div class="field-group">
+            <label class="field-label">Title</label>
+            <input class="field-input" type="text" id="fTitle" placeholder="Post title…">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tags (comma separated)</label>
+            <input class="field-input" type="text" id="fTags" placeholder="Massive Binaries, Cosmology…">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Image URL (optional)</label>
+            <input class="field-input" type="text" id="fImg" placeholder="assets/images/… or https://…">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Excerpt (max 250 chars)</label>
+            <textarea class="field-textarea" id="fExcerpt" rows="2" placeholder="Short teaser…"></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Full Article Content</label>
+            <textarea class="field-textarea" id="fContent" rows="6" placeholder="Full article text…"></textarea>
+          </div>
+          <button class="publish-btn" id="publishBtn"><i class="fas fa-satellite-dish"></i> &nbsp;Publish Post</button>
+          <div class="publish-success" id="publishSuccess">✓ Post published successfully!</div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="mastfoot">
+  <div class="mastfoot-inner">
+    <div>
+      <div class="mastfoot-brand">Question Everything</div>
+      <div class="mastfoot-sub">
+        Astrophysics Vlog by Asrate Gaulle<br>
+        Ph.D. Candidate · Ariel University, Israel<br>
+        © 2026 All rights reserved
+      </div>
+    </div>
+    <div class="mastfoot-links">
+      <div class="sidebar-title" style="margin-bottom:0.8rem">Links</div>
+      <a href="index.html"><i class="fas fa-user"></i> &nbsp;Portfolio</a>
+      <a href="mailto:asrieguae@gmail.com"><i class="fas fa-envelope"></i> &nbsp;asrieguae@gmail.com</a>
+      <a href="https://github.com/asrat-g" target="_blank"><i class="fab fa-github"></i> &nbsp;GitHub</a>
+      <a href="https://orcid.org/" target="_blank"><i class="fab fa-orcid"></i> &nbsp;ORCID</a>
+    </div>
+    <div class="mastfoot-quote">
+      "Nothing is as pure as knowledge — question everything, even the stars."
+      <cite>— Asrate Gaulle</cite>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /page content -->
+
+<!-- ══════ MODAL ══════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-article" id="modalArticle">
+    <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ══════ SCRIPTS ══════ -->
+<script>
+/* ─── COSMOS CANVAS ─── */
+(function(){
+  const cv = document.getElementById('cosmos');
+  const cx = cv.getContext('2d');
+  let W, H, stars, nebulae, shooting=[];
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  function makeStars(){
+    stars=[];
+    const n=Math.floor(W*H/3000);
+    for(let i=0;i<n;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.15,a:Math.random(),sp:Math.random()*0.003+0.001,ph:Math.random()*Math.PI*2,c:rndColor()});
+    nebulae=[];
+    for(let i=0;i<5;i++) nebulae.push({x:Math.random()*W,y:Math.random()*H,rx:200+Math.random()*400,ry:100+Math.random()*250,h:[200,260,45][Math.floor(Math.random()*3)],a:0.012+Math.random()*0.025});
+  }
+  function rndColor(){const r=Math.random();if(r<0.12)return'#a8d0ff';if(r<0.22)return'#ffc8a0';if(r<0.28)return'#d4a017';return'#e8e4da';}
+  let t=0;
+  function draw(){
+    t+=0.016; cx.clearRect(0,0,W,H);
+    const bg=cx.createRadialGradient(W/2,H*.4,0,W/2,H*.4,Math.max(W,H)*.9);
+    bg.addColorStop(0,'#060920'); bg.addColorStop(.6,'#030610'); bg.addColorStop(1,'#02030a');
+    cx.fillStyle=bg; cx.fillRect(0,0,W,H);
+    nebulae.forEach(n=>{
+      cx.save(); cx.translate(n.x,n.y); cx.scale(1,n.ry/n.rx);
+      const g=cx.createRadialGradient(0,0,0,0,0,n.rx);
+      g.addColorStop(0,`hsla(${n.h},65%,55%,${n.a*1.4})`); g.addColorStop(1,`hsla(${n.h},65%,40%,0)`);
+      cx.beginPath(); cx.arc(0,0,n.rx,0,Math.PI*2); cx.fillStyle=g; cx.fill(); cx.restore();
+    });
+    stars.forEach(s=>{
+      cx.globalAlpha=(Math.sin(t*s.sp*60+s.ph)*.3+.7)*s.a;
+      cx.fillStyle=s.c; cx.beginPath(); cx.arc(s.x,s.y,s.r,0,Math.PI*2); cx.fill();
+    });
+    cx.globalAlpha=1;
+    if(Math.random()<.003&&shooting.length<3) shooting.push({x:Math.random()*W,y:Math.random()*H*.35,vx:(2+Math.random()*4)*(Math.random()<.5?1:-1),vy:1.5+Math.random()*2.5,l:1,f:.013+Math.random()*.015,len:80+Math.random()*120});
+    for(let i=shooting.length-1;i>=0;i--){
+      const s=shooting[i]; s.x+=s.vx; s.y+=s.vy; s.l-=s.f;
+      if(s.l<=0){shooting.splice(i,1);continue;}
+      const a=Math.atan2(s.vy,s.vx);
+      const tg=cx.createLinearGradient(s.x,s.y,s.x-Math.cos(a)*s.len,s.y-Math.sin(a)*s.len);
+      tg.addColorStop(0,`rgba(255,255,255,${s.l*.9})`); tg.addColorStop(1,'rgba(255,255,255,0)');
+      cx.beginPath(); cx.moveTo(s.x,s.y); cx.lineTo(s.x-Math.cos(a)*s.len,s.y-Math.sin(a)*s.len);
+      cx.strokeStyle=tg; cx.lineWidth=1.5*s.l; cx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();makeStars();});
+  resize(); makeStars(); draw();
+})();
+
+/* ─── DATA ─── */
+let posts = [
+  {
+    id:1,
+    title:"Colliding Winds in Massive Binaries: When Stars Roar",
+    date:"May 15, 2026",
+    tags:["Massive Binaries","Radiative Transfer","FLASH"],
+    excerpt:"Massive binary systems are cosmic laboratories where supersonic stellar winds collide at thousands of km/s, carving complex shock geometries, driving X-ray flares, and spawning hydrodynamic instabilities that challenge our models of stellar feedback.",
+    content:`Massive binary systems are among the most energetic laboratories the universe offers. In systems like WR 140, η Carinae, and HD 93205, the powerful winds of two supergiant or Wolf-Rayet stars collide head-on at speeds exceeding 1000 km/s. The wind-wind collision (WWC) region becomes a zone of extreme physics: post-shock temperatures reach tens of millions of Kelvin, X-ray luminosities rival entire star clusters, and a delicate interplay between radiative cooling and hydrodynamic instabilities sculpts the shock into fractal-like structures.
+
+In my Ph.D. research at Ariel University under Prof. Amit Kashi, I use the FLASH adaptive-mesh refinement (AMR) code to perform three-dimensional simulations of these collision regions. The key physics I probe includes the Stevens et al. (1992) cooling parameter χ — which distinguishes adiabatic (χ ≫ 1) from radiative (χ ≪ 1) shocks — and the Sutherland & Dopita (1993) cooling function that governs how quickly post-shock plasma radiates its thermal energy away.
+
+When cooling is efficient, the WWC region collapses into a thin dense shell, vulnerable to the Non-linear Thin Shell Instability (NTSI) and Kelvin-Helmholtz shear instabilities. These instabilities fragment the shell, mix the wind material, and produce the time-variable X-ray emission observed with XMM-Newton and Chandra. Our synthetic spectra, generated through PyXSIM and post-processed with XSPEC, allow direct comparison with archival observations of HD 93205 — one of the most massive O+O binaries known.
+
+The goal is not just to reproduce observations, but to understand what instabilities tell us about mass-loss rates, orbital eccentricity, and the eventual fate of these systems as gravitational wave sources or supernova progenitors.`,
+    image:"assets/images/hrd-evolution.png",
+    featured:true
+  },
+  {
+    id:2,
+    title:"Dark Energy & Modified Gravity: Rethinking Cosmic Acceleration",
+    date:"April 28, 2026",
+    tags:["Dark Energy","Modified Gravity","Cosmology"],
+    excerpt:"The ΛCDM model explains the accelerated expansion of the universe, but it leaves profound open questions. Exploring f(R,T) and f(R,T,S) extensions of General Relativity may hold the key to reconciling the Hubble tension and the S₈ discrepancy.",
+    content:`The concordance cosmological model — ΛCDM — fits an enormous body of observational data with remarkable precision. Yet several cracks are appearing in its foundations. The Hubble tension, where early-universe (Planck CMB) and late-universe (distance ladder) measurements of H₀ disagree at more than 5σ, hints that something fundamental may be missing. The S₈ tension in the matter power spectrum adds to this unease.
+
+One promising avenue is to modify the gravitational action itself. Instead of assuming Einstein's General Relativity holds on all scales, f(R,T) theories introduce couplings between the Ricci scalar R and the trace T of the energy-momentum tensor. This coupling produces effective "dark energy" without invoking a cosmological constant. The f(R,T,S) extension further includes the contraction of the Ricci tensor with the energy-momentum tensor.
+
+In my work, I investigate the cosmological perturbation theory in these frameworks, computing the growth rate of structure f·σ₈ and comparing with redshift-space distortion measurements from BOSS and upcoming Euclid data. The challenge is to find models that simultaneously relieve the Hubble tension, match the CMB power spectrum, and reproduce the observed abundance of galaxy clusters.
+
+This research connects directly to my observational work on AGN, since modified gravity can alter the feedback energy budget in galaxies, changing the predicted AGN luminosity function at low redshift — exactly the regime I probe with XMM-Newton and SDSS data.`,
+    image:"https://images.unsplash.com/photo-1506703719100-f0f04f0e6e6e?w=800&q=80",
+    featured:false
+  },
+  {
+    id:3,
+    title:"Measuring AGN Accretion Rates via the X-ray / Optical Flux Ratio",
+    date:"March 12, 2026",
+    tags:["AGN","Accretion","X-ray Astronomy"],
+    excerpt:"Supermassive black holes power active galactic nuclei through accretion. We propose and validate an alternative method to measure mass accretion rates using the X-ray to optical flux ratio — calibrated against 4XMM-DR14 and SDSS DR10, classified with Galaxy Zoo morphology.",
+    content:`Measuring how fast supermassive black holes accrete matter is fundamental to understanding galaxy evolution. The Eddington ratio λ_Edd = L_bol / L_Edd directly quantifies the accretion efficiency, yet measuring L_bol requires integrating the spectral energy distribution across many wavebands — an observationally expensive endeavour.
+
+In my M.Sc. thesis (supervised by Prof. Mirjana Pović at Entoto Observatory) and the accompanying paper with Pović & Zewdie (A&A, to be submitted), I develop an alternative diagnostic: the X-ray to optical flux ratio F_X/F_O. This quantity encodes the accretion state because the X-ray corona luminosity scales with the optical/UV accretion disc luminosity in a well-characterized way. By calibrating F_X/F_O against classical accretion-rate indicators in a sample of z ≤ 0.2 AGN drawn from 4XMM-DR14 cross-matched with SDSS DR10, I show that F_X/F_O can serve as an efficient proxy for λ_Edd.
+
+Crucially, I use Galaxy Zoo morphological classifications to separate AGN hosted in early-type versus late-type galaxies, finding that the F_X/F_O–accretion rate relation is largely morphology-independent at these redshifts. This makes it applicable to large photometric surveys where spectroscopy is unavailable.
+
+The sample also overlaps with the "inside-out" assembled galaxy candidates studied in our MNRAS 2020 paper with Zewdie et al., providing a unified picture of AGN activity in galaxies undergoing the quenching transition.`,
+    image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&q=80",
+    featured:false
+  },
+  {
+    id:4,
+    title:"Inside-Out Galaxy Assembly: Our MNRAS 2020 Study",
+    date:"February 5, 2026",
+    tags:["Galaxy Formation","Star Formation","MNRAS"],
+    excerpt:"Some galaxies build themselves from the inside out — the compact central bulge forms first, then the extended disk grows around it. Our 2020 MNRAS paper identified such candidates at z < 0.1 and explored the interplay between AGN activity and star formation.",
+    content:`Galaxy formation is not a monolithic process. While the classical picture of hierarchical assembly paints galaxies growing through mergers and smooth accretion, a growing body of evidence points to an alternative pathway: inside-out growth, where a compact central spheroid forms at high redshift and a disk assembles around it at later times.
+
+In Zewdie, Pović, Aravena, Roberto & Gaulle (MNRAS, 498, 4345, 2020), we identified a sample of inside-out assembled galaxy candidates at z < 0.1 using multi-wavelength data from GALEX (UV), SDSS (optical), and WISE (mid-IR). The key diagnostic is a positive gradient in specific star formation rate (sSFR) from the centre outward — low sSFR in the nucleus but elevated sSFR in the outer disk.
+
+Our analysis reveals that these objects predominantly host low-luminosity AGN, consistent with the idea that central black hole feedback has suppressed star formation in the nucleus while the disk continues forming stars. Interestingly, the AGN in inside-out galaxies tend to lie in the BPT "composite" region, suggesting a mix of AGN ionization and residual HII region activity.
+
+This work provided the foundation for the accretion-rate diagnostic study described in my forthcoming A&A paper, where I revisit the same sample with X-ray data from 4XMM-DR14 to characterise the AGN accretion efficiency as a function of morphological assembly state.`,
+    image:"https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&q=80",
+    featured:false
+  },
+  {
+    id:5,
+    title:"The HD 93205 Binary: A Testbed for Colliding-Wind Physics",
+    date:"January 20, 2026",
+    tags:["Massive Binaries","HD 93205","Hydrodynamics"],
+    excerpt:"HD 93205 is one of the most massive known O+O binary systems, residing in the Trumpler 16 cluster near η Carinae. It provides an exceptional testbed for studying wind-wind collisions in the low cooling-parameter regime.",
+    content:`HD 93205 is a double-lined spectroscopic binary in the Trumpler 16 cluster of the Carina Nebula, hosting two O-type supergiants with masses of ~60 M☉ and ~35 M☉ in a 6.08-day orbit. Its relative proximity (~2.3 kpc) and bright X-ray flux make it one of the best-studied colliding-wind binaries accessible to XMM-Newton and Chandra.
+
+My current Ph.D. research focuses on reproducing the phase-resolved X-ray light curve and spectrum of HD 93205 using 3D FLASH AMR simulations. The system sits in an intermediate cooling regime — the wind-wind collision region is neither purely adiabatic (χ ≫ 1) nor fully radiative (χ ≪ 1). This intermediate state is computationally challenging because it requires resolving both the broad adiabatic shock structure and the thin cooled layers where instabilities nucleate.
+
+Key results from our initial simulations show: (i) the NTSI grows on orbital timescales and produces clumping factors consistent with the observed hard X-ray variability; (ii) radiative braking — where the radiation pressure of each star decelerates the other's wind — becomes important at periastron; (iii) synthetic spectra produced with PyXSIM and XSPEC reproduce the observed kT ~ 1.5–3 keV thermal plasma temperatures.
+
+Our paper, "Multidimensional Hydrodynamic Foundational Modelling and Radiative Cooling Effects of Colliding Winds in HD 93205" (Gaulle & Kashi, in preparation for MNRAS), presents the first systematic parameter study of the cooling function dependence in this system.`,
+    image:"assets/images/hrd-evolution.png",
+    featured:false
+  }
+];
+let nextId = posts.length + 1;
+
+/* ─── STORAGE ─── */
+function save(){localStorage.setItem('qe_posts',JSON.stringify(posts)); localStorage.setItem('qe_nid',nextId);}
+function load(){const s=localStorage.getItem('qe_posts'); if(s){posts=JSON.parse(s); const n=localStorage.getItem('qe_nid'); if(n) nextId=parseInt(n);}}
+
+/* ─── TAG COLOR ─── */
+const TAG_COLORS = {
+  'Massive Binaries':'','HD 93205':'','Hydrodynamics':'','FLASH':'',
+  'AGN':'art-tag-cyan','X-ray Astronomy':'art-tag-cyan','Accretion':'art-tag-cyan',
+  'Galaxy Formation':'art-tag-violet','Star Formation':'art-tag-violet','MNRAS':'art-tag-violet',
+  'Dark Energy':'','Modified Gravity':'','Cosmology':''
+};
+function tagClass(t){ return TAG_COLORS[t] || ''; }
+
+function tagHtml(tags, small=false){
+  return tags.map(t=>`<span class="art-tag ${tagClass(t)}" style="${small?'font-size:0.55rem':''}">${esc(t)}</span>`).join('');
+}
+
+function esc(s){ if(!s) return ''; return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function getCurrentDate(){
+  return new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+}
+
+/* ─── RENDER FEATURED ─── */
+function renderFeatured(){
+  const fp = posts.find(p=>p.featured) || posts[0];
+  if(!fp) return;
+  const el = document.getElementById('featuredPost');
+  const img = fp.image
+    ? `<div class="featured-img-wrap"><img src="${esc(fp.image)}" alt="${esc(fp.title)}" onerror="this.parentElement.innerHTML='<div class=featured-img-placeholder><i class=fas fa-star-of-life></i></div>'"></div>`
+    : `<div class="featured-img-wrap"><div class="featured-img-placeholder"><i class="fas fa-star-of-life"></i></div></div>`;
+  el.innerHTML = `
+    ${img}
+    <div class="featured-content">
+      <div class="art-tags">${tagHtml(fp.tags)}</div>
+      <h2 class="art-title" onclick="openModal(${fp.id})">${esc(fp.title)}</h2>
+      <p class="art-excerpt">${esc(fp.excerpt)}</p>
+      <div class="art-meta">
+        <span>${esc(fp.date)}</span>
+        <span class="art-meta-divider"></span>
+        <span>Asrate Gaulle</span>
+      </div>
+      <br>
+      <button class="read-btn read-btn-solid" onclick="openModal(${fp.id})">Read article <i class="fas fa-arrow-right"></i></button>
+    </div>
+  `;
+}
+
+/* ─── RENDER LIST ─── */
+function renderList(list){
+  const el = document.getElementById('articleList');
+  if(!list.length){el.innerHTML='<p style="color:var(--text-3);font-style:italic;padding:2rem 0">No articles found.</p>';return;}
+  el.innerHTML = list.map(p=>{
+    const img = p.image
+      ? `<div class="article-row-thumb"><img src="${esc(p.image)}" alt="${esc(p.title)}" onerror="this.parentElement.innerHTML='<div class=article-row-thumb-placeholder><i class=fas fa-star-of-life></i></div>'"></div>`
+      : `<div class="article-row-thumb"><div class="article-row-thumb-placeholder"><i class="fas fa-star-of-life"></i></div></div>`;
+    return `
+      <div class="article-row" onclick="openModal(${p.id})">
+        <div>
+          <div class="art-tags" style="margin-bottom:0.6rem">${tagHtml(p.tags,true)}</div>
+          <div class="article-row-title">${esc(p.title)}</div>
+          <div class="article-row-excerpt">${esc(p.excerpt)}</div>
+          <div class="article-row-meta">
+            <span>${esc(p.date)}</span>
+            <span>Asrate Gaulle</span>
+          </div>
+        </div>
+        ${img}
+      </div>`;
+  }).join('');
+}
+
+/* ─── RENDER SIDEBAR ─── */
+function renderSidebar(){
+  // recent
+  const rec = document.getElementById('recentPosts');
+  rec.innerHTML = posts.slice(0,5).map(p=>`
+    <div class="recent-post" onclick="openModal(${p.id})">
+      <div class="recent-post-title">${esc(p.title)}</div>
+      <div class="recent-post-date">${esc(p.date)}</div>
+    </div>`).join('');
+  // topics
+  const tc = {};
+  posts.forEach(p=>p.tags.forEach(t=>tc[t]=(tc[t]||0)+1));
+  const cloud = document.getElementById('topicCloud');
+  cloud.innerHTML = Object.entries(tc).map(([t,c])=>
+    `<button class="topic-chip" onclick="filterTag('${esc(t)}')">${esc(t)} <span style="opacity:0.5">(${c})</span></button>`
+  ).join('');
+  // filter tabs
+  const tabs = document.getElementById('filterTabs');
+  const allTags = [...new Set(posts.flatMap(p=>p.tags))];
+  tabs.innerHTML = `<button class="filter-tab active" data-tag="All" onclick="filterTag('All')">All</button>`
+    + allTags.map(t=>`<button class="filter-tab" data-tag="${esc(t)}" onclick="filterTag('${esc(t)}')">${esc(t)}</button>`).join('');
+}
+
+let activeTag = 'All';
+function filterTag(tag){
+  activeTag = tag;
+  const list = tag === 'All' ? posts : posts.filter(p=>p.tags.includes(tag));
+  renderList(list);
+  document.querySelectorAll('.filter-tab,.topic-chip').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tag === tag || b.textContent.startsWith(tag));
+  });
+}
+
+function searchPosts(q){
+  const lq = q.toLowerCase();
+  const list = q ? posts.filter(p=>p.title.toLowerCase().includes(lq)||p.excerpt.toLowerCase().includes(lq)||p.tags.some(t=>t.toLowerCase().includes(lq))) : posts;
+  renderList(list);
+}
+
+/* ─── MODAL ─── */
+function openModal(id){
+  const p = posts.find(x=>x.id===id); if(!p) return;
+  const img = p.image
+    ? `<img class="modal-img" src="${esc(p.image)}" alt="${esc(p.title)}" onerror="this.outerHTML='<div class=modal-img-placeholder><i class=fas fa-star-of-life></i></div>'">`
+    : `<div class="modal-img-placeholder"><i class="fas fa-star-of-life"></i></div>`;
+  const paras = p.content.split('\n\n').filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join('');
+  document.getElementById('modalContent').innerHTML = `
+    ${img}
+    <div class="modal-body">
+      <div class="modal-tags">${tagHtml(p.tags)}</div>
+      <h1 class="modal-title">${esc(p.title)}</h1>
+      <div class="modal-meta">
+        <span><i class="fas fa-calendar-alt"></i> ${esc(p.date)}</span>
+        <span><i class="fas fa-user-astronaut"></i> Asrate Gaulle</span>
+        <span><i class="fas fa-clock"></i> ${Math.ceil(p.content.split(' ').length/200)} min read</span>
+      </div>
+      <div class="modal-content">${paras}</div>
+      <div class="modal-footer">
+        <i class="fas fa-star-of-life"></i>
+        <span>Question Everything · Asrate Gaulle · Ariel University, Israel</span>
+      </div>
+    </div>`;
+  const ov = document.getElementById('modalOverlay');
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ─── PUBLISH ─── */
+function publishPost(){
+  const title = document.getElementById('fTitle').value.trim();
+  const tags  = document.getElementById('fTags').value.trim();
+  const img   = document.getElementById('fImg').value.trim();
+  const exc   = document.getElementById('fExcerpt').value.trim();
+  const cont  = document.getElementById('fContent').value.trim();
+  if(!title||!exc||!cont){alert('Please fill in Title, Excerpt, and Content.'); return;}
+  const newPost = {
+    id: nextId++,
+    title, date: getCurrentDate(),
+    tags: tags ? tags.split(',').map(t=>t.trim()).filter(Boolean) : ['Astrophysics'],
+    excerpt: exc.substring(0,280), content: cont,
+    image: img || '', featured: false
+  };
+  posts.unshift(newPost);
+  save();
+  renderAll();
+  // clear
+  ['fTitle','fTags','fImg','fExcerpt','fContent'].forEach(id=>document.getElementById(id).value='');
+  const suc = document.getElementById('publishSuccess');
+  suc.style.display='block'; setTimeout(()=>suc.style.display='none',4000);
+}
+
+function renderAll(){
+  renderFeatured();
+  renderList(activeTag==='All'?posts:posts.filter(p=>p.tags.includes(activeTag)));
+  renderSidebar();
+}
+
+/* ─── THEME ─── */
+function getTheme(){ return document.documentElement.getAttribute('data-theme')||'dark'; }
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.body.setAttribute('data-theme',t);
+  localStorage.setItem('qe_theme',t);
+}
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  setTheme(getTheme()==='dark'?'light':'dark');
+});
+const savedTheme = localStorage.getItem('qe_theme');
+if(savedTheme) setTheme(savedTheme);
+
+/* ─── EVENTS ─── */
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('modalOverlay')) closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+document.getElementById('searchBtn').addEventListener('click',()=>searchPosts(document.getElementById('searchInput').value));
+document.getElementById('searchInput').addEventListener('keyup',e=>{ if(e.key==='Enter') searchPosts(e.target.value); });
+document.getElementById('publishBtn').addEventListener('click', publishPost);
+document.getElementById('writeToggle').addEventListener('click',function(){
+  const body = document.getElementById('writePanelBody');
+  const open = body.classList.toggle('open');
+  this.textContent = open ? 'Collapse ↑' : 'Expand ↓';
+});
+
+/* ─── REVEAL ON SCROLL ─── */
+const ro = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('in');}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ─── INIT ─── */
+load();
+renderAll();
+
+// expose globals
+window.openModal = openModal;
+window.filterTag = filterTag;
+</script>
+</body>
+</html>

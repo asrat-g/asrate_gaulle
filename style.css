@@ -48,6 +48,7 @@ cat > style.css << 'CSSEOF'
     --transition-slow: all 0.5s ease;
 }
 
+body[dir="rtl"] { direction: rtl; text-align: right; }
 /* ===== RESET & BASE ===== */
 *, *::before, *::after {
     margin: 0;
