@@ -31,9 +31,9 @@ import yt
 # ---------------------------------------------------------
 # 1. CONFIG
 # ---------------------------------------------------------
-BASE_PATH = "/home/asrat/mass_hd93"
-SNAPSHOT = os.path.join(BASE_PATH, "massivestar_hdf5_plt_cnt_0030")
-OUT_STEM = "HD93205_density_isosurface_30"
+BASE_PATH = "/home/asrat/mass_hd93w"
+SNAPSHOT = os.path.join(BASE_PATH, "massive_star_hdf5_plt_cnt_")  # TODO: append the snapshot index, e.g. "0030"
+OUT_STEM = "HD93205_density_isosurface"
 
 AU = 1.496e13
 
